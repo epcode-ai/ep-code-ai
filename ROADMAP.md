@@ -19,7 +19,7 @@
 | S5 | Week 5 | 统一 CLI + 对外发布 + 试点复盘 | 📋 计划中 |
 | S6+ | 持续 | 真实项目迭代 + 框架反馈 | 📋 |
 
-完整计划文档将在 Sprint 5 定稿为 `PLAN.md`。当前规划存于本地 `~/.claude/plans/humming-sprouting-boot.md`（Claude plan mode 产出）。
+**完整计划**（所有 Sprint 的详细产出、接入模式抽象、风险、验收）见 **[PLAN.md](./PLAN.md)** 🔗
 
 ## 近期变更
 

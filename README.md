@@ -109,7 +109,8 @@ ep-code-ai/
 ├── examples/               完整示例项目
 │   ├── leave-management-system/  模式 A · 绿地项目完整样本
 │   └── pilot-npds-newpd/         模式 D · 稳态运维真实试点
-├── ROADMAP.md              实施路线图
+├── PLAN.md                 完整建设计划（5 Sprint × 接入模式 × 验收）
+├── ROADMAP.md              实施路线图（概览）
 └── assets/                 图片、图表等静态资源
 ```
 
