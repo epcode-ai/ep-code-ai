@@ -29,9 +29,8 @@ jobs:
       - name: Run link check
         run: node tools/cross-platform/scripts/check-links.js
 
-      - name: Run markdown lint
-        run: node tools/cross-platform/scripts/markdown-lint.js
-        continue-on-error: true  # nit 级警告不阻塞合入
+      - name: Run markdown lint (nit 警告不阻塞)
+        run: node tools/cross-platform/scripts/markdown-lint.js --fail-on=hard
 
   commit-lint:
     name: Commit Message Lint

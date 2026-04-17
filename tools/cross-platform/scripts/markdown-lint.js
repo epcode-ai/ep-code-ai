@@ -23,7 +23,17 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, resolve, relative } from 'node:path';
 import { argv, exit, cwd } from 'node:process';
 
-const TARGET = resolve(argv[2] || cwd());
+// 解析参数: [target] [--warn-only | --fail-on=<severity>]
+const args = argv.slice(2);
+let target = null;
+let warnOnly = false;
+let failOn = 'any'; // any | hard (只有非 nit 才 fail)
+for (const a of args) {
+  if (a === '--warn-only') warnOnly = true;
+  else if (a.startsWith('--fail-on=')) failOn = a.split('=')[1];
+  else if (!target) target = a;
+}
+const TARGET = resolve(target || cwd());
 const IGNORE_DIRS = new Set(['.git', 'node_modules', 'build', 'dist']);
 
 function findMarkdown(p) {
@@ -167,7 +177,25 @@ function main() {
       console.log('');
     }
     if (totalIssues > 50) console.log(`... 还有 ${totalIssues - 50} 条，省略显示\n`);
-    // 提示模式：只给警告，不阻止构建
+
+    // 退出码决策
+    if (warnOnly) {
+      console.log('ℹ️  --warn-only 模式,以 0 退出');
+      exit(0);
+    }
+    if (failOn === 'hard') {
+      // 统计硬错误（非 nit）
+      const hardCount = bad.reduce(
+        (sum, b) => sum + b.issues.filter((i) => i.severity !== 'nit').length,
+        0
+      );
+      if (hardCount === 0) {
+        console.log('ℹ️  仅 nit 级警告,以 0 退出（--fail-on=hard）');
+        exit(0);
+      }
+      console.log(`❌ ${hardCount} 条非 nit 级问题,退出 1`);
+      exit(1);
+    }
     exit(1);
   }
   exit(0);
