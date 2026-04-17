@@ -1,0 +1,11 @@
+{
+  "name": "@epcode-ai/integrations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EP Code AI 企业工具集成 - Jira / Confluence / Slack / WeCom / DingTalk / Feishu / GitLab",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

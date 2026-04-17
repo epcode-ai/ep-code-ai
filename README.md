@@ -97,7 +97,12 @@ ep-code-ai/
 │   │   ├── check-commit.js       Conventional Commits 校验
 │   │   ├── api-diff.js           API 契约对比
 │   │   └── check-all.js          聚合所有检查
-│   └── integrations/       与 Jira、Confluence 等的对接（占位）
+│   └── integrations/       企业工具集成（✅ 零依赖）
+│       ├── jira/               Jira: create-issue + sync-from-markdown + list
+│       ├── confluence/         Confluence: publish-markdown + fetch-page
+│       ├── slack/              Slack: notify + send-release-note
+│       ├── im/                 企业微信 / 钉钉 / 飞书 统一 notify
+│       └── gitlab/             GitLab: create-labels（scoped labels 批量）
 │
 ├── skills/                 Claude Skills 定义（29 个 Prompt）
 ├── examples/               完整示例项目
