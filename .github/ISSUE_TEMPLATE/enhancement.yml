@@ -1,0 +1,67 @@
+name: 💡 改进建议
+description: 提议一个新功能、新模板、新 Prompt、新平台支持等
+title: "[Enhancement] "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的建议! 请尽量填写完整,方便我们评估。
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 建议分类
+      options:
+        - 新增方法论章节
+        - 新增 / 优化模板
+        - 新增 / 优化 AI Prompt (Skill)
+        - 新增跨平台脚本
+        - 新增平台支持
+        - 新增工作流集成（Jira/Confluence/...）
+        - 改进现有内容
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 当前痛点
+      description: 你在实际使用中遇到什么问题?
+      placeholder: "如:PRD 里经常漏掉权限描述,希望有个检查项"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 你希望怎么改进?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 考虑过的替代方案
+      placeholder: "如考虑过用 xx 工具替代,但..."
+
+  - type: dropdown
+    id: willingness
+    attributes:
+      label: 你愿意贡献吗？
+      options:
+        - 我想自己 PR 实现
+        - 我可以提供资料但不写代码
+        - 我只是建议,请别人实现
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索过 Issue 列表,无重复
+          required: true
+        - label: 建议与本项目定位相符（企业 AI 研发方法论 + 工具）
+          required: true

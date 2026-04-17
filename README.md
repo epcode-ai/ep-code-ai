@@ -74,9 +74,14 @@ ep-code-ai/
 │   ├── testing/
 │   └── operations/
 │
-├── workflows/              研发平台工作流
+├── .github/                GitHub 原生配置（本仓库自用）
+│   ├── workflows/ci.yml    CI 自动检查（链接/提交/语法/提测单）
+│   ├── PULL_REQUEST_TEMPLATE.md  PR 模板
+│   └── ISSUE_TEMPLATE/     Issue 表单（Bug / 改进 / 提测）
+│
+├── workflows/              研发平台工作流指引（给其他仓库借鉴）
 │   ├── gitlab/             GitLab 适配（MR、CI、标签）
-│   ├── github/             GitHub 适配
+│   ├── github/             GitHub 适配（含本仓库做法说明）
 │   └── generic/            通用（不依赖平台）
 │
 ├── platforms/              跨平台适配

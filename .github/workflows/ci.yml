@@ -1,0 +1,141 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # 允许手动触发
+  workflow_dispatch:
+
+# 并行运行同分支的多个 push 时,取消前面那个
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs-check:
+    name: Docs & Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run link check
+        run: node tools/cross-platform/scripts/check-links.js
+
+      - name: Run markdown lint
+        run: node tools/cross-platform/scripts/markdown-lint.js
+        continue-on-error: true  # nit 级警告不阻塞合入
+
+  commit-lint:
+    name: Commit Message Lint
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 需要完整历史来对比
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check commit messages
+        run: |
+          # 获取本 PR 所有 commit 的标题行
+          COMMITS=$(git log --format=%s origin/${{ github.base_ref }}..HEAD)
+          if [ -z "$COMMITS" ]; then
+            echo "⚠️ 没有发现新 commit"
+            exit 0
+          fi
+          FAIL=0
+          echo "$COMMITS" | while IFS= read -r msg; do
+            echo "检查: $msg"
+            node tools/cross-platform/scripts/check-commit.js "$msg" || FAIL=1
+          done
+          exit $FAIL
+
+  shell-syntax:
+    name: Shell Script Syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check bash scripts
+        run: |
+          FAIL=0
+          find platforms/linux platforms/macos -name "*.sh" -type f | while read -r f; do
+            echo "检查: $f"
+            bash -n "$f" || FAIL=1
+          done
+          # shellcheck 可选,若未装则跳过
+          if command -v shellcheck >/dev/null 2>&1; then
+            find platforms/linux platforms/macos -name "*.sh" -type f -exec shellcheck -x -e SC1091,SC2086 {} +
+          fi
+          exit $FAIL
+
+  powershell-syntax:
+    name: PowerShell Syntax
+    runs-on: ubuntu-latest
+    if: false  # 暂时关闭,启用需 windows-latest（消耗 Actions 分钟数多）
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check PowerShell scripts (跳过)
+        run: echo "PowerShell 语法检查需 Windows runner,待启用时开启"
+
+  submission-check:
+    name: Submission Format Check
+    runs-on: ubuntu-latest
+    # 只在有 submission 相关文件变化时跑
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check changed submission files
+        run: |
+          # 找本 PR 变化的 submission 文件
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}..HEAD | grep -E '(submission|提测).*\.md$' || true)
+          if [ -z "$FILES" ]; then
+            echo "✅ 本 PR 无提测申请单变化,跳过"
+            exit 0
+          fi
+          FAIL=0
+          for f in $FILES; do
+            if [ -f "$f" ]; then
+              echo "检查: $f"
+              node tools/cross-platform/scripts/check-submission.js "$f" || FAIL=1
+            fi
+          done
+          exit $FAIL
+
+  summary:
+    name: CI Summary
+    needs: [docs-check, commit-lint, shell-syntax, submission-check]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Summary
+        run: |
+          echo "### CI 汇总" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 检查项 | 结果 |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Docs & Links | ${{ needs.docs-check.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit Lint  | ${{ needs.commit-lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Shell Syntax | ${{ needs.shell-syntax.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Submission   | ${{ needs.submission-check.result }} |" >> $GITHUB_STEP_SUMMARY
