@@ -1,0 +1,19 @@
+{
+  "name": "@epcode-ai/cross-platform-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EP Code AI 跨平台工具脚本 - 零依赖，macOS/Linux/Windows 通用",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "check-links": "node scripts/check-links.js",
+    "check-submission": "node scripts/check-submission.js",
+    "markdown-lint": "node scripts/markdown-lint.js",
+    "check-commit": "node scripts/check-commit.js",
+    "api-diff": "node scripts/api-diff.js",
+    "check-all": "node scripts/check-all.js"
+  },
+  "license": "MIT"
+}
