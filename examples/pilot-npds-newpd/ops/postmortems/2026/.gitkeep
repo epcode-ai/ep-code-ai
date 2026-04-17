@@ -1,0 +1,6 @@
+# 2026 年复盘报告归档
+
+每次 SEV-1/SEV-2 故障后,48 小时内在这里创建:
+`PM-YYYYMMDD-简短描述.md`
+
+模板: ../../../../templates/operations/postmortem-template.md

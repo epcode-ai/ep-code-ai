@@ -1,0 +1,6 @@
+# 2026 年故障报告归档
+
+每次 SEV-1/SEV-2 故障后,在这里创建:
+`INC-YYYYMMDD-简短描述.md`
+
+模板: ../../../../templates/operations/incident-report-template.md
