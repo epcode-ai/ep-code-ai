@@ -168,6 +168,21 @@ Fixes #456
 ❌ 加了一些东西，下次再说
 ```
 
+### 4.4 自动化校验
+
+用跨平台脚本在 commit-msg hook 里强制校验:
+
+```bash
+# 在代码仓库根目录
+cat > .git/hooks/commit-msg <<'SH'
+#!/bin/sh
+node path/to/ep-code-ai/tools/cross-platform/scripts/check-commit.js "$1"
+SH
+chmod +x .git/hooks/commit-msg
+```
+
+详见 [tools/cross-platform/scripts/check-commit.js](../../../tools/cross-platform/scripts/check-commit.js)。
+
 ## 五、合并策略（Merge Strategy）
 
 ### 5.1 三种合并方式
