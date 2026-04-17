@@ -85,8 +85,14 @@ ep-code-ai/
 │   └── windows/            Windows（Phase 3）
 │
 ├── tools/                  工具与集成
-│   ├── cross-platform/     跨平台脚本（Node/Python）
-│   └── integrations/       与 Jira、Confluence 等的对接
+│   ├── cross-platform/     零依赖跨平台脚本
+│   │   ├── check-links.js        Markdown 相对链接校验
+│   │   ├── check-submission.js   提测申请单完整性校验
+│   │   ├── markdown-lint.js      Markdown 风格检查
+│   │   ├── check-commit.js       Conventional Commits 校验
+│   │   ├── api-diff.js           API 契约对比
+│   │   └── check-all.js          聚合所有检查
+│   └── integrations/       与 Jira、Confluence 等的对接（占位）
 │
 ├── skills/                 Claude Skills 定义
 ├── examples/               完整示例项目
@@ -111,6 +117,25 @@ cd app
 - [开发篇](./docs/chapters/03-development/)
 - [测试篇](./docs/chapters/04-testing/)
 - [运维篇](./docs/chapters/05-operations/)
+
+### 🤖 我想用 AI 辅助工作
+
+到 [`skills/`](./skills/) 找对应场景的 Prompt 模板（29 个）：
+- [业务 Prompt](./skills/business/) · [开发 Prompt](./skills/development/) · [测试 Prompt](./skills/testing/) · [运维 Prompt](./skills/operations/)
+
+### 🔧 我想跑质量检查脚本
+
+```bash
+# 一次性跑全部（链接校验 + Markdown 风格）
+node tools/cross-platform/scripts/check-all.js
+
+# 单个检查
+node tools/cross-platform/scripts/check-links.js         # 内部链接校验
+node tools/cross-platform/scripts/check-commit.js "feat: xxx"  # Commit 格式
+node tools/cross-platform/scripts/check-submission.js path/to/file.md  # 提测单校验
+```
+
+详见 [`tools/cross-platform/README.md`](./tools/cross-platform/README.md)（含 Git Hook / CI 集成示例）
 
 ### 🛠️ 我想在企业中落地
 
