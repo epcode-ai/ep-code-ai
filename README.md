@@ -61,7 +61,8 @@ ep-code-ai/
 │   ├── install.sh                一键安装脚本
 │   └── generate_icon.swift       图标生成
 │
-├── docs/chapters/          方法论文档（分 5 篇）
+├── docs/chapters/          方法论文档（分 6 篇）
+│   ├── 00-adoption/        ⭐ 接入模式：4 种项目阶段的嵌入策略（先读这篇）
 │   ├── 01-overview/        总览与四场景融合
 │   ├── 02-business/        业务篇：需求、PRD、用户故事
 │   ├── 03-development/     开发篇：API 契约、代码评审、架构
@@ -106,13 +107,28 @@ ep-code-ai/
 │
 ├── skills/                 Claude Skills 定义（29 个 Prompt）
 ├── examples/               完整示例项目
-│   └── leave-management-system/  员工请假管理系统（端到端示例）
+│   ├── leave-management-system/  模式 A · 绿地项目完整样本
+│   └── pilot-npds-newpd/         模式 D · 稳态运维真实试点
+├── ROADMAP.md              实施路线图
 └── assets/                 图片、图表等静态资源
 ```
 
 ---
 
 ## 快速开始
+
+### 🎯 我想在自己的项目中接入本框架（先读这个）
+
+根据你项目的阶段选对应文档：
+
+| 你的项目阶段 | 接入模式 | 入口 |
+|-------------|---------|------|
+| 还没开始编码（刚立项） | A · 绿地 | [mode-a-greenfield.md](./docs/chapters/00-adoption/mode-a-greenfield.md) |
+| 开发中,未上线 | B · 进行中 | [mode-b-mid-dev.md](./docs/chapters/00-adoption/mode-b-mid-dev.md) |
+| 已上线,定期迭代 | C · 迭代中 | [mode-c-iterating.md](./docs/chapters/00-adoption/mode-c-iterating.md) |
+| 稳态运维,只做维护 | D · 稳态 | [mode-d-maintenance.md](./docs/chapters/00-adoption/mode-d-maintenance.md) |
+
+不确定选哪个？看 [5 分钟判定流程](./docs/chapters/00-adoption/README.md#5-分钟判定流程)。
 
 ### 👨‍💻 我是开发者，想安装桌面应用
 

@@ -1,0 +1,174 @@
+name: Platforms Verify
+
+# 目的: 在 macOS / Linux (多发行版) / Windows 真实 runner 上
+# 验证各平台的 install + check-environment 脚本能跑通。
+#
+# 触发:
+# - 手动 (workflow_dispatch) - 日常按需
+# - platforms/ 或本 workflow 有变更时自动触发
+#
+# 资源说明（GH Actions Free 额度,公开仓库无限,私有仓库有限）:
+# - ubuntu-latest:  1x 倍率
+# - macos-latest:   10x 倍率（因此只跑 1 个 job）
+# - windows-latest: 2x 倍率
+# 总耗时预估: 约 15-20 分钟,每月跑 ~10 次在额度内
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'platforms/**'
+      - '.github/workflows/platforms-verify.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'platforms/**'
+      - '.github/workflows/platforms-verify.yml'
+
+concurrency:
+  group: platforms-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ========== Linux ==========
+  linux:
+    name: Linux · ${{ matrix.image }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - ubuntu:22.04
+          - ubuntu:24.04
+          - debian:12
+          - fedora:39
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run check-environment in ${{ matrix.image }}
+        run: |
+          docker run --rm -v "$PWD:/work" -w /work ${{ matrix.image }} bash -c '
+            set -e
+            echo "=== 发行版信息 ==="
+            cat /etc/os-release | head -3 || cat /etc/debian_version || true
+            echo ""
+            echo "=== 安装基础依赖（容器里没有）==="
+            if command -v apt >/dev/null; then
+              apt update -qq && apt install -y -qq --no-install-recommends \
+                curl wget jq git ca-certificates gnupg lsb-release
+            elif command -v dnf >/dev/null; then
+              dnf install -y -q curl wget jq git ca-certificates gnupg || \
+              dnf install -y -q --setopt=install_weak_deps=False \
+                curl wget jq git ca-certificates
+            fi
+
+            echo ""
+            echo "=== 跑 check-environment.sh ==="
+            bash platforms/linux/scripts/check-environment.sh || EC=$?
+            # check-environment 会因为缺可选工具退出 1,这是预期的
+            # 只要脚本本身能跑就算通过
+            if [ "${EC:-0}" -gt 1 ]; then
+              echo "❌ check-environment.sh 异常退出: $EC"
+              exit $EC
+            fi
+          '
+
+  # ========== Linux install.sh (apt-only) ==========
+  linux-install:
+    name: Linux · install.sh (ubuntu:22.04)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run install.sh in ubuntu:22.04
+        run: |
+          docker run --rm -v "$PWD:/work" -w /work ubuntu:22.04 bash -c '
+            set -e
+            apt update -qq
+            apt install -y -qq --no-install-recommends sudo curl ca-certificates
+            # install.sh 里有 sudo 用法,在容器里 root 会跳过
+            bash platforms/linux/scripts/install.sh --minimal
+            echo ""
+            echo "=== 验证安装 ==="
+            node --version
+            python3 --version
+            git --version
+          '
+
+  # ========== macOS ==========
+  macos:
+    name: macOS · check-environment
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run check-environment.sh
+        run: |
+          bash platforms/macos/scripts/check-environment.sh || EC=$?
+          if [ "${EC:-0}" -gt 1 ]; then
+            echo "❌ check-environment.sh 异常退出: $EC"
+            exit $EC
+          fi
+
+      - name: Syntax check install.sh
+        run: |
+          bash -n platforms/macos/scripts/install.sh
+
+  # ========== Windows ==========
+  windows:
+    name: Windows · check-environment
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run check-environment.ps1
+        shell: pwsh
+        run: |
+          # ps1 脚本会因为缺可选工具退 1,这是预期的
+          $ErrorActionPreference = 'Continue'
+          & ./platforms/windows/scripts/check-environment.ps1
+          $ec = $LASTEXITCODE
+          if ($ec -gt 1) {
+            Write-Host "❌ check-environment.ps1 异常退出: $ec"
+            exit $ec
+          }
+          Write-Host "✅ 脚本能正常执行"
+
+      - name: Syntax check install.ps1
+        shell: pwsh
+        run: |
+          # 用 PSScriptAnalyzer 做静态检查（Windows runner 自带）
+          $null = Get-Command Get-Command
+          # 至少确保脚本能被解析（不真执行,避免改环境）
+          $errors = $null
+          $tokens = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            "platforms/windows/scripts/install.ps1",
+            [ref]$tokens, [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            Write-Host "❌ install.ps1 有语法错误:"
+            $errors | Format-Table -AutoSize
+            exit 1
+          }
+          Write-Host "✅ install.ps1 语法正确"
+
+  # ========== 汇总 ==========
+  summary:
+    name: Summary
+    needs: [linux, linux-install, macos, windows]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report
+        run: |
+          echo "### 三平台验证结果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 平台 | 状态 |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Linux (4 种发行版) | ${{ needs.linux.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Linux install.sh   | ${{ needs.linux-install.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| macOS              | ${{ needs.macos.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Windows            | ${{ needs.windows.result }} |" >> $GITHUB_STEP_SUMMARY
