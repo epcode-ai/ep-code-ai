@@ -84,12 +84,42 @@ jobs:
   powershell-syntax:
     name: PowerShell Syntax
     runs-on: ubuntu-latest
-    if: false  # 暂时关闭,启用需 windows-latest（消耗 Actions 分钟数多）
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check PowerShell scripts (跳过)
-        run: echo "PowerShell 语法检查需 Windows runner,待启用时开启"
+      - name: Setup PowerShell
+        shell: bash
+        run: |
+          # Ubuntu 上装 pwsh（比跑 windows-latest 省 2x 额度）
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq wget apt-transport-https software-properties-common
+          source /etc/os-release
+          wget -q "https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq powershell
+
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $files = Get-ChildItem -Path platforms/windows -Recurse -Include *.ps1
+          $failed = 0
+          foreach ($f in $files) {
+            $errors = $null
+            $tokens = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $f.FullName, [ref]$tokens, [ref]$errors
+            ) | Out-Null
+            if ($errors.Count -gt 0) {
+              Write-Host "❌ $($f.FullName)"
+              $errors | ForEach-Object { Write-Host "   L$($_.Extent.StartLineNumber): $($_.Message)" }
+              $failed++
+            } else {
+              Write-Host "✅ $($f.FullName)"
+            }
+          }
+          if ($failed -gt 0) { exit 1 }
 
   submission-check:
     name: Submission Format Check
@@ -124,7 +154,7 @@ jobs:
 
   summary:
     name: CI Summary
-    needs: [docs-check, commit-lint, shell-syntax, submission-check]
+    needs: [docs-check, commit-lint, shell-syntax, powershell-syntax, submission-check]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -137,4 +167,5 @@ jobs:
           echo "| Docs & Links | ${{ needs.docs-check.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Commit Lint  | ${{ needs.commit-lint.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Shell Syntax | ${{ needs.shell-syntax.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| PS Syntax    | ${{ needs.powershell-syntax.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Submission   | ${{ needs.submission-check.result }} |" >> $GITHUB_STEP_SUMMARY

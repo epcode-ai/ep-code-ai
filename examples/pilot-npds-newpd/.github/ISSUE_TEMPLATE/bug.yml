@@ -1,0 +1,74 @@
+name: 🐛 Bug 报告
+description: npds-newpd 派单叫号系统的问题反馈
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈! 这是稳态运维项目,请聚焦"问题现象 + 影响面 + 紧急度"即可。
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 严重级别
+      options:
+        - P0 - 核心业务不可用
+        - P1 - 部分用户受影响
+        - P2 - 非核心异常
+        - P3 - 体验/文案
+    validations:
+      required: true
+
+  - type: dropdown
+    id: subpackage
+    attributes:
+      label: 涉及子包
+      multiple: true
+      options:
+        - npds-newpd-web（前端）
+        - npds-newpd-service（后端业务）
+        - npds-newpd-consumer（消息消费）
+        - 不确定 / 全部
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptoms
+    attributes:
+      label: 问题现象
+      placeholder: 用户反馈了什么 / 监控看到什么
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: 影响面
+      placeholder: 受影响用户数、持续时长、是否有 workaround
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤（如能复现）
+      value: |
+        1.
+        2.
+        3.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志 / 截图
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 确认项
+      options:
+        - label: 我已查找过 Runbook,没有现成处置方案
+          required: false
+        - label: 我已按故障响应 SOP 处理
+          required: false
