@@ -1,0 +1,116 @@
+# GitLab CI 示例 - 集成测试门禁
+# 放置位置: 代码仓库根目录的 .gitlab-ci.yml
+
+stages:
+  - lint          # 代码规范
+  - build         # 构建
+  - unit-test     # 单元测试
+  - code-quality  # 代码扫描
+  - integration   # 集成测试（可选）
+  - submission-gate  # 【提测门禁】汇总校验
+  - deploy-test   # 部署到测试环境
+
+variables:
+  MIN_COVERAGE: "80"
+
+# ============ Lint ============
+lint:
+  stage: lint
+  script:
+    - echo "运行代码规范检查"
+    # - npm run lint
+    # - ruff check .
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+# ============ Build ============
+build:
+  stage: build
+  script:
+    - echo "编译项目"
+    # - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 day
+
+# ============ Unit Test ============
+unit-test:
+  stage: unit-test
+  script:
+    - echo "运行单元测试"
+    # - npm test -- --coverage
+  coverage: '/Statements\s*:\s*([0-9.]+)%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+
+# ============ Code Quality ============
+code-quality:
+  stage: code-quality
+  script:
+    - echo "静态代码扫描"
+    # - sonar-scanner
+  allow_failure: false
+
+# ============ Submission Gate ============
+# 这是提测门禁的核心：检查提测 MR 的必要条件
+submission-gate:
+  stage: submission-gate
+  script:
+    - |
+      echo "========== 提测门禁校验 =========="
+
+      # 1. 检查 CI 是否全绿（上游依赖保证）
+      echo "[1/5] CI 流水线 ✅"
+
+      # 2. 检查单元测试覆盖率
+      echo "[2/5] 检查单元测试覆盖率"
+      COVERAGE=$(grep -oP '(?<=Statements\s+:\s+)[0-9.]+' coverage/lcov-report/index.html || echo "0")
+      echo "  当前覆盖率: ${COVERAGE}%"
+      if (( $(echo "$COVERAGE < $MIN_COVERAGE" | bc -l) )); then
+        echo "❌ 覆盖率未达标（目标 ${MIN_COVERAGE}%）"
+        exit 1
+      fi
+      echo "  ✅ 覆盖率达标"
+
+      # 3. 检查接口文档是否与代码同步更新
+      echo "[3/5] 检查接口文档同步"
+      if git diff --name-only origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME...HEAD | grep -qE '^(src|app|lib)/.*\.(ts|js|py|go|java)$'; then
+        if ! git diff --name-only origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME...HEAD | grep -qE '^docs/api/.*\.md$'; then
+          echo "⚠️  代码有变更但接口文档未更新，请检查"
+          # exit 1  # 可根据严格度打开
+        fi
+      fi
+      echo "  ✅ 通过"
+
+      # 4. 检查提测申请单是否完整（MR 描述中的 checklist）
+      echo "[4/5] 检查 MR checklist"
+      # 通过 GitLab API 检查 MR 描述
+      echo "  ✅ 通过（需结合 MR 模板审核）"
+
+      # 5. 检查是否有遗留的 TODO/FIXME
+      echo "[5/5] 检查代码标记"
+      TODO_COUNT=$(git diff --name-only origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME...HEAD | xargs grep -l "TODO\|FIXME" 2>/dev/null | wc -l || echo 0)
+      echo "  发现 ${TODO_COUNT} 个包含 TODO/FIXME 的文件"
+
+      echo "========== 提测门禁通过 =========="
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(release|main)/'
+
+# ============ Deploy to Test ============
+deploy-test:
+  stage: deploy-test
+  script:
+    - echo "部署到测试环境"
+    # - ./deploy.sh test
+  environment:
+    name: test
+    url: https://test.example.com
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^release/'

@@ -1,0 +1,59 @@
+# 操作系统
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+.swiftpm/
+Package.resolved
+
+# 构建产物
+dist/
+out/
+*.o
+*.app
+
+# 备份
+backup-*/
+*.backup.*
+*.bak
+
+# 依赖
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 环境变量
+.env
+.env.local
+
+# 日志
+*.log
+tmp/
+.tmp/
+
+# 会话临时
+.claude/sessions/

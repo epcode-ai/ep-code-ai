@@ -1,0 +1,361 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10001 /* ClaudeCodeHistoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20001 /* ClaudeCodeHistoryApp.swift */; };
+		B10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20002 /* ContentView.swift */; };
+		B10003 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20003 /* SidebarView.swift */; };
+		B10006 /* ConversationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20006 /* ConversationStore.swift */; };
+		B10007 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20007 /* Models.swift */; };
+		B10008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B20008 /* Assets.xcassets */; };
+		B10009 /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = B30001 /* SwiftTerm */; };
+		B10010 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20010 /* AppSettings.swift */; };
+		B10011 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20011 /* SettingsView.swift */; };
+		B10012 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20012 /* FavoritesManager.swift */; };
+		B401727D2F7E031D00DABF6A /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401727C2F7E031D00DABF6A /* FileWatcher.swift */; };
+		B4527E7E2F8B6ED300AE0ED6 /* SlashCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4527E7D2F8B6ED300AE0ED6 /* SlashCommands.swift */; };
+		B4527E7F2F8B6ED300AE0ED6 /* SlashCommandPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4527E7C2F8B6ED300AE0ED6 /* SlashCommandPalette.swift */; };
+		B4527E822F8B750300AE0ED6 /* ArtifactPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4527E812F8B750300AE0ED6 /* ArtifactPanel.swift */; };
+		B4527E832F8B750300AE0ED6 /* ArtifactDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4527E802F8B750300AE0ED6 /* ArtifactDetector.swift */; };
+		B4B624742F7DFD7600E567BB /* ConversationNameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B624732F7DFD7600E567BB /* ConversationNameManager.swift */; };
+		B4D9C3DE2F823EC80038E947 /* EnvironmentChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D9C3DC2F823EC80038E947 /* EnvironmentChecker.swift */; };
+		B4D9C3DF2F823EC80038E947 /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D9C3DD2F823EC80038E947 /* SetupWizardView.swift */; };
+		B4D9C3E02F823EC80038E947 /* EHUBInfoBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D9C3DB2F823EC80038E947 /* EHUBInfoBar.swift */; };
+		B4D9C3E22F8251230038E947 /* ProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D9C3E12F8251230038E947 /* ProviderManager.swift */; };
+		C10001 /* ClaudeProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20001 /* ClaudeProcessManager.swift */; };
+		C10002 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20002 /* ChatView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B20001 /* ClaudeCodeHistoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeCodeHistoryApp.swift; sourceTree = "<group>"; };
+		B20002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B20003 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		B20006 /* ConversationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStore.swift; sourceTree = "<group>"; };
+		B20007 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B20008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B20009 /* ClaudeCodeHistory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ClaudeCodeHistory.app; path = EPCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20010 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		B20011 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B20012 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		B20013 /* ClaudeCodeHistory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClaudeCodeHistory.entitlements; sourceTree = "<group>"; };
+		B401727C2F7E031D00DABF6A /* FileWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
+		B4527E7C2F8B6ED300AE0ED6 /* SlashCommandPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlashCommandPalette.swift; sourceTree = "<group>"; };
+		B4527E7D2F8B6ED300AE0ED6 /* SlashCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlashCommands.swift; sourceTree = "<group>"; };
+		B4527E802F8B750300AE0ED6 /* ArtifactDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactDetector.swift; sourceTree = "<group>"; };
+		B4527E812F8B750300AE0ED6 /* ArtifactPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtifactPanel.swift; sourceTree = "<group>"; };
+		B4B624732F7DFD7600E567BB /* ConversationNameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNameManager.swift; sourceTree = "<group>"; };
+		B4D9C3DB2F823EC80038E947 /* EHUBInfoBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHUBInfoBar.swift; sourceTree = "<group>"; };
+		B4D9C3DC2F823EC80038E947 /* EnvironmentChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentChecker.swift; sourceTree = "<group>"; };
+		B4D9C3DD2F823EC80038E947 /* SetupWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWizardView.swift; sourceTree = "<group>"; };
+		B4D9C3E12F8251230038E947 /* ProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManager.swift; sourceTree = "<group>"; };
+		C20001 /* ClaudeProcessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeProcessManager.swift; sourceTree = "<group>"; };
+		C20002 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B40001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10009 /* SwiftTerm in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B50001 = {
+			isa = PBXGroup;
+			children = (
+				B50002 /* ClaudeCodeHistory */,
+				B50003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B50002 /* ClaudeCodeHistory */ = {
+			isa = PBXGroup;
+			children = (
+				B4527E802F8B750300AE0ED6 /* ArtifactDetector.swift */,
+				B4527E812F8B750300AE0ED6 /* ArtifactPanel.swift */,
+				B4527E7C2F8B6ED300AE0ED6 /* SlashCommandPalette.swift */,
+				B4527E7D2F8B6ED300AE0ED6 /* SlashCommands.swift */,
+				B4D9C3E12F8251230038E947 /* ProviderManager.swift */,
+				B4D9C3DB2F823EC80038E947 /* EHUBInfoBar.swift */,
+				B4D9C3DC2F823EC80038E947 /* EnvironmentChecker.swift */,
+				B4D9C3DD2F823EC80038E947 /* SetupWizardView.swift */,
+				B4B624732F7DFD7600E567BB /* ConversationNameManager.swift */,
+				B20001 /* ClaudeCodeHistoryApp.swift */,
+				B20002 /* ContentView.swift */,
+				B20003 /* SidebarView.swift */,
+				B20006 /* ConversationStore.swift */,
+				B20007 /* Models.swift */,
+				B20010 /* AppSettings.swift */,
+				B20011 /* SettingsView.swift */,
+				B20012 /* FavoritesManager.swift */,
+				B20008 /* Assets.xcassets */,
+				B20013 /* ClaudeCodeHistory.entitlements */,
+				B401727C2F7E031D00DABF6A /* FileWatcher.swift */,
+				C20001 /* ClaudeProcessManager.swift */,
+				C20002 /* ChatView.swift */,
+			);
+			path = ClaudeCodeHistory;
+			sourceTree = "<group>";
+		};
+		B50003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B20009 /* ClaudeCodeHistory.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B60001 /* ClaudeCodeHistory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B80001 /* Build configuration list for PBXNativeTarget "ClaudeCodeHistory" */;
+			buildPhases = (
+				B70001 /* Sources */,
+				B40001 /* Frameworks */,
+				B70002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClaudeCodeHistory;
+			packageProductDependencies = (
+				B30001 /* SwiftTerm */,
+			);
+			productName = ClaudeCodeHistory;
+			productReference = B20009 /* ClaudeCodeHistory.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B90001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					B60001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = B80002 /* Build configuration list for PBXProject "ClaudeCodeHistory" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				"zh-Hans",
+				en,
+				Base,
+			);
+			mainGroup = B50001;
+			packageReferences = (
+				BA0001 /* XCRemoteSwiftPackageReference "SwiftTerm" */,
+			);
+			productRefGroup = B50003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B60001 /* ClaudeCodeHistory */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B70002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10008 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B70001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4D9C3DE2F823EC80038E947 /* EnvironmentChecker.swift in Sources */,
+				B4D9C3DF2F823EC80038E947 /* SetupWizardView.swift in Sources */,
+				B4D9C3E02F823EC80038E947 /* EHUBInfoBar.swift in Sources */,
+				B10001 /* ClaudeCodeHistoryApp.swift in Sources */,
+				B10002 /* ContentView.swift in Sources */,
+				B4527E7E2F8B6ED300AE0ED6 /* SlashCommands.swift in Sources */,
+				B4527E7F2F8B6ED300AE0ED6 /* SlashCommandPalette.swift in Sources */,
+				B401727D2F7E031D00DABF6A /* FileWatcher.swift in Sources */,
+				B4D9C3E22F8251230038E947 /* ProviderManager.swift in Sources */,
+				B10003 /* SidebarView.swift in Sources */,
+				B10006 /* ConversationStore.swift in Sources */,
+				B10007 /* Models.swift in Sources */,
+				B4B624742F7DFD7600E567BB /* ConversationNameManager.swift in Sources */,
+				B10010 /* AppSettings.swift in Sources */,
+				B10011 /* SettingsView.swift in Sources */,
+				B10012 /* FavoritesManager.swift in Sources */,
+				C10001 /* ClaudeProcessManager.swift in Sources */,
+				C10002 /* ChatView.swift in Sources */,
+				B4527E822F8B750300AE0ED6 /* ArtifactPanel.swift in Sources */,
+				B4527E832F8B750300AE0ED6 /* ArtifactDetector.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BB0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BB0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		BB0003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ClaudeCodeHistory/ClaudeCodeHistory.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright 2026";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.epcode.app;
+				PRODUCT_NAME = EPCode;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BB0004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ClaudeCodeHistory/ClaudeCodeHistory.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright 2026";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.epcode.app;
+				PRODUCT_NAME = EPCode;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B80001 /* Build configuration list for PBXNativeTarget "ClaudeCodeHistory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB0003 /* Debug */,
+				BB0004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B80002 /* Build configuration list for PBXProject "ClaudeCodeHistory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB0001 /* Debug */,
+				BB0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BA0001 /* XCRemoteSwiftPackageReference "SwiftTerm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/migueldeicaza/SwiftTerm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B30001 /* SwiftTerm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA0001 /* XCRemoteSwiftPackageReference "SwiftTerm" */;
+			productName = SwiftTerm;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = B90001 /* Project object */;
+}
