@@ -1,0 +1,96 @@
+name: 🐛 Bug 报告
+description: 报告一个 Bug（文档错误 / 脚本问题 / 模板缺陷）
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈 Bug！填写下面的信息以便我们快速定位。
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 严重级别
+      options:
+        - P0 - 阻塞：重要文档链接失效 / 核心脚本不能跑
+        - P1 - 严重：影响使用但有 workaround
+        - P2 - 一般：体验问题
+        - P3 - 轻微：文案 / 格式
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 问题领域
+      options:
+        - docs/chapters 方法论文档
+        - templates 模板
+        - workflows 工作流
+        - tools/cross-platform 跨平台脚本
+        - platforms/macos
+        - platforms/linux
+        - platforms/windows
+        - skills Prompt 库
+        - examples 示例项目
+        - app Swift 应用
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: file
+    attributes:
+      label: 涉及文件/路径
+      placeholder: "如: docs/chapters/04-testing/04-gates/submission-gate.md"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      placeholder: 2-3 句话说明
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      value: |
+        1.
+        2.
+        3.
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: 环境（如是脚本/应用问题）
+      value: |
+        - 操作系统:
+        - Node.js 版本:
+        - 其他相关:
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索过 Issue 列表,无重复
+          required: true
+        - label: 我已运行 `check-all.js` 确认不是本地问题
+          required: false

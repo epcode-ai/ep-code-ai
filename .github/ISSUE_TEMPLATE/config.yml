@@ -1,0 +1,10 @@
+# 关闭空白 Issue,强制用模板
+blank_issues_enabled: false
+
+contact_links:
+  - name: 💬 使用疑问 / 讨论
+    url: https://github.com/epcode-ai/ep-code-ai/discussions
+    about: 不是 Bug 的问题请去 Discussions（需先启用）
+  - name: 📚 查阅方法论文档
+    url: https://github.com/epcode-ai/ep-code-ai/tree/main/docs/chapters
+    about: 五篇方法论文档入口

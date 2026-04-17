@@ -1,0 +1,143 @@
+name: 🚀 提测申请（示例用）
+description: 适用于把本框架集成到业务仓库时，业务侧提交提测单
+title: "[提测] v"
+labels: ["提测", "待审核"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        💡 这是一个**示范性**模板，展示"提测达标"如何通过 GitHub Issue 表单落地。
+        实际业务仓库使用时请复制到自己的 `.github/ISSUE_TEMPLATE/` 并按需调整。
+        完整的 Markdown 版本: [templates/testing/submission/submission-template.md](../../templates/testing/submission/submission-template.md)
+
+  - type: input
+    id: version
+    attributes:
+      label: 版本号
+      placeholder: "v1.2.0"
+    validations:
+      required: true
+
+  - type: input
+    id: branch
+    attributes:
+      label: 提测分支
+      placeholder: "release/1.2.0"
+    validations:
+      required: true
+
+  - type: input
+    id: release_date
+    attributes:
+      label: 计划发布日期
+      placeholder: "2026-05-01"
+
+  - type: textarea
+    id: changes
+    attributes:
+      label: 本次变更清单
+      value: |
+        ### 新增
+        -
+
+        ### 修改
+        -
+
+        ### 修复
+        -
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: 影响范围
+      placeholder: |
+        - 直接影响: xxx 模块
+        - 可能影响: xxx
+        - 数据库变更: 是/否
+        - 接口变更: 是/否
+    validations:
+      required: true
+
+  - type: textarea
+    id: selftest
+    attributes:
+      label: 自测结果
+      value: |
+        | 功能点 | 场景 | 结果 |
+        |-------|------|------|
+        | | | ✅/⚠️/❌ |
+
+  - type: textarea
+    id: env
+    attributes:
+      label: 测试环境信息
+      value: |
+        - 地址:
+        - 账号:
+        - 版本:
+        - 依赖服务版本:
+
+  - type: checkboxes
+    id: code_checklist
+    attributes:
+      label: 代码层面
+      options:
+        - label: 代码已合并到 release 分支
+          required: true
+        - label: CI 流水线绿灯
+          required: true
+        - label: 单元测试覆盖率 ≥ 80%
+          required: true
+        - label: 代码评审通过（至少 1 人 approve）
+          required: true
+
+  - type: checkboxes
+    id: selftest_checklist
+    attributes:
+      label: 自测层面
+      options:
+        - label: 冒烟测试通过
+          required: true
+        - label: 本次变更点全部自测
+          required: true
+        - label: 历史 Bug 已验证修复（如有）
+
+  - type: checkboxes
+    id: docs_checklist
+    attributes:
+      label: 文档层面
+      options:
+        - label: 接口文档已更新
+          required: true
+        - label: 数据库变更脚本已提供（如有）
+        - label: 配置变更清单已提供（如有）
+        - label: 部署文档已更新（如涉及）
+
+  - type: checkboxes
+    id: env_checklist
+    attributes:
+      label: 环境层面
+      options:
+        - label: 测试环境已部署且可访问
+          required: true
+        - label: 依赖服务正常
+          required: true
+
+  - type: textarea
+    id: known_issues
+    attributes:
+      label: 已知问题
+      placeholder: "暂无 / 列表"
+
+  - type: textarea
+    id: risk
+    attributes:
+      label: 风险提示
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        提交后，测试团队会在 24h 内审核并回复"达标/退回"。
