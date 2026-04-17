@@ -184,6 +184,10 @@ curl -X POST https://api.example.com/api/v1/login \
 
 ## 相关接口
 
-- [用户登出](../auth/logout.md)
-- [刷新 Token](../auth/refresh-token.md)
-- [修改密码](../user/change-password.md)
+> **填写示例**（实际填写时替换为你项目里的真实路径）：
+>
+> ```
+> - [用户登出](../auth/logout.md)
+> - [刷新 Token](../auth/refresh-token.md)
+> - [修改密码](../user/change-password.md)
+> ```

@@ -155,6 +155,6 @@ bash scripts/check-environment.sh
 
 ## 下一步
 
-- 阅读 [docs/01-overview](../../docs/01-overview/) 理解整体架构
-- 阅读 [docs/04-gates/submission-gate.md](../../docs/04-gates/submission-gate.md) 理解提测达标
+- 阅读 [docs/chapters/01-overview](../../docs/chapters/01-overview/) 理解整体架构
+- 阅读 [docs/chapters/04-testing/04-gates/submission-gate.md](../../docs/chapters/04-testing/04-gates/submission-gate.md) 理解提测达标
 - 参考 [workflows/gitlab](../../workflows/gitlab/) 在你的 GitLab 仓库配置模板
