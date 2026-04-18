@@ -98,7 +98,7 @@
 - [发布计划模板](../../../templates/operations/release-plan-template.md)
 - [Runbook 模板](../../../templates/operations/runbook-template.md)
 - [故障报告 + 复盘模板](../../../templates/operations/postmortem-template.md)
-- 告警转 IM（[im/notify.js](../../../tools/integrations/im/notify.js)）
+- 告警转 IM（[im/notify.js](https://github.com/epcode-ai/ep-code-ai/blob/main/tools/integrations/im/notify.js)）
 
 **保留**：
 - 现有 CI/CD 流水线
