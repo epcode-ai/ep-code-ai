@@ -11,7 +11,7 @@
 > 📍 **最新进展**: Sprint 5 已完成（统一 `epcode` CLI + Docusaurus 文档站 + 治理文件,2026-04-18）。**5 个 Sprint 全部完成 · 整体完成度 98%**。
 >
 > - 🧰 [统一 CLI · epcode](./tools/cli/) · 10 个子命令,零依赖 `npx epcode --help`
-> - 🌐 [文档站 (GitHub Pages)](https://epcode-ai.github.io/ep-code-ai/) · 首页以 4 接入模式为一等公民
+> - 🌐 **[文档站 · epcode-ai.github.io/ep-code-ai](https://epcode-ai.github.io/ep-code-ai/)** ✅ 已上线 · 首页以 4 接入模式为一等公民
 > - 📋 [完整建设计划 PLAN.md](./PLAN.md) · 5 Sprint × 4 接入模式 × 验收标准
 > - 🗺️ [实施路线图 ROADMAP.md](./ROADMAP.md) · 概览 + 里程碑
 > - 📝 [变更日志 CHANGELOG.md](./CHANGELOG.md) · 每个版本的具体产出
