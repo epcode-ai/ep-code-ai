@@ -2,9 +2,16 @@
 
 > 企业级 AI 研发助手 — 覆盖**业务 · 开发 · 测试 · 运维**四大场景的 Claude Code 增强生态
 
-[![Platform](https://img.shields.io/badge/platform-macOS-blue)]()
-[![Stage](https://img.shields.io/badge/stage-macOS%20Phase%201-orange)]()
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-blue)]()
+[![Progress](https://img.shields.io/badge/progress-91%25%20(S2%20done)-brightgreen)](./ROADMAP.md)
+[![Changelog](https://img.shields.io/badge/changelog-v0.3.0-informational)](./CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green)]()
+
+> 📍 **最新进展**: Sprint 2 已完成（业务 + 开发场景工具 + CI 门禁,2026-04-18）。进行中 · Sprint 3（测试 + 运维场景工具补齐）。
+>
+> - 📋 [完整建设计划 PLAN.md](./PLAN.md) · 5 Sprint × 4 接入模式 × 验收标准
+> - 🗺️ [实施路线图 ROADMAP.md](./ROADMAP.md) · 概览 + 里程碑
+> - 📝 [变更日志 CHANGELOG.md](./CHANGELOG.md) · 每个版本的具体产出
 
 ---
 
@@ -43,11 +50,12 @@
 
 | # | 篇章 | 目标读者 | 状态 |
 |---|------|---------|------|
-| 01 | [总览](./docs/chapters/01-overview/) | 全员 | 🚧 进行中 |
-| 02 | [业务篇](./docs/chapters/02-business/) | 产品 / 业务 / BA | 📋 规划中 |
-| 03 | [开发篇](./docs/chapters/03-development/) | 开发 / 架构 | 📋 规划中 |
-| 04 | [测试篇](./docs/chapters/04-testing/) | 测试 / QA | ✅ 骨架完成 |
-| 05 | [运维篇](./docs/chapters/05-operations/) | 运维 / SRE | 📋 规划中 |
+| 00 | [接入模式](./docs/chapters/00-adoption/) ⭐ | 所有团队 | ✅ 完成（4 种模式） |
+| 01 | [总览](./docs/chapters/01-overview/) | 全员 | ✅ 完成 |
+| 02 | [业务篇](./docs/chapters/02-business/) | 产品 / 业务 / BA | ✅ 完成 |
+| 03 | [开发篇](./docs/chapters/03-development/) | 开发 / 架构 | ✅ 完成 |
+| 04 | [测试篇](./docs/chapters/04-testing/) | 测试 / QA | ✅ 完成 |
+| 05 | [运维篇](./docs/chapters/05-operations/) | 运维 / SRE | ✅ 完成 |
 
 ---
 
@@ -92,12 +100,18 @@ ep-code-ai/
 │
 ├── tools/                  工具与集成
 │   ├── cross-platform/     零依赖跨平台脚本
-│   │   ├── check-links.js        Markdown 相对链接校验
-│   │   ├── check-submission.js   提测申请单完整性校验
-│   │   ├── markdown-lint.js      Markdown 风格检查
-│   │   ├── check-commit.js       Conventional Commits 校验
-│   │   ├── api-diff.js           API 契约对比
-│   │   └── check-all.js          聚合所有检查
+│   │   ├── check-links.js           Markdown 相对链接校验
+│   │   ├── check-submission.js      提测申请单完整性校验
+│   │   ├── markdown-lint.js         Markdown 风格检查
+│   │   ├── check-commit.js          Conventional Commits 校验
+│   │   ├── api-diff.js              API 契约对比
+│   │   ├── check-prd.js             【S2】PRD 结构校验
+│   │   ├── score-testability.js     【S2】PRD 可测性打分 0-100
+│   │   ├── generate-adr-index.js    【S2】ADR 索引自动生成
+│   │   └── check-all.js             聚合所有检查
+│   ├── metrics/            【S2】度量采集（零依赖,从 Git 读数据）
+│   │   ├── business/collect.js         业务周报（PRD/CR/贡献者）
+│   │   └── development/collect.js      开发周报（Commits 合规率/类型/规模/ADR）
 │   └── integrations/       企业工具集成（✅ 零依赖）
 │       ├── jira/               Jira: create-issue + sync-from-markdown + list
 │       ├── confluence/         Confluence: publish-markdown + fetch-page
@@ -109,8 +123,9 @@ ep-code-ai/
 ├── examples/               完整示例项目
 │   ├── leave-management-system/  模式 A · 绿地项目完整样本
 │   └── pilot-npds-newpd/         模式 D · 稳态运维真实试点
-├── PLAN.md                 完整建设计划（5 Sprint × 接入模式 × 验收）
-├── ROADMAP.md              实施路线图（概览）
+├── CHANGELOG.md            📝 版本变更日志（每个 Sprint 一个条目）
+├── PLAN.md                 📋 完整建设计划（5 Sprint × 接入模式 × 验收）
+├── ROADMAP.md              🗺️ 实施路线图（概览）
 └── assets/                 图片、图表等静态资源
 ```
 
