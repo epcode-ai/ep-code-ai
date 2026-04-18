@@ -1,0 +1,64 @@
+name: Metrics Weekly
+
+on:
+  schedule:
+    # 每周一 08:00 CST (UTC +8) = UTC 00:00
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      since:
+        description: 采集时间窗（git --since 语法）
+        required: false
+        default: '7 days ago'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-dashboard:
+    name: Generate METRICS.md dashboard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate dashboard
+        env:
+          SINCE: ${{ github.event.inputs.since || '7 days ago' }}
+        run: |
+          node tools/metrics/generate-dashboard.js --since "$SINCE" --output METRICS.md
+          echo "--- METRICS.md 预览（前 80 行）---"
+          head -n 80 METRICS.md
+
+      - name: Create PR if changed
+        run: |
+          if git diff --quiet METRICS.md METRICS-business.md METRICS-development.md METRICS-testing.md METRICS-operations.md 2>/dev/null; then
+            echo "✅ 度量数据无变化,跳过"
+            exit 0
+          fi
+
+          git config user.email "metrics-bot@users.noreply.github.com"
+          git config user.name "EP Metrics Bot"
+
+          BRANCH="metrics/weekly-$(date -u +%Y-%m-%d)"
+          git checkout -b "$BRANCH"
+          git add METRICS.md METRICS-business.md METRICS-development.md METRICS-testing.md METRICS-operations.md
+          git commit -m "chore(metrics): 自动周报 $(date -u +%Y-%m-%d)"
+          git push -u origin "$BRANCH"
+
+          gh pr create \
+            --title "chore(metrics): 自动周报 $(date -u +%Y-%m-%d)" \
+            --body "由 \`metrics-weekly.yml\` 自动生成。审查 METRICS.md 顶层指标,合入即可归档本周数据。" \
+            --label metrics,automated \
+            --base main \
+            --head "$BRANCH"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

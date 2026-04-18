@@ -10,6 +10,8 @@
 | `development/collect.js` | Conventional Commits 合规率、commit 类型分布、变更规模桶、ADR 数 | `METRICS-development.md` |
 | `testing/collect.js` | 测试用例/策略/报告/提测单/Bug commit 数 + 贡献者 Top-5 | `METRICS-testing.md` |
 | `operations/collect.js` | Runbook/发布/故障/复盘 + 回滚数/Hotfix 数 | `METRICS-operations.md` |
+| `collect.js` | **S4 统一入口**,一次跑四场景 | 4 个 METRICS-*.md |
+| `generate-dashboard.js` | **S4 汇总**,各场景 METRICS-*.md → 顶层看板 | `METRICS.md` |
 
 ## 用法
 
@@ -42,7 +44,7 @@ node tools/metrics/development/collect.js --since "2026-01-01"
 
 GitLab CI（`workflows/gitlab/.gitlab-ci.example.yml` 的 `business-metrics` job）已配好每周一 08:00 触发,产物为 artifact。
 
-GitHub Actions 方案：参考 `.github/workflows/metrics-weekly.yml`（Sprint 4 会加）。
+GitHub Actions 方案：`.github/workflows/metrics-weekly.yml`（每周一 08:00 CST / 00:00 UTC 自动跑,生成 PR 到 main）。手动触发也可: `gh workflow run metrics-weekly.yml -f since="14 days ago"`。
 
 ## 设计原则
 
