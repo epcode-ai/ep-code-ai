@@ -1,0 +1,32 @@
+/**
+ * 全局样式 · 以简洁 + 企业风为主
+ */
+
+:root {
+  --ifm-color-primary: #2962ff;
+  --ifm-color-primary-dark: #0039cb;
+  --ifm-color-primary-darker: #0024b3;
+  --ifm-color-primary-darkest: #001d8f;
+  --ifm-color-primary-light: #448aff;
+  --ifm-color-primary-lighter: #82b1ff;
+  --ifm-color-primary-lightest: #eef3ff;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #82b1ff;
+  --ifm-color-primary-dark: #448aff;
+  --ifm-color-primary-darker: #2962ff;
+  --ifm-color-primary-darkest: #0039cb;
+  --ifm-color-primary-light: #a6c8ff;
+  --ifm-color-primary-lighter: #c6dbff;
+  --ifm-color-primary-lightest: #1a1a2e;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+}
+
+.mode-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(41, 98, 255, 0.15);
+  border-color: var(--ifm-color-primary);
+}

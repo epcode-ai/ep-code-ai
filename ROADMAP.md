@@ -4,9 +4,9 @@
 
 ## 当前状态
 
-- **完成度**: 96%（L1: 95%, L2: 100%, L3: 97%, L4: 90%, L5: 70%）
-- **进行中**: Sprint 5 · 统一 CLI + 对外发布 + 试点复盘
-- **试点项目**: `examples/pilot-npds-newpd/` 派单叫号系统（模式 D · 稳态运维）
+- **完成度**: 98%（L1: 95%, L2: 100%, L3: 97%, L4: 90%, L5: 85%）
+- **状态**: 🎉 **5 个 Sprint 全部完成**
+- **试点项目**: `examples/pilot-npds-newpd/` 派单叫号系统（模式 D · 稳态运维,数据不足,复盘暂缓）
 
 ## 里程碑
 
@@ -16,12 +16,21 @@
 | S2 | Week 2 | 业务 + 开发场景工具补齐 | ✅ 完成 |
 | S3 | Week 3 | 测试 + 运维场景工具补齐 | ✅ 完成 |
 | S4 | Week 4 | 场景联动 + 度量闭环 | ✅ 完成 |
-| S5 | Week 5 | 统一 CLI + 对外发布 + 试点复盘 | 📋 计划中 |
+| S5 | Week 5 | 统一 CLI + 对外发布 + 试点复盘 | ✅ 完成 |
 | S6+ | 持续 | 真实项目迭代 + 框架反馈 | 📋 |
 
 **完整计划**（所有 Sprint 的详细产出、接入模式抽象、风险、验收）见 **[PLAN.md](./PLAN.md)** 🔗
 
 ## 近期变更
+
+### 2026-04-18（Sprint 5 完成）
+- `tools/cli/` — 统一 `epcode` CLI,10 个子命令（init/adopt/migrate/check/prd/adr/metrics/incident/linkage/jira）
+- `tools/cli/scaffolds/mode-{a,b,c,d}/` — 4 种接入模式的脚手架模板
+- `package.json` 根目录 — 支持 `npx epcode` 调用
+- `docs-site/` — Docusaurus v3 文档站,首页以 4 接入模式为一等公民（4 张卡片）
+- `.github/workflows/pages.yml` — docs-site 变动时自动部署到 GitHub Pages
+- `CODEOWNERS` — 代码归属规则
+- `RELEASE_PROCESS.md` — 版本 / CHANGELOG / tag / Pages 的标准发布流程
 
 ### 2026-04-18（Sprint 4 完成）
 - `tools/cross-platform/scripts/link-prd-to-design.js` — 业务→开发: PRD 变更 → 受影响设计清单

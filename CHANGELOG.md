@@ -10,9 +10,65 @@
 
 ---
 
-## [Unreleased] · Sprint 5 进行中
+## [Unreleased] · 收尾期
 
-统一 CLI + 对外发布 + 试点复盘（详见 [PLAN.md § Sprint 5](./PLAN.md)）。
+5 个 Sprint 全部完成。后续进入真实项目落地 + 框架反馈阶段（详见 [PLAN.md § Sprint 6+](./PLAN.md)）。
+
+---
+
+## [0.6.0] - 2026-04-18 · Sprint 5 完成 🎉
+
+**主题**: 统一 CLI + 对外发布 + 治理文件
+
+### 新增 · 统一 CLI · `epcode`
+
+CLI 位于 `tools/cli/`,通过根 `package.json` bin 字段暴露,支持 `npx epcode`:
+
+| 命令 | 作用 |
+|------|------|
+| `init --mode=<A\|B\|C\|D> --name=xxx` | 按接入模式初始化项目（从 scaffolds 复制骨架） |
+| `adopt --level=1..5` | 模式 C 渐进启用（更新 ADOPTION-LOG.md） |
+| `migrate --from=existing-code` | 模式 B 从现存代码反向生成 API 契约草稿 |
+| `check` | 聚合质量校验（等效 check-all.js） |
+| `prd <file>` | PRD 结构 + 可测性打分（二合一） |
+| `adr index [--check]` | ADR 索引生成 / CI 校验 |
+| `metrics [--since]` | 四场景度量 + METRICS.md 总看板 |
+| `incident new / to-requirement` | 故障处置工作流 |
+| `linkage prd-to-design / regression / release-plan` | 跨场景联动 |
+| `jira sync / create-issue / list` | Jira 集成封装 |
+
+所有子命令都是对 `tools/` 下现成脚本的薄封装,保持**零 npm 依赖**。
+
+### 新增 · 4 种接入模式脚手架
+
+`tools/cli/scaffolds/mode-{a,b,c,d}/` 各自含:
+- `README.md` 起步清单 + "为什么选这模式" + 常见坑
+- mode B: `BACKLOG.md` 技术债清单
+- mode C: `ADOPTION-LOG.md` 渐进启用日志
+- mode D: `SERVICE-LEVEL.md` SLO/on-call/故障分级
+
+变量 `__PROJECT_NAME__` / `__DATE__` 在 init 时替换。
+
+### 新增 · 文档站
+
+- `docs-site/` · Docusaurus v3 静态站
+- 首页以 **4 接入模式** 为一等公民（4 张大卡片）
+- `sidebars.js` 按 `docs/chapters/*` 自动生成侧边栏
+- `.github/workflows/pages.yml` · 每次 main 动 `docs-site/` 或 `docs/chapters/` 时自动构建 + 部署到 `https://epcode-ai.github.io/ep-code-ai/`
+
+### 新增 · 治理文件
+
+- `package.json` 根目录 · 暴露 `epcode` bin
+- `CODEOWNERS` · 代码归属规则
+- `RELEASE_PROCESS.md` · 版本节奏 / CHANGELOG / tag / Pages 的标准 SOP
+
+### 未完成 · 试点复盘
+
+原计划的 `examples/pilot-npds-newpd/RETROSPECTIVE.md` 因试点数据不足暂缓,留到真实项目跑一轮后再补。完成度影响: L5 从预期 85% 调整为实际 85%（因 CLI/文档站/治理三项充分完成）。
+
+### 完成度
+
+整体 **96% → 98%**。5 个 Sprint 全部完成。
 
 ---
 

@@ -1,0 +1,48 @@
+# CODEOWNERS
+#
+# 规则:
+#   - 路径按 GitHub glob 语法
+#   - 后出现的规则优先级高
+#   - PR 触发该路径时,自动 request review
+#
+# 该文件可放 .github/ 或仓库根。GitHub 会按以下优先级查找: .github/ > 根 > docs/
+#
+# 本项目目前维护人: zhangkunshi 为主。后续有新成员加入需要更新。
+
+# 默认所有变更
+*                                   @zhangkunshi
+
+# 方法论文档（业务/开发/测试/运维）
+/docs/chapters/00-adoption/          @zhangkunshi
+/docs/chapters/02-business/          @zhangkunshi
+/docs/chapters/03-development/       @zhangkunshi
+/docs/chapters/04-testing/           @zhangkunshi
+/docs/chapters/05-operations/        @zhangkunshi
+
+# CI / 基础设施
+/.github/workflows/                  @zhangkunshi
+/platforms/                          @zhangkunshi
+
+# CLI + 脚手架
+/tools/cli/                          @zhangkunshi
+/tools/cross-platform/scripts/       @zhangkunshi
+
+# 企业集成
+/tools/integrations/                 @zhangkunshi
+
+# 度量
+/tools/metrics/                      @zhangkunshi
+
+# 文档站
+/docs-site/                          @zhangkunshi
+
+# 试点 / 示例项目
+/examples/pilot-*/                   @zhangkunshi
+/examples/leave-management-system/   @zhangkunshi
+
+# 关键治理文件,任何修改都要慎重
+/CHANGELOG.md                        @zhangkunshi
+/PLAN.md                             @zhangkunshi
+/ROADMAP.md                          @zhangkunshi
+/CODEOWNERS                          @zhangkunshi
+/RELEASE_PROCESS.md                  @zhangkunshi
