@@ -3,11 +3,11 @@
 > 企业级 AI 研发助手 — 覆盖**业务 · 开发 · 测试 · 运维**四大场景的 Claude Code 增强生态
 
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-blue)]()
-[![Progress](https://img.shields.io/badge/progress-93%25%20(S3%20done)-brightgreen)](./ROADMAP.md)
-[![Changelog](https://img.shields.io/badge/changelog-v0.4.0-informational)](./CHANGELOG.md)
+[![Progress](https://img.shields.io/badge/progress-96%25%20(S4%20done)-brightgreen)](./ROADMAP.md)
+[![Changelog](https://img.shields.io/badge/changelog-v0.5.0-informational)](./CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-> 📍 **最新进展**: Sprint 3 已完成（测试 + 运维场景工具全套,2026-04-18）。进行中 · Sprint 4（场景联动 + 度量闭环）。
+> 📍 **最新进展**: Sprint 4 已完成（4 个跨场景联动脚本 + 度量大盘 + 每周定时 workflow,2026-04-18）。进行中 · Sprint 5（统一 CLI + 对外发布 + 试点复盘）。
 >
 > - 📋 [完整建设计划 PLAN.md](./PLAN.md) · 5 Sprint × 4 接入模式 × 验收标准
 > - 🗺️ [实施路线图 ROADMAP.md](./ROADMAP.md) · 概览 + 里程碑
@@ -111,8 +111,14 @@ ep-code-ai/
 │   │   ├── bug-trend.js             【S3】Bug JSON → 趋势报告 + ASCII 图
 │   │   ├── coverage-analysis.js     【S3】需求↔用例覆盖率
 │   │   ├── config-audit.js          【S3】多环境配置 diff + 敏感值扫描
+│   │   ├── link-prd-to-design.js    【S4】业务→开发: PRD 变更 → 受影响设计
+│   │   ├── recommend-regression.js  【S4】开发→测试: git diff → 回归用例推荐
+│   │   ├── generate-release-plan.js 【S4】测试→运维: 测试报告 → 发布计划草稿
+│   │   ├── incident-to-requirement.js 【S4】运维→业务: 复盘改进项 → Issue 批量
 │   │   └── check-all.js             聚合所有检查
 │   ├── metrics/            度量采集（零依赖,从 Git 读数据）
+│   │   ├── collect.js                  【S4】统一入口,一次跑所有场景
+│   │   ├── generate-dashboard.js       【S4】汇总生成 METRICS.md 总看板
 │   │   ├── business/collect.js         【S2】业务周报（PRD/CR/贡献者）
 │   │   ├── development/collect.js      【S2】开发周报（Commits 合规率/类型/规模/ADR）
 │   │   ├── testing/collect.js          【S3】测试周报（用例/策略/报告/Bug 提交）
@@ -196,11 +202,15 @@ node tools/cross-platform/scripts/bug-trend.js --file bugs.json                 
 node tools/cross-platform/scripts/coverage-analysis.js --req PRD --cases cases/       # 需求覆盖率
 node tools/cross-platform/scripts/config-audit.js --dir config/                       # 多环境配置审计
 
+# Sprint 4 新增 - 跨场景联动
+node tools/cross-platform/scripts/link-prd-to-design.js --prd prd.md                  # 业务→开发
+node tools/cross-platform/scripts/recommend-regression.js --base main                 # 开发→测试
+node tools/cross-platform/scripts/generate-release-plan.js --report test-report.md    # 测试→运维
+node tools/cross-platform/scripts/incident-to-requirement.js --postmortem pm.md       # 运维→业务
+
 # 度量采集（从 Git 拉数据,零依赖）
-node tools/metrics/business/collect.js --since "7 days ago"       # 业务周报
-node tools/metrics/development/collect.js --since "7 days ago"    # 开发周报
-node tools/metrics/testing/collect.js --since "7 days ago"        # 测试周报 (S3)
-node tools/metrics/operations/collect.js --since "7 days ago"     # 运维周报 (S3)
+node tools/metrics/collect.js --since "7 days ago"                # S4 统一入口,一次跑全部
+node tools/metrics/generate-dashboard.js --since "7 days ago"     # S4 生成 METRICS.md 总看板
 ```
 
 详见 [`tools/cross-platform/README.md`](./tools/cross-platform/README.md)（含 Git Hook / CI 集成示例）和 [`tools/metrics/`](./tools/metrics/)（度量脚本）

@@ -10,9 +10,47 @@
 
 ---
 
-## [Unreleased] · Sprint 4 进行中
+## [Unreleased] · Sprint 5 进行中
 
-场景联动 + 度量闭环（详见 [PLAN.md § Sprint 4](./PLAN.md#-sprint-4week-4-场景联动--度量闭环)）。
+统一 CLI + 对外发布 + 试点复盘（详见 [PLAN.md § Sprint 5](./PLAN.md)）。
+
+---
+
+## [0.5.0] - 2026-04-18 · Sprint 4 完成
+
+**主题**: 场景联动 + 度量闭环
+
+### 新增 · 4 个跨场景联动脚本（零依赖）
+
+- `tools/cross-platform/scripts/link-prd-to-design.js` — **业务 → 开发**
+  PRD 变更 → 提取 REQ/US ID → 扫描设计目录找受影响文档 → 输出评审 checklist
+- `tools/cross-platform/scripts/recommend-regression.js` — **开发 → 测试**
+  git diff + commit msg → 抽模块/需求 ID → 匹配用例 → 推荐回归清单
+- `tools/cross-platform/scripts/generate-release-plan.js` — **测试 → 运维**
+  解析测试报告（通过率/覆盖率/S1-S4 分布）→ 规则推导可发布性与灰度节奏 → Markdown 发布计划
+- `tools/cross-platform/scripts/incident-to-requirement.js` — **运维 → 业务**
+  解析 postmortem.md 改进项（checkbox + 表格）→ 生成 GH Issue 批量命令或 Jira sync payload
+
+### 新增 · 度量闭环
+
+- `tools/metrics/collect.js` — 统一入口,一次跑四场景 collect.js
+- `tools/metrics/generate-dashboard.js` — 汇总 METRICS-*.md → METRICS.md 顶层看板（含 details 折叠）
+- `.github/workflows/metrics-weekly.yml` — 每周一 08:00 UTC 自动跑 + 产 PR
+
+### 变更 · 文档
+
+- `README.md` / `ROADMAP.md` · 新增 S4 脚本说明
+- Badge: `progress-96%` `(S4 done)` · `changelog-v0.5.0`
+
+### 验证
+
+- 4 个脚本均在本仓库 + examples/leave-management-system 上跑通
+- `incident-to-requirement.js` 对 postmortem-example 抽到 11 条真实改进项（过滤掉 SMART 自检元项）
+- `generate-dashboard.js` 生成 241 行 METRICS.md,4/4 场景有数据
+
+### 完成度
+
+整体 93% → 96%（L4 场景联动 20% → 90%,L5 真实反馈 50% → 70%）。
 
 ---
 

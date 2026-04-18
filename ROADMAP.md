@@ -4,8 +4,8 @@
 
 ## 当前状态
 
-- **完成度**: 93%（L1: 95%, L2: 100%, L3: 97%, L4: 20%, L5: 50%）
-- **进行中**: Sprint 4 · 场景联动 + 度量闭环
+- **完成度**: 96%（L1: 95%, L2: 100%, L3: 97%, L4: 90%, L5: 70%）
+- **进行中**: Sprint 5 · 统一 CLI + 对外发布 + 试点复盘
 - **试点项目**: `examples/pilot-npds-newpd/` 派单叫号系统（模式 D · 稳态运维）
 
 ## 里程碑
@@ -15,13 +15,21 @@
 | S1 | Week 1 | 操作系统收尾 + 接入模式骨架 + 启动试点 | ✅ 完成 |
 | S2 | Week 2 | 业务 + 开发场景工具补齐 | ✅ 完成 |
 | S3 | Week 3 | 测试 + 运维场景工具补齐 | ✅ 完成 |
-| S4 | Week 4 | 场景联动 + 度量闭环 | 📋 计划中 |
+| S4 | Week 4 | 场景联动 + 度量闭环 | ✅ 完成 |
 | S5 | Week 5 | 统一 CLI + 对外发布 + 试点复盘 | 📋 计划中 |
 | S6+ | 持续 | 真实项目迭代 + 框架反馈 | 📋 |
 
 **完整计划**（所有 Sprint 的详细产出、接入模式抽象、风险、验收）见 **[PLAN.md](./PLAN.md)** 🔗
 
 ## 近期变更
+
+### 2026-04-18（Sprint 4 完成）
+- `tools/cross-platform/scripts/link-prd-to-design.js` — 业务→开发: PRD 变更 → 受影响设计清单
+- `tools/cross-platform/scripts/recommend-regression.js` — 开发→测试: git diff → 回归用例推荐
+- `tools/cross-platform/scripts/generate-release-plan.js` — 测试→运维: 测试报告 → 发布计划草稿（通过率/S1 规则）
+- `tools/cross-platform/scripts/incident-to-requirement.js` — 运维→业务: 复盘改进项 → Jira/GitHub Issue 批量
+- `tools/metrics/collect.js` + `generate-dashboard.js` — 四场景统一入口 + METRICS.md 总看板
+- `.github/workflows/metrics-weekly.yml` — 每周一 08:00 自动生成周报 PR
 
 ### 2026-04-18（Sprint 3 完成）
 - `tools/integrations/zentao/` — 禅道 Bug: create / list / sync-from-markdown（含 sessionID 鉴权封装）
