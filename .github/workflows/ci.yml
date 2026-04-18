@@ -137,8 +137,14 @@ jobs:
 
       - name: Check changed submission files
         run: |
-          # 找本 PR 变化的 submission 文件
-          FILES=$(git diff --name-only origin/${{ github.base_ref }}..HEAD | grep -E '(submission|提测).*\.md$' || true)
+          # 找本 PR 变化的 "实际提测申请单",排除方法论文章/模板文件/示例
+          # - 排除 docs/chapters/ (讲解提测规范的文章,不是申请单本身)
+          # - 排除 templates/ (模板)
+          # - 排除 examples/ 只 submission-* 前缀命名的(真实示例)仍然校验
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}..HEAD \
+            | grep -E '(submission|提测).*\.md$' \
+            | grep -v -E '^(docs/chapters/|templates/)' \
+            || true)
           if [ -z "$FILES" ]; then
             echo "✅ 本 PR 无提测申请单变化,跳过"
             exit 0
