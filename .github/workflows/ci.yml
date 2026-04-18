@@ -152,9 +152,84 @@ jobs:
           done
           exit $FAIL
 
+  prd-check:
+    name: PRD Structure & Testability
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check changed PRD files
+        run: |
+          FILES=$(git diff --name-only origin/${{ github.base_ref }}..HEAD \
+            | grep -E '(prd|PRD).*\.md$' || true)
+          if [ -z "$FILES" ]; then
+            echo "✅ 本 PR 无 PRD 变化,跳过"
+            exit 0
+          fi
+          FAIL=0
+          for f in $FILES; do
+            [ -f "$f" ] || continue
+            echo "=== 结构校验: $f ==="
+            node tools/cross-platform/scripts/check-prd.js "$f" || {
+              code=$?
+              # 只有硬错误（退出码 2）阻塞
+              if [ "$code" = "2" ]; then FAIL=1; fi
+            }
+            echo "=== 可测性评分: $f ==="
+            node tools/cross-platform/scripts/score-testability.js "$f" || {
+              code=$?
+              # < 60 分硬阻塞
+              if [ "$code" = "2" ]; then FAIL=1; fi
+            }
+          done
+          exit $FAIL
+
+  adr-index-sync:
+    name: ADR Index Up-to-date
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Detect ADR directories
+        id: scan
+        run: |
+          # 任何 docs/adr 或 **/adr/ 目录下 0001-xxx.md 变动
+          DIRS=$(git diff --name-only origin/${{ github.base_ref }}..HEAD \
+            | grep -E '(^|/)adr/[0-9]{4}-.+\.md$' \
+            | sed -E 's#/[^/]+$##' | sort -u || true)
+          echo "dirs<<EOF" >> $GITHUB_OUTPUT
+          echo "$DIRS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Verify ADR index is latest
+        if: steps.scan.outputs.dirs != ''
+        run: |
+          FAIL=0
+          while IFS= read -r dir; do
+            [ -z "$dir" ] && continue
+            echo "→ 校验索引: $dir"
+            node tools/cross-platform/scripts/generate-adr-index.js \
+              --target "$dir" --check || FAIL=1
+          done <<< "${{ steps.scan.outputs.dirs }}"
+          exit $FAIL
+
   summary:
     name: CI Summary
-    needs: [docs-check, commit-lint, shell-syntax, powershell-syntax, submission-check]
+    needs: [docs-check, commit-lint, shell-syntax, powershell-syntax, submission-check, prd-check, adr-index-sync]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -169,3 +244,5 @@ jobs:
           echo "| Shell Syntax | ${{ needs.shell-syntax.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| PS Syntax    | ${{ needs.powershell-syntax.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Submission   | ${{ needs.submission-check.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| PRD Check    | ${{ needs.prd-check.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ADR Index    | ${{ needs.adr-index-sync.result }} |" >> $GITHUB_STEP_SUMMARY

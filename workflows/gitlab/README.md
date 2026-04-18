@@ -60,3 +60,20 @@ cp path/to/issue_template_submission.md .gitlab/issue_templates/Submission.md
 | 标签 | Labels（内置） | Labels（内置） | Labels（内置） |
 
 如果你用的是 GitHub，见 [../github/](../github/)。
+
+## Sprint 2 新增 CI Job
+
+`.gitlab-ci.example.yml` 新增以下 4 个 job（不替换原有流水线）：
+
+| Job | 阶段 | 触发条件 | 作用 | 阻塞性 |
+|-----|------|---------|------|--------|
+| `prd-check` | lint | MR + 动了 `docs/prd/**/*.md` 或 `**/prd-*.md` | 跑 `check-prd.js` 校验必备章节 / 模糊词 | 硬错误（退出 2）阻塞合入 |
+| `testability-score` | lint | 同上 | 跑 `score-testability.js` 0-100 打分 | < 60 分阻塞合入 |
+| `adr-index` | lint | push 到默认分支 + 动了 `docs/adr/**/*.md` | 重建索引并自动 commit | - |
+| `business-metrics` | metrics | Schedule（每周一 08:00） | 跑 `tools/metrics/**/collect.js` 生成周报 artifact | - |
+
+**准备工作**：
+- `adr-index` 需要在 **CI/CD → Variables** 配置 `CI_PUSH_TOKEN`（Project Access Token,`write_repository` 权限）。
+- `business-metrics` 需要在 **CI/CD → Schedules** 创建每周一 08:00 的定时任务（cron: `0 8 * * 1`）。
+
+所有脚本零依赖（Node 18+ 内置 fetch/fs）,镜像用 `node:20-alpine` 即可。

@@ -292,10 +292,26 @@ Prompt 也要迭代：
 - 增加冲突严重度标注
 ```
 
-## 六、配套资源
+## 六、CLI 脚手架（本仓库提供）
+
+除了 AI Prompt 辅助外，本仓库在 `tools/cross-platform/scripts/` 下提供了两个零依赖 CLI 脚本，可在本地 / CI 直接跑：
+
+| 脚本 | 作用 | 退出码 |
+|------|------|--------|
+| `check-prd.js <file.md>` | 校验 PRD 必备章节 / 验收标准 / 非功能量化 / 模糊词 | 0 通过 / 1 warning / 2 error |
+| `score-testability.js <file.md>` | 对 PRD 打可测性分（0-100,5 维度） | 0 ≥80 / 1 60-79 / 2 <60 |
+
+**在 PR / MR 里自动跑**：
+- GitHub: `.github/workflows/ci.yml` 的 `prd-check` job
+- GitLab: `workflows/gitlab/.gitlab-ci.example.yml` 的 `prd-check` + `testability-score` job
+
+CLI 与 Prompt 互补：Prompt 做深度语义理解（适合评审阶段），CLI 做机械结构校验（适合门禁阶段）。
+
+## 七、配套资源
 
 - [01 PRD 编写规范](./01-prd-standards.md)
 - [02 用户故事与验收标准](./02-user-stories.md)
 - [03 业务规则管理](./03-business-rules.md)
 - [04 需求变更管理](./04-change-management.md)
 - [Claude Skills 定义目录](../../../skills/)（团队 Prompt 库）
+- [度量采集脚本](../../../tools/metrics/)（业务 / 开发指标周报）

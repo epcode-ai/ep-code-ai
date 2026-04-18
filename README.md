@@ -161,9 +161,18 @@ node tools/cross-platform/scripts/check-all.js
 node tools/cross-platform/scripts/check-links.js         # 内部链接校验
 node tools/cross-platform/scripts/check-commit.js "feat: xxx"  # Commit 格式
 node tools/cross-platform/scripts/check-submission.js path/to/file.md  # 提测单校验
+
+# Sprint 2 新增 - 业务/开发场景
+node tools/cross-platform/scripts/check-prd.js path/to/prd.md              # PRD 结构校验
+node tools/cross-platform/scripts/score-testability.js path/to/prd.md      # PRD 可测性打分 (0-100)
+node tools/cross-platform/scripts/generate-adr-index.js --target docs/adr/ # ADR 索引自动重建
+
+# 度量采集（从 Git 拉数据,零依赖）
+node tools/metrics/business/collect.js --since "7 days ago"      # 业务指标周报
+node tools/metrics/development/collect.js --since "7 days ago"   # 开发指标周报
 ```
 
-详见 [`tools/cross-platform/README.md`](./tools/cross-platform/README.md)（含 Git Hook / CI 集成示例）
+详见 [`tools/cross-platform/README.md`](./tools/cross-platform/README.md)（含 Git Hook / CI 集成示例）和 [`tools/metrics/`](./tools/metrics/)（度量脚本）
 
 ### 📖 我想看一个完整示例
 

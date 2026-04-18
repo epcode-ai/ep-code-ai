@@ -1,0 +1,15 @@
+{
+  "name": "@epcode-ai/metrics",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EP Code AI 度量采集脚本（零依赖,从 Git 读数据）",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "business": "node business/collect.js",
+    "development": "node development/collect.js"
+  },
+  "license": "MIT"
+}
