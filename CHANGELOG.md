@@ -14,6 +14,22 @@
 
 5 个 Sprint 全部完成。后续进入真实项目落地 + 框架反馈阶段（详见 [PLAN.md § Sprint 6+](./PLAN.md)）。
 
+### 基础设施修复（2026-04-18,Sprint 5 收尾日)
+
+- 🌐 **文档站正式上线**: <https://epcode-ai.github.io/ep-code-ai/>
+  - 仓库从私有转公开,GitHub Pages Source 切到 GitHub Actions
+- 🛡️ **Branch protection** 用 Ruleset 重配(删旧 classic 版),main 分支强制 PR + CI 全绿
+- 🔧 修一批 Docusaurus 构建问题:
+  - Docusaurus 3.5 → 3.8.1,npm overrides 锁 webpack 5.97.1(修 ProgressPlugin schema 不兼容)
+  - sidebars.js 用剥离数字前缀后的 doc ID
+  - MDX v3 把 `<60` 当 JSX,改用 `&lt;60` 转义
+  - 3 个 `.js` 文件链接转成 GitHub blob URL(避开 Terser 对非模块 JS 的处理)
+  - `onBrokenMarkdownLinks: 'ignore'` 抑制 docs → 仓库其他目录的相对链接刷屏
+- 🧹 CI 修:
+  - `submission-check` 正则增加 `docs/chapters/` 和 `templates/` 排除,避免方法论文章被当申请单误报
+  - `submission-gate.md` 长行从 201 改 197 字符,过 markdown-lint 硬门禁
+  - pages.yml 去掉 setup-node 的 cache 依赖(首次无 lockfile)
+
 ---
 
 ## [0.6.0] - 2026-04-18 · Sprint 5 完成 🎉
