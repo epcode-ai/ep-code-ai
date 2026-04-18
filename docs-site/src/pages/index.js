@@ -10,7 +10,7 @@ const MODES = [
     title: 'A · 绿地项目',
     subtitle: '从零建,全套上车',
     desc: '项目刚立项,团队愿意从 Day 1 走规范。推荐路径: 产品写 PRD → 测试做可测性评审 → 开发写 ADR → ...',
-    href: '/docs/00-adoption/mode-a-greenfield',
+    href: '/docs/adoption/mode-a-greenfield',
   },
   {
     id: 'b',
@@ -18,7 +18,7 @@ const MODES = [
     title: 'B · 开发中项目',
     subtitle: '从现在追溯补齐',
     desc: '代码已开始写未上线。不追溯历史,从今天开始按规范 + 补齐 3-5 个核心 PRD。',
-    href: '/docs/00-adoption/mode-b-mid-dev',
+    href: '/docs/adoption/mode-b-mid-dev',
   },
   {
     id: 'c',
@@ -26,7 +26,7 @@ const MODES = [
     title: 'C · 迭代中项目',
     subtitle: '每版本一层',
     desc: '已上线定期迭代,流程成熟但和本框架不同。分 5 迭代渐进嵌入,每版本加一层。',
-    href: '/docs/00-adoption/mode-c-iterating',
+    href: '/docs/adoption/mode-c-iterating',
   },
   {
     id: 'd',
@@ -34,7 +34,7 @@ const MODES = [
     title: 'D · 稳态运维',
     subtitle: '聚焦运维场景',
     desc: '项目运行 1 年+,只做 bug 修复小优化。只用运维篇 + 最小开发规范,其他不强求。',
-    href: '/docs/00-adoption/mode-d-maintenance',
+    href: '/docs/adoption/mode-d-maintenance',
   },
 ];
 
@@ -47,11 +47,11 @@ export default function Home() {
           企业级 AI 研发助手 · 覆盖 <b>业务 · 开发 · 测试 · 运维</b> 四大场景的 Claude Code 增强生态
         </p>
         <div>
-          <Link className="button button--primary button--lg" to="/docs/00-adoption/">
+          <Link className="button button--primary button--lg" to="/docs/adoption/">
             5 分钟判定你的接入模式 →
           </Link>
           &nbsp;&nbsp;
-          <Link className="button button--secondary button--lg" to="/docs/01-overview/">
+          <Link className="button button--secondary button--lg" to="/docs/overview/">
             查看方法论总览
           </Link>
         </div>

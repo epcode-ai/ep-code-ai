@@ -50,7 +50,7 @@ const config = {
       logo: { alt: 'EP Code AI', src: 'img/logo.svg' },
       items: [
         { type: 'docSidebar', sidebarId: 'main', position: 'left', label: '方法论' },
-        { to: '/docs/00-adoption/', label: '接入模式 ⭐', position: 'left' },
+        { to: '/docs/adoption/', label: '接入模式 ⭐', position: 'left' },
         { href: 'https://github.com/epcode-ai/ep-code-ai/blob/main/CHANGELOG.md', label: 'Changelog', position: 'right' },
         { href: 'https://github.com/epcode-ai/ep-code-ai', label: 'GitHub', position: 'right' },
       ],
@@ -61,19 +61,19 @@ const config = {
         {
           title: '接入模式',
           items: [
-            { label: 'A · 绿地', to: '/docs/00-adoption/mode-a-greenfield' },
-            { label: 'B · 开发中', to: '/docs/00-adoption/mode-b-mid-dev' },
-            { label: 'C · 迭代中', to: '/docs/00-adoption/mode-c-iterating' },
-            { label: 'D · 稳态运维', to: '/docs/00-adoption/mode-d-maintenance' },
+            { label: 'A · 绿地', to: '/docs/adoption/mode-a-greenfield' },
+            { label: 'B · 开发中', to: '/docs/adoption/mode-b-mid-dev' },
+            { label: 'C · 迭代中', to: '/docs/adoption/mode-c-iterating' },
+            { label: 'D · 稳态运维', to: '/docs/adoption/mode-d-maintenance' },
           ],
         },
         {
           title: '方法论篇章',
           items: [
-            { label: '业务篇', to: '/docs/02-business/' },
-            { label: '开发篇', to: '/docs/03-development/' },
-            { label: '测试篇', to: '/docs/04-testing/' },
-            { label: '运维篇', to: '/docs/05-operations/' },
+            { label: '业务篇', to: '/docs/business/' },
+            { label: '开发篇', to: '/docs/development/' },
+            { label: '测试篇', to: '/docs/testing/' },
+            { label: '运维篇', to: '/docs/operations/' },
           ],
         },
         {
