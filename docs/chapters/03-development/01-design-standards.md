@@ -292,3 +292,17 @@ sequenceDiagram
 - [03 分支策略](./03-branch-strategy.md)
 - [API 契约模板](../../../templates/testing/api-contracts/api-template.md)
 - [开发 → 测试 契约](../04-testing/03-roles-contracts/dev-contract.md)
+
+## 附：ADR 索引自动生成
+
+每个 `docs/adr/` 目录下的 ADR 文件遵循 `NNNN-<slug>.md` 命名后，可用下面的脚本自动生成（或在 CI 里校验）`README.md` 索引：
+
+```bash
+# 生成/更新索引
+node tools/cross-platform/scripts/generate-adr-index.js --target docs/adr/
+
+# CI 校验（索引不是最新时退出 1,提示本地重跑）
+node tools/cross-platform/scripts/generate-adr-index.js --target docs/adr/ --check
+```
+
+本仓库 `.github/workflows/ci.yml` 的 `adr-index-sync` job 会在 PR 改了 ADR 时自动校验；GitLab 方案见 `workflows/gitlab/.gitlab-ci.example.yml` 的 `adr-index` job（支持推送到默认分支时自动提交刷新后的索引）。
