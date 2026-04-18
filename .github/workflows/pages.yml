@@ -28,13 +28,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: docs-site/package-lock.json
 
       - name: Install
         working-directory: docs-site
         run: |
-          # 首次无 lockfile 时 fallback 到 npm install
+          # 首次无 lockfile 时 fallback 到 npm install（之后若 commit lockfile 可改 npm ci）
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
       - name: Build
