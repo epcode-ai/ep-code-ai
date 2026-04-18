@@ -4,8 +4,8 @@
 
 ## 当前状态
 
-- **完成度**: 91%（L1: 95%, L2: 100%, L3: 93%, L4: 20%, L5: 30%）
-- **进行中**: Sprint 3 · 测试 + 运维场景工具补齐
+- **完成度**: 93%（L1: 95%, L2: 100%, L3: 97%, L4: 20%, L5: 50%）
+- **进行中**: Sprint 4 · 场景联动 + 度量闭环
 - **试点项目**: `examples/pilot-npds-newpd/` 派单叫号系统（模式 D · 稳态运维）
 
 ## 里程碑
@@ -14,7 +14,7 @@
 |--------|------|------|------|
 | S1 | Week 1 | 操作系统收尾 + 接入模式骨架 + 启动试点 | ✅ 完成 |
 | S2 | Week 2 | 业务 + 开发场景工具补齐 | ✅ 完成 |
-| S3 | Week 3 | 测试 + 运维场景工具补齐 | 🚧 进行中 |
+| S3 | Week 3 | 测试 + 运维场景工具补齐 | ✅ 完成 |
 | S4 | Week 4 | 场景联动 + 度量闭环 | 📋 计划中 |
 | S5 | Week 5 | 统一 CLI + 对外发布 + 试点复盘 | 📋 计划中 |
 | S6+ | 持续 | 真实项目迭代 + 框架反馈 | 📋 |
@@ -22,6 +22,17 @@
 **完整计划**（所有 Sprint 的详细产出、接入模式抽象、风险、验收）见 **[PLAN.md](./PLAN.md)** 🔗
 
 ## 近期变更
+
+### 2026-04-18（Sprint 3 完成）
+- `tools/integrations/zentao/` — 禅道 Bug: create / list / sync-from-markdown（含 sessionID 鉴权封装）
+- `tools/integrations/tapd/` — TAPD Bug: create / list / sync-from-markdown
+- `tools/cross-platform/scripts/bug-trend.js` — Bug JSON → Markdown + ASCII 趋势图
+- `tools/cross-platform/scripts/coverage-analysis.js` — 需求↔用例覆盖率 + 悬空引用检测
+- `tools/integrations/alertmanager/` — Prometheus webhook → 企微/钉钉/飞书/Slack 转发 server
+- `tools/cross-platform/scripts/config-audit.js` — 多环境配置 diff + 敏感值扫描
+- `tools/integrations/k8s/` — kubectl 封装: rollout-status / scale（含 prod 保护）/ logs
+- `tools/metrics/testing/` + `tools/metrics/operations/` — 测试/运维度量周报
+- CI 新增 `coverage-check` + `config-audit` job（GH + GitLab）
 
 ### 2026-04-18（Sprint 2 完成）
 - `tools/cross-platform/scripts/check-prd.js` — PRD 结构校验（必备章节 / AC / 模糊词 / 量化指标）

@@ -8,6 +8,8 @@
 |------|---------|------|
 | `business/collect.js` | PRD 变更次数、CR 提交、贡献者分布 | `METRICS-business.md` |
 | `development/collect.js` | Conventional Commits 合规率、commit 类型分布、变更规模桶、ADR 数 | `METRICS-development.md` |
+| `testing/collect.js` | 测试用例/策略/报告/提测单/Bug commit 数 + 贡献者 Top-5 | `METRICS-testing.md` |
+| `operations/collect.js` | Runbook/发布/故障/复盘 + 回滚数/Hotfix 数 | `METRICS-operations.md` |
 
 ## 用法
 

@@ -227,9 +227,75 @@ jobs:
           done <<< "${{ steps.scan.outputs.dirs }}"
           exit $FAIL
 
+  coverage-check:
+    name: Requirement Coverage
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run coverage-analysis on examples
+        run: |
+          # 对 examples/leave-management-system 做需求覆盖快照（参考值）
+          # 不阻塞：仅打印,PR 改了相关目录时才报硬错
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}..HEAD \
+            | grep -E '(01-business|03-testing)/' || true)
+          if [ -z "$CHANGED" ]; then
+            echo "✅ 本 PR 未动业务/测试目录,跳过"
+            exit 0
+          fi
+          node tools/cross-platform/scripts/coverage-analysis.js \
+            --req examples/leave-management-system/01-business/prd-v1.0.md \
+            --cases examples/leave-management-system/03-testing/ \
+            --output /tmp/COVERAGE.md || echo "⚠️  有未覆盖需求（软警告,不阻塞）"
+          echo "::group::COVERAGE.md"
+          cat /tmp/COVERAGE.md
+          echo "::endgroup::"
+
+  config-audit:
+    name: Config Audit (opt-in)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Detect changed config dirs and audit
+        run: |
+          # 找同目录下多份 *.env / *.yml / *.json 的改动
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}..HEAD \
+            | grep -E '\.(env|ya?ml|json)$' | grep -E '(config|configs|env)/' | head -10 || true)
+          if [ -z "$CHANGED" ]; then
+            echo "✅ 本 PR 未触发配置审计"
+            exit 0
+          fi
+          # 按目录分组
+          DIRS=$(echo "$CHANGED" | xargs -I{} dirname {} | sort -u)
+          FAIL=0
+          for d in $DIRS; do
+            echo "=== 审计 $d ==="
+            node tools/cross-platform/scripts/config-audit.js --dir "$d" --output /tmp/audit-$(basename $d).md || {
+              code=$?
+              # 退出码 2 (prod 明文敏感值) 阻塞合入
+              if [ "$code" = "2" ]; then FAIL=1; fi
+            }
+          done
+          exit $FAIL
+
   summary:
     name: CI Summary
-    needs: [docs-check, commit-lint, shell-syntax, powershell-syntax, submission-check, prd-check, adr-index-sync]
+    needs: [docs-check, commit-lint, shell-syntax, powershell-syntax, submission-check, prd-check, adr-index-sync, coverage-check, config-audit]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -246,3 +312,5 @@ jobs:
           echo "| Submission   | ${{ needs.submission-check.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| PRD Check    | ${{ needs.prd-check.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| ADR Index    | ${{ needs.adr-index-sync.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Req Coverage | ${{ needs.coverage-check.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Config Audit | ${{ needs.config-audit.result }} |" >> $GITHUB_STEP_SUMMARY
