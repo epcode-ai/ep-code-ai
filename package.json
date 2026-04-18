@@ -1,0 +1,45 @@
+{
+  "name": "epcode-ai",
+  "version": "0.6.0",
+  "description": "企业级 AI 研发助手 — 覆盖业务 · 开发 · 测试 · 运维四大场景的 Claude Code 增强生态",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "homepage": "https://github.com/epcode-ai/ep-code-ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epcode-ai/ep-code-ai.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "epcode": "tools/cli/bin/epcode.js"
+  },
+  "scripts": {
+    "check": "node tools/cross-platform/scripts/check-all.js",
+    "epcode": "node tools/cli/bin/epcode.js"
+  },
+  "files": [
+    "tools/",
+    "templates/",
+    "skills/",
+    "docs/",
+    "examples/",
+    "CHANGELOG.md",
+    "PLAN.md",
+    "ROADMAP.md",
+    "README.md"
+  ],
+  "keywords": [
+    "claude-code",
+    "ai-engineering",
+    "sre",
+    "testing",
+    "qa",
+    "prd",
+    "adr",
+    "devops",
+    "methodology"
+  ]
+}

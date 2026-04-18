@@ -3,15 +3,19 @@
 > 企业级 AI 研发助手 — 覆盖**业务 · 开发 · 测试 · 运维**四大场景的 Claude Code 增强生态
 
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-blue)]()
-[![Progress](https://img.shields.io/badge/progress-96%25%20(S4%20done)-brightgreen)](./ROADMAP.md)
-[![Changelog](https://img.shields.io/badge/changelog-v0.5.0-informational)](./CHANGELOG.md)
+[![Progress](https://img.shields.io/badge/progress-98%25%20(S5%20done)-brightgreen)](./ROADMAP.md)
+[![Changelog](https://img.shields.io/badge/changelog-v0.6.0-informational)](./CHANGELOG.md)
+[![npx](https://img.shields.io/badge/npx-epcode-orange)](./tools/cli/)
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-> 📍 **最新进展**: Sprint 4 已完成（4 个跨场景联动脚本 + 度量大盘 + 每周定时 workflow,2026-04-18）。进行中 · Sprint 5（统一 CLI + 对外发布 + 试点复盘）。
+> 📍 **最新进展**: Sprint 5 已完成（统一 `epcode` CLI + Docusaurus 文档站 + 治理文件,2026-04-18）。**5 个 Sprint 全部完成 · 整体完成度 98%**。
 >
+> - 🧰 [统一 CLI · epcode](./tools/cli/) · 10 个子命令,零依赖 `npx epcode --help`
+> - 🌐 [文档站 (GitHub Pages)](https://epcode-ai.github.io/ep-code-ai/) · 首页以 4 接入模式为一等公民
 > - 📋 [完整建设计划 PLAN.md](./PLAN.md) · 5 Sprint × 4 接入模式 × 验收标准
 > - 🗺️ [实施路线图 ROADMAP.md](./ROADMAP.md) · 概览 + 里程碑
 > - 📝 [变更日志 CHANGELOG.md](./CHANGELOG.md) · 每个版本的具体产出
+> - 🚀 [发布流程 RELEASE_PROCESS.md](./RELEASE_PROCESS.md) · 版本 / CHANGELOG / tag / Pages 的标准流程
 
 ---
 
@@ -123,6 +127,10 @@ ep-code-ai/
 │   │   ├── development/collect.js      【S2】开发周报（Commits 合规率/类型/规模/ADR）
 │   │   ├── testing/collect.js          【S3】测试周报（用例/策略/报告/Bug 提交）
 │   │   └── operations/collect.js       【S3】运维周报（Runbook/发布/回滚/Hotfix）
+│   ├── cli/                【S5】统一 epcode CLI（10 个子命令,零依赖）
+│   │   ├── bin/epcode.js       入口（npx epcode）
+│   │   ├── commands/           子命令实现
+│   │   └── scaffolds/mode-{a,b,c,d}/  4 种接入模式的脚手架模板
 │   └── integrations/       企业工具集成（✅ 零依赖）
 │       ├── jira/               Jira: create-issue + sync-from-markdown + list
 │       ├── confluence/         Confluence: publish-markdown + fetch-page
@@ -138,6 +146,10 @@ ep-code-ai/
 ├── examples/               完整示例项目
 │   ├── leave-management-system/  模式 A · 绿地项目完整样本
 │   └── pilot-npds-newpd/         模式 D · 稳态运维真实试点
+├── docs-site/              【S5】Docusaurus 文档站（GitHub Pages）
+├── package.json            【S5】根 package.json,支持 `npx epcode`
+├── CODEOWNERS              【S5】代码归属 & 评审分派
+├── RELEASE_PROCESS.md      【S5】发布流程 SOP
 ├── CHANGELOG.md            📝 版本变更日志（每个 Sprint 一个条目）
 ├── PLAN.md                 📋 完整建设计划（5 Sprint × 接入模式 × 验收）
 ├── ROADMAP.md              🗺️ 实施路线图（概览）
@@ -160,6 +172,33 @@ ep-code-ai/
 | 稳态运维,只做维护 | D · 稳态 | [mode-d-maintenance.md](./docs/chapters/00-adoption/mode-d-maintenance.md) |
 
 不确定选哪个？看 [5 分钟判定流程](./docs/chapters/00-adoption/README.md#5-分钟判定流程)。
+
+### 🧰 用统一 CLI `epcode`（推荐,Sprint 5 新增）
+
+```bash
+# 查看所有命令
+npx epcode --help
+
+# 按接入模式初始化新项目
+npx epcode init --mode=A --name=my-new-app
+
+# PRD 结构 + 可测性打分（一条命令出报告）
+npx epcode prd docs/prd/v1.0.md
+
+# ADR 索引自动生成
+npx epcode adr index --target docs/adr/
+
+# 四场景度量 + 汇总看板
+npx epcode metrics --since "7 days ago"
+
+# 跨场景联动
+npx epcode linkage prd-to-design --prd docs/prd/v1.2.md
+npx epcode linkage regression --base main
+npx epcode linkage release-plan --report test-report.md
+npx epcode incident to-requirement --postmortem pm.md --target github
+```
+
+所有子命令见 [`tools/cli/`](./tools/cli/)。CLI 零依赖,只封装 `tools/` 下现成脚本。
 
 ### 👨‍💻 我是开发者，想安装桌面应用
 
