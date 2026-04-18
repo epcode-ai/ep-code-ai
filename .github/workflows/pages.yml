@@ -1,5 +1,10 @@
 name: Deploy Docusaurus to Pages
 
+# 前提: 仓库必须是 public,否则 GitHub Pages 对私仓要收费。
+# 开启步骤(仓库公开后):
+#   1. Settings → Pages → Source 选 "GitHub Actions"
+#   2. 推到 main 会自动部署到 https://epcode-ai.github.io/ep-code-ai/
+
 on:
   push:
     branches: [main]

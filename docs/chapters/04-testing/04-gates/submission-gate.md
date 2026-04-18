@@ -99,7 +99,7 @@
 
 - **GitLab MR 模板**：把 checklist 做进 MR 描述 — 见 [workflows/gitlab](../../../../workflows/gitlab/)
 - **CI 强制门禁**：CI 不过不允许合入测试分支
-- **自动化校验脚本**：`check-submission.js` 校验提测申请单完整性 — 见 [tools/cross-platform/scripts/check-submission.js](https://github.com/epcode-ai/ep-code-ai/blob/main/tools/cross-platform/scripts/check-submission.js)
+- **自动化校验脚本**：`check-submission.js` 校验提测申请单完整性 （[源码](https://github.com/epcode-ai/ep-code-ai/blob/main/tools/cross-platform/scripts/check-submission.js)）
   ```bash
   node tools/cross-platform/scripts/check-submission.js your-submission.md
   ```
