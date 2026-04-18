@@ -15,7 +15,10 @@ const config = {
   trailingSlash: false,
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  // docs/chapters/ 内有大量指向 ../../../templates/、../../../tools/ 等仓库其他目录的
+  // 链接,GitHub 浏览时正常,但 Docusaurus 视角是"broken"。设 ignore 避免刷屏;
+  // 后续 S8 用户手册阶段统一转成绝对 GitHub URL。
+  onBrokenMarkdownLinks: 'ignore',
 
   i18n: {
     defaultLocale: 'zh-Hans',

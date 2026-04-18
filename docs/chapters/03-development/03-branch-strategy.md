@@ -181,7 +181,7 @@ SH
 chmod +x .git/hooks/commit-msg
 ```
 
-详见 [tools/cross-platform/scripts/check-commit.js](../../../tools/cross-platform/scripts/check-commit.js)。
+详见 [tools/cross-platform/scripts/check-commit.js](https://github.com/epcode-ai/ep-code-ai/blob/main/tools/cross-platform/scripts/check-commit.js)。
 
 ## 五、合并策略（Merge Strategy）
 
