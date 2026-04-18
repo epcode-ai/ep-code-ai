@@ -77,11 +77,11 @@ ep-code-ai/
 │   ├── 04-testing/         测试篇：生命周期、门禁、度量
 │   └── 05-operations/      运维篇：发布、监控、故障
 │
-├── templates/              模板库（按场景分类）
-│   ├── business/
-│   ├── development/
-│   ├── testing/
-│   └── operations/
+├── templates/              模板库（按场景分类,共 24 个）
+│   ├── business/           PRD / 用户故事 / 业务规则 / 变更请求 / 竞品分析
+│   ├── development/        设计文档 / ADR / 代码评审 / 依赖升级 / 发布说明
+│   ├── testing/            API 契约 / Bug 报告 / 需求可测性 / 提测单 / 用例 / 测试报告
+│   └── operations/         发布计划 / Runbook / 故障报告 / 复盘 / 容量规划 / 值班交接
 │
 ├── .github/                GitHub 原生配置（本仓库自用）
 │   ├── workflows/ci.yml    CI 自动检查（链接/提交/语法/提测单）
