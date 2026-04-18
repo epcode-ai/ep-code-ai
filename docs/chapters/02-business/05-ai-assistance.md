@@ -299,7 +299,7 @@ Prompt 也要迭代：
 | 脚本 | 作用 | 退出码 |
 |------|------|--------|
 | `check-prd.js <file.md>` | 校验 PRD 必备章节 / 验收标准 / 非功能量化 / 模糊词 | 0 通过 / 1 warning / 2 error |
-| `score-testability.js <file.md>` | 对 PRD 打可测性分（0-100,5 维度） | 0 ≥80 / 1 60-79 / 2 <60 |
+| `score-testability.js <file.md>` | 对 PRD 打可测性分（0-100,5 维度） | 0 ≥80 / 1 60-79 / 2 &lt;60 |
 
 **在 PR / MR 里自动跑**：
 - GitHub: `.github/workflows/ci.yml` 的 `prd-check` job
