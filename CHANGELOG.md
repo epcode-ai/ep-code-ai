@@ -10,9 +10,48 @@
 
 ---
 
-## [Unreleased] · Sprint 3 进行中
+## [Unreleased] · Sprint 4 进行中
 
-测试 + 运维场景工具补齐（详见 [PLAN.md § Sprint 3](./PLAN.md#-sprint-3week-3-测试--运维场景工具补齐)）。
+场景联动 + 度量闭环（详见 [PLAN.md § Sprint 4](./PLAN.md#-sprint-4week-4-场景联动--度量闭环)）。
+
+---
+
+## [0.4.0] - 2026-04-18 · Sprint 3 完成
+
+**主题**: 测试 + 运维场景工具补齐
+
+### 新增 · 企业系统集成
+
+- `tools/integrations/zentao/` — 禅道 Bug: `create-bug.js` + `list-bugs.js` + `sync-from-markdown.js`（含 sessionID 鉴权封装 `_client.js`）
+- `tools/integrations/tapd/` — TAPD Bug 同套三件（`_client.js` + create + list + sync）
+- `tools/integrations/alertmanager/` — Prometheus Alertmanager webhook 接收 + 转发到企微/钉钉/飞书/Slack（`webhook-server.js` + `transform.js` + `test-fire.js`）
+- `tools/integrations/k8s/` — `kubectl` 封装: `rollout-status.js` / `scale.js`（含 prod 保护）/ `logs.js`（按 label 聚合）
+
+### 新增 · 测试 / 运维校验脚本
+
+- `tools/cross-platform/scripts/bug-trend.js` — Bug JSON → Markdown 趋势报告 + ASCII 柱图（兼容 Jira/禅道/TAPD 字段）
+- `tools/cross-platform/scripts/coverage-analysis.js` — 需求 ↔ 用例映射覆盖率,含悬空引用检测
+- `tools/cross-platform/scripts/config-audit.js` — 多环境配置（.env / .yml / .json）diff + 敏感值明文扫描
+
+### 新增 · 度量
+
+- `tools/metrics/testing/collect.js` — 测试周报（用例/策略/报告/提测单/Bug 报告 commit 数 + 贡献者 Top-5）
+- `tools/metrics/operations/collect.js` — 运维周报（Runbook/发布/故障/复盘 + 回滚数/Hotfix 数）
+
+### 变更 · CI 集成
+
+- `.github/workflows/ci.yml` 新增 `coverage-check`、`config-audit` job
+- `workflows/gitlab/.gitlab-ci.example.yml` 新增 `coverage-check`、`config-audit`、`testing-ops-metrics` job
+
+### 约定
+
+- 所有外部系统集成（Zentao/TAPD/Alertmanager/K8s）支持 `--dry-run`,无凭证也能跑通
+- `scale.js` 默认拒绝把 name 含 prod/production/live 的 Deployment 缩到 0（加 `--force` 覆盖）
+- `config-audit.js` 检测到 prod 明文敏感值时退出码 2（CI 硬门禁）
+
+### 完成度
+
+整体 91% → 93%（L3 场景纵深 93% → 97%）。
 
 ---
 

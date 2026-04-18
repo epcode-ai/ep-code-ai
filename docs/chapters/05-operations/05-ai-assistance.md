@@ -344,7 +344,20 @@ skills/operations/
 
 持续迭代。
 
-## 七、配套资源
+## 七、CLI 脚手架（Sprint 3 新增）
+
+本仓库 `tools/` 下提供运维场景零依赖脚手架:
+
+| 能力 | 位置 |
+|------|------|
+| Prometheus 告警 → 企微/钉钉/飞书/Slack 转发 webhook server | [`tools/integrations/alertmanager/`](../../../tools/integrations/alertmanager/) |
+| `kubectl` 薄封装: rollout-status / scale（prod 保护）/ logs | [`tools/integrations/k8s/`](../../../tools/integrations/k8s/) |
+| 多环境配置 diff + 敏感值明文扫描 | `tools/cross-platform/scripts/config-audit.js` |
+| 运维度量周报（Runbook/发布/故障/复盘 + 回滚/Hotfix 数） | [`tools/metrics/operations/`](../../../tools/metrics/) |
+
+在 CI 里的自动校验见 `.github/workflows/ci.yml` 的 `config-audit` job（prod 明文敏感值阻塞合入）。
+
+## 八、配套资源
 
 - [01 发布 SOP](./01-release-sop.md)
 - [02 监控与告警](./02-monitoring.md)

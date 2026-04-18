@@ -3,11 +3,11 @@
 > 企业级 AI 研发助手 — 覆盖**业务 · 开发 · 测试 · 运维**四大场景的 Claude Code 增强生态
 
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-blue)]()
-[![Progress](https://img.shields.io/badge/progress-91%25%20(S2%20done)-brightgreen)](./ROADMAP.md)
-[![Changelog](https://img.shields.io/badge/changelog-v0.3.0-informational)](./CHANGELOG.md)
+[![Progress](https://img.shields.io/badge/progress-93%25%20(S3%20done)-brightgreen)](./ROADMAP.md)
+[![Changelog](https://img.shields.io/badge/changelog-v0.4.0-informational)](./CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-> 📍 **最新进展**: Sprint 2 已完成（业务 + 开发场景工具 + CI 门禁,2026-04-18）。进行中 · Sprint 3（测试 + 运维场景工具补齐）。
+> 📍 **最新进展**: Sprint 3 已完成（测试 + 运维场景工具全套,2026-04-18）。进行中 · Sprint 4（场景联动 + 度量闭环）。
 >
 > - 📋 [完整建设计划 PLAN.md](./PLAN.md) · 5 Sprint × 4 接入模式 × 验收标准
 > - 🗺️ [实施路线图 ROADMAP.md](./ROADMAP.md) · 概览 + 里程碑
@@ -108,16 +108,25 @@ ep-code-ai/
 │   │   ├── check-prd.js             【S2】PRD 结构校验
 │   │   ├── score-testability.js     【S2】PRD 可测性打分 0-100
 │   │   ├── generate-adr-index.js    【S2】ADR 索引自动生成
+│   │   ├── bug-trend.js             【S3】Bug JSON → 趋势报告 + ASCII 图
+│   │   ├── coverage-analysis.js     【S3】需求↔用例覆盖率
+│   │   ├── config-audit.js          【S3】多环境配置 diff + 敏感值扫描
 │   │   └── check-all.js             聚合所有检查
-│   ├── metrics/            【S2】度量采集（零依赖,从 Git 读数据）
-│   │   ├── business/collect.js         业务周报（PRD/CR/贡献者）
-│   │   └── development/collect.js      开发周报（Commits 合规率/类型/规模/ADR）
+│   ├── metrics/            度量采集（零依赖,从 Git 读数据）
+│   │   ├── business/collect.js         【S2】业务周报（PRD/CR/贡献者）
+│   │   ├── development/collect.js      【S2】开发周报（Commits 合规率/类型/规模/ADR）
+│   │   ├── testing/collect.js          【S3】测试周报（用例/策略/报告/Bug 提交）
+│   │   └── operations/collect.js       【S3】运维周报（Runbook/发布/回滚/Hotfix）
 │   └── integrations/       企业工具集成（✅ 零依赖）
 │       ├── jira/               Jira: create-issue + sync-from-markdown + list
 │       ├── confluence/         Confluence: publish-markdown + fetch-page
 │       ├── slack/              Slack: notify + send-release-note
 │       ├── im/                 企业微信 / 钉钉 / 飞书 统一 notify
-│       └── gitlab/             GitLab: create-labels（scoped labels 批量）
+│       ├── gitlab/             GitLab: create-labels（scoped labels 批量）
+│       ├── zentao/             【S3】禅道: create-bug + list + sync-from-markdown
+│       ├── tapd/               【S3】TAPD: create-bug + list + sync-from-markdown
+│       ├── alertmanager/       【S3】Prometheus 告警转发到企微/钉钉/飞书/Slack
+│       └── k8s/                【S3】K8s: rollout-status + scale + logs（kubectl 封装）
 │
 ├── skills/                 Claude Skills 定义（29 个 Prompt）
 ├── examples/               完整示例项目
@@ -182,9 +191,16 @@ node tools/cross-platform/scripts/check-prd.js path/to/prd.md              # PRD
 node tools/cross-platform/scripts/score-testability.js path/to/prd.md      # PRD 可测性打分 (0-100)
 node tools/cross-platform/scripts/generate-adr-index.js --target docs/adr/ # ADR 索引自动重建
 
+# Sprint 3 新增 - 测试/运维场景
+node tools/cross-platform/scripts/bug-trend.js --file bugs.json                       # Bug 趋势报告
+node tools/cross-platform/scripts/coverage-analysis.js --req PRD --cases cases/       # 需求覆盖率
+node tools/cross-platform/scripts/config-audit.js --dir config/                       # 多环境配置审计
+
 # 度量采集（从 Git 拉数据,零依赖）
-node tools/metrics/business/collect.js --since "7 days ago"      # 业务指标周报
-node tools/metrics/development/collect.js --since "7 days ago"   # 开发指标周报
+node tools/metrics/business/collect.js --since "7 days ago"       # 业务周报
+node tools/metrics/development/collect.js --since "7 days ago"    # 开发周报
+node tools/metrics/testing/collect.js --since "7 days ago"        # 测试周报 (S3)
+node tools/metrics/operations/collect.js --since "7 days ago"     # 运维周报 (S3)
 ```
 
 详见 [`tools/cross-platform/README.md`](./tools/cross-platform/README.md)（含 Git Hook / CI 集成示例）和 [`tools/metrics/`](./tools/metrics/)（度量脚本）

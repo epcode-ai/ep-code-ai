@@ -78,3 +78,18 @@
 ## 数据分析模板
 
 Markdown 模板见 [templates/test-reports](../../../../templates/testing/test-reports/)
+
+## CLI 脚手架（Sprint 3 新增）
+
+本仓库 `tools/cross-platform/scripts/` 下提供测试相关零依赖脚本:
+
+| 脚本 | 作用 |
+|------|------|
+| `bug-trend.js` | 读 Bug JSON（Jira/禅道/TAPD 导出兼容）→ Markdown 趋势报告 + ASCII 图 |
+| `coverage-analysis.js` | 需求 ↔ 用例 ID 映射扫描,算覆盖率 + 未覆盖清单 + 悬空引用 |
+
+企业 Bug 系统集成（国内高频）:
+- [`tools/integrations/zentao/`](../../../../tools/integrations/zentao/) — 禅道 create-bug / list / sync
+- [`tools/integrations/tapd/`](../../../../tools/integrations/tapd/) — TAPD create-bug / list / sync
+
+度量周报: [`tools/metrics/testing/collect.js`](../../../../tools/metrics/)（从 Git 拉产出数据,每周自动生成）。
