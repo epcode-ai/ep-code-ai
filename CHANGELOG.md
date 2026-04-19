@@ -10,31 +10,20 @@
 
 ---
 
-## [Unreleased] · 收尾期
+## [Unreleased] · Phase 2 进行中
 
-5 个 Sprint 全部完成。后续进入真实项目落地 + 框架反馈阶段（详见 [PLAN.md § Sprint 6+](./PLAN.md)）。
-
-### 基础设施修复（2026-04-18,Sprint 5 收尾日)
-
-- 🌐 **文档站正式上线**: <https://epcode-ai.github.io/ep-code-ai/>
-  - 仓库从私有转公开,GitHub Pages Source 切到 GitHub Actions
-- 🛡️ **Branch protection** 用 Ruleset 重配(删旧 classic 版),main 分支强制 PR + CI 全绿
-- 🔧 修一批 Docusaurus 构建问题:
-  - Docusaurus 3.5 → 3.8.1,npm overrides 锁 webpack 5.97.1(修 ProgressPlugin schema 不兼容)
-  - sidebars.js 用剥离数字前缀后的 doc ID
-  - MDX v3 把 `<60` 当 JSX,改用 `&lt;60` 转义
-  - 3 个 `.js` 文件链接转成 GitHub blob URL(避开 Terser 对非模块 JS 的处理)
-  - `onBrokenMarkdownLinks: 'ignore'` 抑制 docs → 仓库其他目录的相对链接刷屏
-- 🧹 CI 修:
-  - `submission-check` 正则增加 `docs/chapters/` 和 `templates/` 排除,避免方法论文章被当申请单误报
-  - `submission-gate.md` 长行从 201 改 197 字符,过 markdown-lint 硬门禁
-  - pages.yml 去掉 setup-node 的 cache 依赖(首次无 lockfile)
+进入真实落地与产品化期。详见 [PLAN.md § Phase 2](./PLAN.md#phase-2--落地与产品化新增2026-04-18)。
 
 ---
 
-## [0.6.0] - 2026-04-18 · Sprint 5 完成 🎉
+## [0.6.0] - 2026-04-19 · Sprint 5 完成 🎉
 
-**主题**: 统一 CLI + 对外发布 + 治理文件
+**主题**: 统一 CLI + 对外发布 + 治理文件 + 文档站正式上线
+
+### 上线
+
+- 🌐 **文档站**: <https://epcode-ai.github.io/ep-code-ai/>(仓库公开,GitHub Pages 自动部署)
+- 🛡️ **Branch protection**: 通过 ruleset 强制 main 必须走 PR + 10 个 CI check 全绿
 
 ### 新增 · 统一 CLI · `epcode`
 
@@ -82,9 +71,25 @@ CLI 位于 `tools/cli/`,通过根 `package.json` bin 字段暴露,支持 `npx ep
 
 原计划的 `examples/pilot-npds-newpd/RETROSPECTIVE.md` 因试点数据不足暂缓,留到真实项目跑一轮后再补。完成度影响: L5 从预期 85% 调整为实际 85%（因 CLI/文档站/治理三项充分完成）。
 
+### 收尾日基础设施修复（2026-04-18 / 04-19）
+
+- 🌐 仓库由私有转公开 + Pages Source 切到 GitHub Actions(私仓 Pages 要付费,违背零成本原则)
+- 🛡️ Branch protection 用单套 `protect-main` ruleset(删旧 classic);Required approvals=0(单人项目,无法自审)
+- 🔧 Docusaurus 构建链修:
+  - 升级 3.5 → 3.8.1,`npm overrides` 锁 webpack 5.97.1 (修 ProgressPlugin schema 不兼容)
+  - sidebars.js 改用 Docusaurus 剥离数字前缀后的 doc ID(`adoption/README` 而非 `00-adoption/README`)
+  - MDX v3 把 `<60` 当 JSX,改为 `&lt;60` 转义;表格内 `<NN` 同处理
+  - 3 个 `.js` 文件链接转成 GitHub blob URL(避开 Terser 对非模块 JS 的处理)
+  - `onBrokenMarkdownLinks: 'ignore'` 抑制 docs → 仓库其他目录相对链接的刷屏 warning
+- 🧹 CI 修:
+  - `submission-check` 正则增加 `docs/chapters/` 和 `templates/` 排除(避免方法论文章被当申请单误报)
+  - `submission-gate.md` 长行从 201 改 197 字符(过 markdown-lint 200 字符硬门禁)
+  - `pages.yml` 去掉 setup-node 的 cache 配置(首次无 lockfile)
+  - ruleset 里 `DR Index Up-to-date` typo 改为 `ADR Index Up-to-date`
+
 ### 完成度
 
-整体 **96% → 98%**。5 个 Sprint 全部完成。
+整体 **96% → 98%**。Phase 1(方法论 + 工具链 + CLI + 文档站 + 治理)全部完成。
 
 ---
 
