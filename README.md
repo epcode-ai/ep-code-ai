@@ -8,7 +8,7 @@
 [![npx](https://img.shields.io/badge/npx-epcode-orange)](./tools/cli/)
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-> 📍 **最新进展**: Sprint 5 已完成（统一 `epcode` CLI + Docusaurus 文档站 + 治理文件,2026-04-18）。**5 个 Sprint 全部完成 · 整体完成度 98%**。
+> 📍 **最新进展**: Phase 1 已完成(v0.6.0 · 5 Sprint · 整体完成度 98%)。Phase 2 启动 · Sprint 6 ⑥ UI/UX 设计稿首发(10 wireframes + 5 interaction flows)。
 >
 > - 🧰 [统一 CLI · epcode](./tools/cli/) · 10 个子命令,零依赖 `npx epcode --help`
 > - 🌐 **[文档站 · epcode-ai.github.io/ep-code-ai](https://epcode-ai.github.io/ep-code-ai/)** ✅ 已上线 · 首页以 4 接入模式为一等公民
