@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>10 · 环境健康状态栏 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { padding-top: 48px; background: var(--color-bg-alt); min-height: 100vh; }
+  .wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--sp-4);
+  }
+  h1 { margin-bottom: var(--sp-2); font-size: var(--fs-2xl); }
+  .subtitle { color: var(--color-text-muted); margin-bottom: var(--sp-6); }
+  .example {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-5);
+    margin-bottom: var(--sp-5);
+  }
+  .example-title { font-weight: 600; margin-bottom: var(--sp-3); }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-4);
+    height: 32px;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+    font-family: var(--font-ui);
+  }
+  .bar.ok { background: #e8f5e9; color: var(--color-success); }
+  .bar.warn { background: #fff8e1; color: #7a5900; }
+  .bar.error { background: #ffebee; color: var(--color-error); }
+  .bar.loading { background: var(--color-bg-alt); color: var(--color-text-muted); }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    margin-top: var(--sp-4);
+  }
+  .tooltip-box {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--sp-3) var(--sp-4);
+    width: 300px;
+  }
+  .tooltip-box::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 24px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--color-bg);
+  }
+  .tooltip-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-sm);
+    padding: 2px 0;
+  }
+
+  .banner {
+    padding: var(--sp-2) var(--sp-4);
+    background: #fff8e1;
+    color: #7a5900;
+    border-radius: var(--radius-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--sp-2);
+  }
+  code { background: var(--color-bg-alt); padding: 1px 4px; border-radius: 3px; font-size: var(--fs-xs); }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 10 / 10 · 环境健康状态栏</span>
+  <span><a href="index.html">← 返回</a> · <a href="09-empty-states.html">上页</a></span>
+</div>
+
+<div class="wrap" style="padding-top:32px">
+
+  <h1>环境健康状态栏</h1>
+  <div class="subtitle">永远在主视图最底部 24-32px。一眼能看出环境健康 + 网络状态。</div>
+
+  <!-- 正常 -->
+  <div class="example">
+    <div class="example-title">✅ 10.1 全绿状态</div>
+    <div class="bar ok">
+      <span>✅ 环境正常 · Node v20 / Claude Code v1.2.3</span>
+      <span><span class="dot"></span>Anthropic · 240ms</span>
+    </div>
+  </div>
+
+  <!-- 警告 -->
+  <div class="example">
+    <div class="example-title">⚠️ 10.2 警告状态(某项失败但可降级)</div>
+    <div class="bar warn">
+      <span>⚠️ Claude Code 缺失 <button class="btn sm" style="padding:2px 8px;margin-left:8px">▶ 修复</button></span>
+      <span><span class="dot"></span>Anthropic · 240ms</span>
+    </div>
+  </div>
+
+  <!-- 严重 -->
+  <div class="example">
+    <div class="example-title">❌ 10.3 严重异常(关键操作禁用)</div>
+    <div class="bar error">
+      <span>❌ 环境损坏 <button class="btn sm" style="padding:2px 8px;margin-left:8px">▶ 修复</button></span>
+      <span><span class="dot error"></span>断网 · <button class="btn sm" style="padding:2px 8px">🔄 重试</button></span>
+    </div>
+  </div>
+
+  <!-- loading -->
+  <div class="example">
+    <div class="example-title">⏳ 10.4 加载中</div>
+    <div class="bar loading">
+      <span>⏳ 检查环境中...</span>
+      <span>⏳ 测连接中...</span>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div class="example">
+    <div class="example-title">🔎 10.5 hover 环境区域 · 弹详情</div>
+    <div class="tooltip">
+      <div class="tooltip-box">
+        <div style="font-weight:600;margin-bottom:6px">环境检查</div>
+        <div class="tooltip-row"><span>✅ Node.js</span><code>v20.10.0</code></div>
+        <div class="tooltip-row"><span>✅ npm</span><code>v10.2.3</code></div>
+        <div class="tooltip-row"><span>✅ git</span><code>v2.42.0</code></div>
+        <div class="tooltip-row"><span>✅ Claude Code</span><code>v1.2.3</code></div>
+        <div style="margin-top:var(--sp-2);font-size:var(--fs-xs);color:var(--color-text-muted)">上次检查: 1 分钟前</div>
+        <button class="btn sm" style="margin-top:8px;padding:2px 8px">▶ 重新检查</button>
+      </div>
+      <div class="bar ok" style="margin-top:8px">
+        <span>✅ 环境正常 · Node v20 / Claude Code v1.2.3</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 降级 banner -->
+  <div class="example">
+    <div class="example-title">📢 10.6 通知降级为应用内 banner(系统通知被禁时)</div>
+    <div class="banner">
+      <span>⚠️ Claude Code 进程崩溃,正在重启...</span>
+      <span><a href="#">详情</a> · <a href="#">✕</a></span>
+    </div>
+    <div class="bar error">
+      <span>❌ 环境损坏 <button class="btn sm" style="padding:2px 8px;margin-left:8px">▶ 修复</button></span>
+      <span><span class="dot error"></span>断网</span>
+    </div>
+  </div>
+
+  <!-- 配色说明 -->
+  <div class="example">
+    <div class="example-title">🎨 配色对照</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-3)">
+      <div><code>--color-success</code><br><code style="color:var(--color-success)">#00C853</code></div>
+      <div><code>--color-warning</code><br><code style="color:var(--color-warning)">#FFB300</code></div>
+      <div><code>--color-error</code><br><code style="color:var(--color-error)">#D50000</code></div>
+      <div><code>--color-text-muted</code><br><code style="color:var(--color-text-muted)">#6B7280</code></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

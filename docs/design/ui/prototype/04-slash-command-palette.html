@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>04 · 斜杠命令面板 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .bg-mock {
+    position: fixed; inset: 32px 0 0 0;
+    background: var(--color-bg-alt);
+    display: flex; flex-direction: column;
+  }
+  .bg-mock::before {
+    content: 'EP Code AI · 主视图(背景)';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-text-muted);
+    font-size: var(--fs-lg);
+  }
+  .palette-overlay {
+    position: fixed; inset: 32px 0 0 0;
+    background: rgba(0,0,0,0.4);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 64px;
+    z-index: 10;
+  }
+  .palette {
+    width: 560px; max-width: 90vw;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .palette-input {
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+  .palette-input input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: var(--fs-lg);
+    font-family: var(--font-mono);
+    background: transparent;
+    color: var(--color-text);
+  }
+  .palette-section {
+    padding: var(--sp-2) 0;
+  }
+  .palette-section-title {
+    padding: var(--sp-2) var(--sp-4) var(--sp-1);
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .cmd-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--sp-4);
+    padding: var(--sp-2) var(--sp-4);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    align-items: center;
+  }
+  .cmd-row:hover { background: var(--color-bg-hover); }
+  .cmd-row.active { background: var(--color-primary-lightest); }
+  .cmd-row .name { font-weight: 500; }
+  .cmd-row .desc {
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
+  }
+  .palette-footer {
+    padding: var(--sp-2) var(--sp-4);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    gap: var(--sp-4);
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+  }
+  .note {
+    position: fixed;
+    bottom: 16px; left: 16px;
+    background: var(--color-primary);
+    color: white;
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-xs);
+    z-index: 11;
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 04 / 10 · 斜杠命令面板</span>
+  <span><a href="index.html">← 返回</a> · <a href="03-settings.html">上页</a> · <a href="05-artifact-panel-expanded.html">下页 →</a></span>
+</div>
+
+<div class="bg-mock"></div>
+
+<div class="palette-overlay">
+  <div class="palette">
+    <div class="palette-input">
+      <span>/</span>
+      <input type="text" placeholder="搜索命令..." autofocus />
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-section-title">🔥 最近使用 (2)</div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/prd</span> <span style="color:var(--color-text-muted)">&lt;file&gt;</span>
+          <div class="desc">PRD 结构校验 + 可测性打分</div>
+        </div>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/adr</span> <span style="color:var(--color-text-muted)">index</span>
+          <div class="desc">重建 ADR 索引</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-section" style="border-top:1px solid var(--color-border)">
+      <div class="palette-section-title">📋 全部命令 (10)</div>
+      <div class="cmd-row active">
+        <div>
+          <span class="name">/init</span> <span style="color:var(--color-text-muted)">&lt;mode&gt;</span>
+          <div class="desc">按接入模式起项目</div>
+        </div>
+        <span class="kbd">↵</span>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/adopt</span> <span style="color:var(--color-text-muted)">--level=N</span>
+          <div class="desc">模式 C 渐进启用</div>
+        </div>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/migrate</span>
+          <div class="desc">模式 B 反向生成 API 契约</div>
+        </div>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/check</span>
+          <div class="desc">跑全部校验</div>
+        </div>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/metrics</span> <span style="color:var(--color-text-muted)">[--since]</span>
+          <div class="desc">生成四场景度量看板</div>
+        </div>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/linkage</span> <span style="color:var(--color-text-muted)">&lt;type&gt;</span>
+          <div class="desc">跨场景联动</div>
+        </div>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/incident</span> <span style="color:var(--color-text-muted)">&lt;action&gt;</span>
+          <div class="desc">故障处理</div>
+        </div>
+      </div>
+      <div class="cmd-row">
+        <div>
+          <span class="name">/jira</span> <span style="color:var(--color-text-muted)">&lt;action&gt;</span>
+          <div class="desc">Jira 集成</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-footer">
+      <span><span class="kbd">↑↓</span> 选择</span>
+      <span><span class="kbd">↵</span> 执行</span>
+      <span><span class="kbd">esc</span> 取消</span>
+      <span style="margin-left:auto"><a href="#">→ 帮助</a></span>
+    </div>
+  </div>
+</div>
+
+<div class="note">
+  💡 提示: 选中 /init 后按 ↵ 会进入参数补齐界面(见 wireframe-04 第 3 段)
+</div>
+
+</body>
+</html>

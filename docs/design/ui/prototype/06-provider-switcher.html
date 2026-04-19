@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>06 · 供应商切换 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { padding-top: 32px; background: var(--color-bg-alt); min-height: 100vh; }
+  .pg {
+    max-width: 480px;
+    margin: 80px auto 40px;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .pg-header {
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 600;
+    font-size: var(--fs-lg);
+  }
+  .pg-section {
+    padding: var(--sp-3) var(--sp-4);
+  }
+  .pg-section-title {
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: var(--sp-2);
+    letter-spacing: 0.5px;
+  }
+  .prov-row {
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+    align-items: center;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+  .prov-row:hover { background: var(--color-bg-hover); }
+  .prov-row.active { background: var(--color-primary-lightest); }
+  .prov-row.current { opacity: 0.7; cursor: default; }
+  .prov-sub {
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+  .warn-box {
+    padding: var(--sp-3);
+    background: #fff8e1;
+    border-left: 3px solid var(--color-warning);
+    margin: 0 var(--sp-4) var(--sp-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+  }
+  .radio-check {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-4);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+  }
+  .radio-check input { cursor: pointer; }
+  .pg-footer {
+    padding: var(--sp-3) var(--sp-4);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    gap: var(--sp-3);
+    justify-content: flex-end;
+    font-size: var(--fs-sm);
+  }
+
+  /* 二次确认 */
+  .confirm {
+    max-width: 440px;
+    margin: 20px auto;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5);
+    box-shadow: var(--shadow-md);
+    border-top: 4px solid var(--color-warning);
+  }
+  .confirm h3 { margin-bottom: var(--sp-3); }
+  .confirm ul { margin-left: var(--sp-5); color: var(--color-text-muted); line-height: 1.8; font-size: var(--fs-sm); }
+  .confirm input[type=text] {
+    margin-top: var(--sp-3);
+    width: 100%;
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 06 / 10 · 供应商切换浮层</span>
+  <span><a href="index.html">← 返回</a> · <a href="05-artifact-panel-expanded.html">上页</a> · <a href="07-search-overlay.html">下页 →</a></span>
+</div>
+
+<!-- 主浮层 -->
+<div class="pg">
+  <div class="pg-header">⚡ 切换供应商</div>
+
+  <div class="pg-section">
+    <div class="pg-section-title">当前会话</div>
+    <div class="prov-row current">
+      <span>●</span>
+      <div>
+        <strong>Anthropic 官方</strong>
+        <div class="prov-sub">opus · 156k / 200k tok 已用</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-section">
+    <div class="pg-section-title">可切换到</div>
+    <div class="prov-row active">
+      <span>○</span>
+      <div>
+        <strong>AWS Bedrock</strong>
+        <div class="prov-sub">anthropic.claude-opus-4-v1</div>
+      </div>
+      <span class="badge ok">220ms</span>
+    </div>
+    <div class="prov-row">
+      <span>○</span>
+      <div>
+        <strong>Google Vertex</strong>
+        <div class="prov-sub">claude-opus-4@vertex</div>
+      </div>
+      <span class="badge warn">未测</span>
+    </div>
+    <div class="prov-row">
+      <span>○</span>
+      <div>
+        <strong>第三方代理</strong>
+        <div class="prov-sub">claude-3-opus (proxy.example.com)</div>
+      </div>
+      <span class="badge error">失败</span>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>切换会丢失当前会话的上下文</strong>
+    <br>
+    新供应商无法看到历史消息
+  </div>
+
+  <div style="padding-bottom:var(--sp-2)">
+    <label class="radio-check">
+      <input type="radio" name="mode" checked>
+      <strong>在新会话中切换</strong> (推荐)
+    </label>
+    <label class="radio-check">
+      <input type="radio" name="mode">
+      在当前会话中切换 (高级)
+    </label>
+  </div>
+
+  <div class="pg-footer">
+    <span class="kbd">esc</span> <span style="color:var(--color-text-muted)">取消</span>
+    <button class="btn primary">↵ 切换</button>
+  </div>
+</div>
+
+<!-- 二次确认(选了"在当前会话中切换") -->
+<div class="confirm">
+  <h3>⚠️ 切换确认</h3>
+  <p style="margin-bottom:var(--sp-3)">你正在切换供应商: <strong>Anthropic 官方 → AWS Bedrock</strong></p>
+  <p style="font-weight:500;margin-bottom:var(--sp-2)">影响:</p>
+  <ul>
+    <li>新供应商看不到此会话的 156k tokens 历史</li>
+    <li>可能导致回复偏离原话题</li>
+    <li>可能产生额外费用(重新读上下文)</li>
+  </ul>
+
+  <div style="margin-top:var(--sp-4);font-size:var(--fs-sm)">
+    仍要继续? 输入 <strong>切换</strong> 确认
+  </div>
+  <input type="text" placeholder="" />
+
+  <div style="display:flex;justify-content:flex-end;gap:var(--sp-3);margin-top:var(--sp-4)">
+    <button class="btn">取消</button>
+    <button class="btn primary" disabled>确认</button>
+  </div>
+</div>
+
+</body>
+</html>

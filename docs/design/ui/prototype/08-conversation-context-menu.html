@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>08 · 会话右键菜单 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .demo-wrap {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    padding: 64px 32px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .fake-sidebar {
+    background: var(--color-sidebar-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-3);
+  }
+  .ctx-menu {
+    position: absolute;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    min-width: 240px;
+    padding: var(--sp-1) 0;
+    font-size: var(--fs-md);
+    z-index: 10;
+  }
+  .ctx-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--sp-3);
+    padding: var(--sp-2) var(--sp-4);
+    cursor: pointer;
+    align-items: center;
+  }
+  .ctx-item:hover { background: var(--color-bg-hover); }
+  .ctx-item.danger { color: var(--color-error); }
+  .ctx-sep { height: 1px; background: var(--color-border); margin: var(--sp-1) 0; }
+  .ctx-sub { color: var(--color-text-muted); font-size: var(--fs-xs); }
+  .demo-col h3 { font-size: var(--fs-lg); margin-bottom: var(--sp-3); }
+
+  /* 删除确认模态 */
+  .del-modal {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-5);
+    width: 420px;
+    box-shadow: var(--shadow-md);
+    border-top: 4px solid var(--color-error);
+  }
+
+  /* 多选底栏 */
+  .multi-bar {
+    background: var(--color-primary);
+    color: white;
+    padding: var(--sp-3) var(--sp-4);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--sp-3);
+  }
+
+  .conv-selected {
+    background: var(--color-primary-lightest);
+    border-left-color: var(--color-primary) !important;
+  }
+  .conv-pinned::before {
+    content: '📌';
+    margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 08 / 10 · 会话右键菜单 / 收藏 / 分组 / 多选</span>
+  <span><a href="index.html">← 返回</a> · <a href="07-search-overlay.html">上页</a> · <a href="09-empty-states.html">下页 →</a></span>
+</div>
+
+<div class="demo-wrap" style="padding-top:80px;position:relative">
+
+  <!-- 左: 带右键菜单的侧边栏 -->
+  <div style="position:relative">
+    <div class="fake-sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">⭐ 收藏 (1)</div>
+        <div class="conversation">
+          <span>⭐ 故障复盘模板</span>
+        </div>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">▼ 工作 ● (3)</div>
+        <div class="conversation conv-pinned">
+          <span>紧急 Bug 排查</span>
+        </div>
+        <div class="conversation active">
+          <span class="conversation-dot"></span>
+          <span>需求评审 - 离职流程</span>
+        </div>
+        <div class="conversation">
+          <span class="conversation-dot"></span>
+          <span>Bug-1024</span>
+        </div>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">▼ 学习 ● (2)</div>
+        <div class="conversation"><span>Rust 入门</span></div>
+        <div class="conversation"><span>设计模式</span></div>
+      </div>
+    </div>
+
+    <!-- 右键菜单 -->
+    <div class="ctx-menu" style="top:80px;left:180px">
+      <div class="ctx-item"><span>⭐ 加入收藏</span></div>
+      <div class="ctx-item"><span>📌 置顶</span></div>
+      <div class="ctx-item"><span>✏ 重命名</span><span class="kbd">⌘R</span></div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item"><span>📂 移到分组</span><span>▸</span></div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item"><span>📋 复制链接</span></div>
+      <div class="ctx-item"><span>📤 导出会话</span><span>▸</span></div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item"><span>📊 查看统计</span><span class="ctx-sub">token/时长</span></div>
+      <div class="ctx-item"><span>🔄 重置上下文</span></div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item danger"><span>🗑 删除</span><span class="kbd">⌘⌫</span></div>
+    </div>
+  </div>
+
+  <!-- 右: 多选 + 删除 -->
+  <div class="demo-col">
+    <h3>多选模式 (⌘ 点击)</h3>
+    <div class="fake-sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">▼ 今天 (3)</div>
+        <div class="conversation conv-selected">
+          <input type="checkbox" checked style="margin-right:8px">
+          <span>需求评审 - 离职流程</span>
+        </div>
+        <div class="conversation conv-selected">
+          <input type="checkbox" checked style="margin-right:8px">
+          <span>Bug-1024</span>
+        </div>
+        <div class="conversation">
+          <input type="checkbox" style="margin-right:8px">
+          <span>部署 SOP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="multi-bar">
+      <span>📦 已选 2 项</span>
+      <select style="background:white;color:var(--color-text);padding:4px 8px;border-radius:4px">
+        <option>操作 ▾</option>
+        <option>移到分组</option>
+        <option>加入收藏</option>
+        <option>批量导出</option>
+        <option>删除选中</option>
+      </select>
+    </div>
+
+    <h3 style="margin-top:32px">新建分组浮窗</h3>
+    <div class="del-modal" style="border-top-color:var(--color-primary)">
+      <h3>新建分组</h3>
+      <div class="field">
+        <div class="field-label">名称</div>
+        <input type="text" placeholder="如: 工作 / 学习" />
+      </div>
+      <div class="field">
+        <div class="field-label">颜色</div>
+        <div style="display:flex;gap:8px">
+          <span style="width:24px;height:24px;border-radius:50%;background:#f44336;cursor:pointer"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:#ff9800;cursor:pointer"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:#ffd600;cursor:pointer"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:#4caf50;cursor:pointer;border:2px solid var(--color-primary)"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:#2196f3;cursor:pointer"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:#9c27b0;cursor:pointer"></span>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
+        <button class="btn">取消</button>
+        <button class="btn primary">创建</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px">删除二次确认</h3>
+    <div class="del-modal">
+      <h3>⚠️ 删除会话</h3>
+      <p style="margin:12px 0">会话「<strong>需求评审 - 离职流程</strong>」和它的 6 条消息将被删除</p>
+      <div class="field">
+        <div class="field-label">Artifact 处理?</div>
+        <label style="display:block;margin:6px 0"><input type="radio" name="art" checked> 一起删(推荐)</label>
+        <label style="display:block;margin:6px 0"><input type="radio" name="art"> 保留 Artifact(移到回收站)</label>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px">
+        <button class="btn">取消</button>
+        <button class="btn" style="background:var(--color-error);color:white;border-color:var(--color-error)">删除</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

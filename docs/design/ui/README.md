@@ -6,9 +6,11 @@
 >
 > **观看顺序**:
 > 1. 本文(原则 + 索引)
-> 2. [wireframes/](./wireframes/) — 10 张静态页面线框图(ASCII)
-> 3. [interaction-flows/](./interaction-flows/) — 5 个关键交互流程图(Mermaid)
-> 4. [cross-platform-constraints.md](./cross-platform-constraints.md) — 三平台一致性约束
+> 2. **🎨 [prototype/](./prototype/) — 可交互 HTML 原型(打开 index.html,点击预览)** ⭐ 推荐先看这个
+> 3. [wireframes/](./wireframes/) — 10 张静态页面线框图(ASCII,含元素说明)
+> 4. [interaction-flows/](./interaction-flows/) — 5 个关键交互流程图(Mermaid)
+> 5. [cross-platform-constraints.md](./cross-platform-constraints.md) — 三平台一致性约束
+> 6. [prototype/prototype-modules-map.md](./prototype/prototype-modules-map.md) — 原型↔模块↔Swift 文件 映射
 
 ---
 

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>07 · 全局搜索 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .bg-mock {
+    position: fixed; inset: 32px 0 0 0;
+    background: var(--color-bg-alt);
+  }
+  .overlay {
+    position: fixed; inset: 32px 0 0 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 80px;
+  }
+  .search {
+    width: 640px; max-width: 90vw;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .search-input {
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    gap: var(--sp-3);
+    align-items: center;
+  }
+  .search-input input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: var(--fs-xl);
+    background: transparent;
+    color: var(--color-text);
+  }
+  .search-body { max-height: 480px; overflow-y: auto; }
+  .result-group {
+    padding: var(--sp-2) 0;
+  }
+  .result-group-title {
+    padding: var(--sp-2) var(--sp-4);
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .result-row {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: var(--sp-3);
+    padding: var(--sp-2) var(--sp-4);
+    cursor: pointer;
+    align-items: center;
+  }
+  .result-row:hover, .result-row.active {
+    background: var(--color-bg-hover);
+  }
+  .result-row.active { background: var(--color-primary-lightest); }
+  .result-row .icon { font-size: var(--fs-xl); text-align: center; }
+  .result-title { font-weight: 500; }
+  .result-preview { font-size: var(--fs-sm); color: var(--color-text-muted); margin-top: 2px; }
+  .result-preview mark { background: #fff3a0; padding: 0 2px; }
+  .result-meta { font-size: var(--fs-xs); color: var(--color-text-muted); white-space: nowrap; }
+  .search-footer {
+    padding: var(--sp-2) var(--sp-4);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    gap: var(--sp-4);
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+  }
+  .expand-link {
+    padding: var(--sp-1) var(--sp-4);
+    font-size: var(--fs-sm);
+    color: var(--color-primary);
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 07 / 10 · 全局搜索 ⌘K</span>
+  <span><a href="index.html">← 返回</a> · <a href="06-provider-switcher.html">上页</a> · <a href="08-conversation-context-menu.html">下页 →</a></span>
+</div>
+
+<div class="bg-mock"></div>
+
+<div class="overlay">
+  <div class="search">
+
+    <div class="search-input">
+      <span style="font-size:var(--fs-xl)">🔍</span>
+      <input type="text" value="PRD" autofocus />
+      <span class="kbd">esc</span>
+    </div>
+
+    <div class="search-body">
+
+      <div class="result-group">
+        <div class="result-group-title">📁 会话 (3)</div>
+        <div class="result-row active">
+          <span class="icon">📁</span>
+          <div>
+            <div class="result-title">需求评审 - 离职流程</div>
+            <div class="result-preview">...帮我把 <mark>prd</mark>-v1.2.md 拆成 user story...</div>
+          </div>
+          <span class="result-meta">今天 11:32</span>
+        </div>
+        <div class="result-row">
+          <span class="icon">📁</span>
+          <div>
+            <div class="result-title">产品评审 - 支付优化</div>
+            <div class="result-preview">...这个 <mark>PRD</mark> 还需要补充非功能...</div>
+          </div>
+          <span class="result-meta">4-15</span>
+        </div>
+      </div>
+
+      <div class="result-group" style="border-top:1px solid var(--color-border)">
+        <div class="result-group-title">📄 Artifacts (2)</div>
+        <div class="result-row">
+          <span class="icon">📄</span>
+          <div>
+            <div class="result-title"><mark>prd</mark>-v1.2.md</div>
+            <div class="result-preview"># <mark>PRD</mark> - 离职流程 v1.2 ...</div>
+          </div>
+          <span class="result-meta">132 行</span>
+        </div>
+        <div class="result-row">
+          <span class="icon">📄</span>
+          <div>
+            <div class="result-title"><mark>prd</mark>-payment-v0.3.md</div>
+            <div class="result-preview"># <mark>PRD</mark> - 支付优化 v0.3 ...</div>
+          </div>
+          <span class="result-meta">89 行</span>
+        </div>
+      </div>
+
+      <div class="result-group" style="border-top:1px solid var(--color-border)">
+        <div class="result-group-title">⚙ 命令 (1)</div>
+        <div class="result-row">
+          <span class="icon">⚙</span>
+          <div>
+            <div class="result-title"><mark>/prd</mark> &lt;file&gt;</div>
+            <div class="result-preview"><mark>PRD</mark> 结构校验 + 可测性打分</div>
+          </div>
+          <span class="result-meta">CLI</span>
+        </div>
+      </div>
+
+      <div class="result-group" style="border-top:1px solid var(--color-border)">
+        <div class="result-group-title">💬 消息 (8 条匹配)</div>
+        <div class="expand-link">→ 展开全部</div>
+      </div>
+
+    </div>
+
+    <div class="search-footer">
+      <span><span class="kbd">↑↓</span> 选择</span>
+      <span><span class="kbd">↵</span> 打开</span>
+      <span style="margin-left:auto"><span class="kbd">⌃→</span> 筛选</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
