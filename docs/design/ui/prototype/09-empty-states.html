@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>09 · 空状态合集 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { padding-top: 48px; background: var(--color-bg-alt); min-height: 100vh; }
+  .states-grid {
+    max-width: 1100px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-4);
+    padding: 0 var(--sp-4);
+  }
+  .state-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .state-label {
+    padding: var(--sp-2) var(--sp-4);
+    background: var(--color-primary);
+    color: white;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+  }
+  .state-body {
+    height: 320px;
+    padding: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .state-icon { font-size: 48px; margin-bottom: var(--sp-3); }
+  .state-title { font-size: var(--fs-xl); margin-bottom: var(--sp-2); }
+  .state-desc { color: var(--color-text-muted); margin-bottom: var(--sp-4); font-size: var(--fs-sm); line-height: 1.6; max-width: 320px; }
+  .prompt-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
+    margin-top: var(--sp-2);
+    width: 100%;
+    max-width: 440px;
+  }
+  .prompt-card {
+    padding: var(--sp-2) var(--sp-3);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    text-align: left;
+  }
+  .prompt-card:hover { border-color: var(--color-primary); background: var(--color-primary-lightest); }
+  .error-state {
+    background: #ffebee;
+    color: var(--color-error);
+    padding: var(--sp-3);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    margin-top: var(--sp-3);
+    max-width: 400px;
+  }
+  .page-title {
+    text-align: center;
+    margin: 0 auto var(--sp-5);
+    padding: 0 var(--sp-4);
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 09 / 10 · 空状态合集</span>
+  <span><a href="index.html">← 返回</a> · <a href="08-conversation-context-menu.html">上页</a> · <a href="10-env-status-bar.html">下页 →</a></span>
+</div>
+
+<div class="page-title">
+  <h1 style="font-size:var(--fs-2xl)">空状态合集</h1>
+  <p style="color:var(--color-text-muted)">每个空态都要告诉用户"为什么没有 + 下一步做什么"</p>
+</div>
+
+<div class="states-grid">
+
+  <!-- 9.1 首次使用 -->
+  <div class="state-card">
+    <div class="state-label">9.1 首次使用 · 无任何会话</div>
+    <div class="state-body">
+      <div class="state-icon">👋</div>
+      <div class="state-title">开始你的第一个会话</div>
+      <div class="state-desc">Claude 会在这里和你协作</div>
+      <button class="btn primary lg">✨ 新建第一个会话 ⌘N</button>
+      <div style="margin-top:var(--sp-3);font-size:var(--fs-sm);color:var(--color-text-muted)">
+        或者: <a href="#">📚 看 5 分钟教程</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9.2 无选中 -->
+  <div class="state-card">
+    <div class="state-label">9.2 有会话 · 没选中</div>
+    <div class="state-body">
+      <div class="state-icon">📂</div>
+      <div class="state-title">选择一个会话</div>
+      <div class="state-desc">点左侧列表,或使用快捷键:</div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div><span class="kbd">⌘N</span> 新建会话</div>
+        <div><span class="kbd">⌘K</span> 全局搜索</div>
+        <div><span class="kbd">/</span> 命令面板</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9.3 新会话 -->
+  <div class="state-card">
+    <div class="state-label">9.3 新会话 · 没发消息</div>
+    <div class="state-body">
+      <div class="state-icon">✨</div>
+      <div class="state-title">新会话</div>
+      <div class="state-desc">发一条消息开始,或试试:</div>
+      <div class="prompt-cards">
+        <div class="prompt-card">💡 把 PRD 拆成 user story</div>
+        <div class="prompt-card">💡 review 这段代码</div>
+        <div class="prompt-card">💡 整理故障复盘</div>
+        <div class="prompt-card">💡 生成度量周报</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9.4 搜索无结果 -->
+  <div class="state-card">
+    <div class="state-label">9.4 搜索无结果</div>
+    <div class="state-body">
+      <div class="state-icon">😶</div>
+      <div class="state-title">没找到 "xxxyyyzzz"</div>
+      <div class="state-desc" style="text-align:left">
+        试试:<br>
+        • 减少关键词长度<br>
+        • 切换搜索类型<br>
+        • 用模糊搜索: <code>fuz/</code>
+      </div>
+      <button class="btn" style="margin-top:var(--sp-3)">✨ 用这个查询新建会话</button>
+    </div>
+  </div>
+
+  <!-- 9.5 网络断开 -->
+  <div class="state-card">
+    <div class="state-label">9.5 网络断开 / API 失败</div>
+    <div class="state-body">
+      <div class="state-icon">📡</div>
+      <div class="state-title">连接失败</div>
+      <div class="state-desc">历史消息正常显示,新消息暂存本地</div>
+      <div class="error-state">
+        ❌ 12:01 发送失败: 网络超时(10s)
+      </div>
+      <div style="display:flex;gap:8px;margin-top:var(--sp-3)">
+        <button class="btn sm">🔄 重试</button>
+        <button class="btn sm">📋 复制消息</button>
+        <button class="btn sm">⚙ 检查供应商</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9.7 供应商未配置 -->
+  <div class="state-card">
+    <div class="state-label">9.7 供应商未配置</div>
+    <div class="state-body">
+      <div class="state-icon">⚠️</div>
+      <div class="state-title">未配置供应商</div>
+      <div class="state-desc">需要 AI 供应商才能发消息</div>
+      <div style="display:flex;gap:var(--sp-3)">
+        <button class="btn primary">🔧 立即配置</button>
+        <button class="btn">📚 查看支持列表</button>
+      </div>
+      <div style="margin-top:var(--sp-3);font-size:var(--fs-xs);color:var(--color-text-muted)">
+        (仍可用 /check /adr /metrics 等本地命令)
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

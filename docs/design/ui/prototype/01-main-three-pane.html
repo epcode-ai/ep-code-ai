@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>01 · 主视图三栏 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="with-banner">
+
+<div class="proto-banner">
+  <span>🎨 原型 01 / 10 · 主视图三栏</span>
+  <span><a href="index.html">← 返回导航</a> · <a href="02-setup-wizard.html">下一页 →</a></span>
+</div>
+
+<div class="app">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <span class="brand">EP Code AI</span>
+    <span class="spacer"></span>
+    <button class="btn sm">Anthropic ▾</button>
+    <button class="btn sm ghost">⚙</button>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-search">
+        <input type="text" placeholder="🔍 搜索... ⌘K">
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">▼ 今天 (3)</div>
+        <div class="conversation active">
+          <span class="conversation-dot"></span>
+          <span>需求评审 - 离职流程</span>
+        </div>
+        <div class="conversation">
+          <span class="conversation-dot"></span>
+          <span>Bug-1024</span>
+        </div>
+        <div class="conversation">
+          <span class="conversation-dot"></span>
+          <span>部署 SOP</span>
+        </div>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">▼ 昨天 (2)</div>
+        <div class="conversation">
+          <span class="conversation-dot"></span>
+          <span>度量周报</span>
+        </div>
+        <div class="conversation">
+          <span class="conversation-dot"></span>
+          <span>ADR-002</span>
+        </div>
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">⭐ 收藏 (1)</div>
+        <div class="conversation">
+          <span>⭐ 故障复盘模板</span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="btn primary" style="width:100%">+ 新会话 ⌘N</button>
+      </div>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat">
+      <div class="chat-header">
+        <div>
+          <div class="chat-title">需求评审 - 离职流程 <span style="font-size:var(--fs-sm);color:var(--color-text-muted);">📌 ⋮</span></div>
+          <div class="chat-meta">Anthropic Claude · opus · 156k / 200k tokens</div>
+        </div>
+      </div>
+
+      <div class="chat-body">
+        <!-- 用户消息 -->
+        <div class="message" style="margin-left:auto">
+          <div class="message-body" style="text-align:right">
+            <div class="message-time">11:32</div>
+            <div class="message-content">
+              <p>帮我把这个 PRD 拆成 user story</p>
+              <span class="attachment">📎 prd-v1.2.md · 132 行</span>
+            </div>
+          </div>
+          <div class="message-avatar">👤</div>
+        </div>
+
+        <!-- AI 消息 -->
+        <div class="message">
+          <div class="message-avatar" style="background:#fff3e0">🤖</div>
+          <div class="message-body">
+            <div class="message-time">11:33 · 思考 12s · 输出 2.3k tokens</div>
+            <div class="message-content">
+              <p>已读 prd-v1.2.md(132 行)。识别出 8 个用户场景,按 INVEST 原则拆成 8 条 user story:</p>
+              <ol style="margin-left:24px;line-height:1.8">
+                <li>员工提交离职申请</li>
+                <li>HR 审核基本资料</li>
+                <li>上级签字确认</li>
+                <li>财务核算结算</li>
+                <li>IT 注销账号</li>
+                <li>行政回收物品</li>
+                <li>员工确认 off-boarding</li>
+                <li>归档完成通知</li>
+              </ol>
+              <p style="margin-top:12px">已生成 → <a href="05-artifact-panel-expanded.html">user-stories.md</a>(右侧已添加)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 新消息区 -->
+        <div class="message" style="margin-left:auto">
+          <div class="message-body" style="text-align:right">
+            <div class="message-time">11:36</div>
+            <div class="message-content" style="color:var(--color-text-muted);font-style:italic">
+              [输入中...]
+            </div>
+          </div>
+          <div class="message-avatar">👤</div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <div class="chat-input-toolbar">
+          <button class="btn sm ghost">/</button>
+          <button class="btn sm ghost">📎</button>
+          <button class="btn sm ghost">⚡ opus</button>
+          <span class="kbd" style="margin-left:auto">⌘↵ 发送</span>
+        </div>
+        <textarea placeholder="输入消息(⌘↵ 发送 / shift+↵ 换行)..."></textarea>
+      </div>
+    </div>
+
+    <!-- Artifact Panel -->
+    <div class="artifact-panel">
+      <div class="artifact-title">📦 Artifacts (2)</div>
+
+      <div class="artifact-card">
+        <div class="artifact-card-title">
+          <span>▾ prd-v1.2.md</span>
+        </div>
+        <div class="artifact-card-meta">📄 132 行 · 2KB · 生成于 11:34</div>
+      </div>
+
+      <div class="artifact-card" style="border-color:var(--color-primary)">
+        <div class="artifact-card-title">
+          <span>▾ user-stories.md</span>
+        </div>
+        <div class="artifact-card-meta">📋 8 条 · 4KB · 生成于 11:35</div>
+      </div>
+
+      <div style="display:flex;gap:var(--sp-2);margin-top:var(--sp-4)">
+        <button class="btn sm">下载所有</button>
+        <button class="btn sm">导出 .zip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status bar -->
+  <div class="statusbar ok">
+    <span>✅ 环境正常 · Node v20 / Claude Code v1.2.3</span>
+    <span><span class="dot"></span>Anthropic · 240ms</span>
+  </div>
+</div>
+
+</body>
+</html>

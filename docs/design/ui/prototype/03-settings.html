@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>03 · 设置页 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .settings-wrap {
+    display:flex; align-items:center; justify-content:center;
+    min-height: 100vh; padding: 48px 16px;
+    background: var(--color-bg-alt);
+  }
+  .settings-modal {
+    width: 880px; max-width: 100%;
+    height: 640px; max-height: 90vh;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .settings-header {
+    padding: var(--sp-4);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .settings-header h2 { font-size: var(--fs-xl); }
+  .settings-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    overflow: hidden;
+  }
+  .settings-nav {
+    border-right: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+    padding: var(--sp-3) 0;
+  }
+  .nav-item {
+    padding: var(--sp-2) var(--sp-4);
+    cursor: pointer;
+    font-size: var(--fs-md);
+    border-left: 3px solid transparent;
+  }
+  .nav-item:hover { background: var(--color-bg-hover); }
+  .nav-item.active {
+    background: var(--color-primary-lightest);
+    border-left-color: var(--color-primary);
+    font-weight: 600;
+  }
+  .settings-content {
+    padding: var(--sp-5);
+    overflow-y: auto;
+  }
+  .settings-content h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--sp-4);
+    padding-bottom: var(--sp-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .settings-content h4 {
+    font-size: var(--fs-md);
+    margin-top: var(--sp-5);
+    margin-bottom: var(--sp-3);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: var(--fs-xs);
+  }
+  .row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--sp-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .row-main { flex: 1; }
+  .row-title { font-weight: 500; }
+  .row-hint { font-size: var(--fs-sm); color: var(--color-text-muted); margin-top: 2px; }
+  .provider-card {
+    padding: var(--sp-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--sp-3);
+  }
+  .provider-card.active { border-color: var(--color-primary); background: var(--color-primary-lightest); }
+  .kb-row {
+    display: grid;
+    grid-template-columns: 1fr 120px 60px;
+    gap: var(--sp-3);
+    align-items: center;
+    padding: var(--sp-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .settings-footer {
+    padding: var(--sp-3) var(--sp-4);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--sp-3);
+  }
+  .toggle {
+    width: 36px; height: 20px;
+    background: var(--color-border);
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: white;
+    transition: left 0.2s;
+  }
+  .toggle.on { background: var(--color-primary); }
+  .toggle.on::after { left: 18px; }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 03 / 10 · 设置页</span>
+  <span><a href="index.html">← 返回</a> · <a href="02-setup-wizard.html">上页</a> · <a href="04-slash-command-palette.html">下页 →</a></span>
+</div>
+
+<div class="settings-wrap" style="padding-top:64px">
+  <div class="settings-modal">
+    <div class="settings-header">
+      <h2>设置</h2>
+      <button class="btn ghost">✕</button>
+    </div>
+
+    <div class="settings-main">
+      <div class="settings-nav">
+        <div class="nav-item active" data-tab="general">General</div>
+        <div class="nav-item" data-tab="provider">Provider</div>
+        <div class="nav-item" data-tab="shortcuts">Shortcuts</div>
+        <div class="nav-item" data-tab="exp">Experimental ⚗️</div>
+      </div>
+
+      <div class="settings-content">
+        <!-- General -->
+        <div data-pane="general">
+          <h3>General · 通用</h3>
+
+          <h4>外观</h4>
+          <div class="row">
+            <div class="row-main"><div class="row-title">主题</div><div class="row-hint">浅色 / 深色 / 跟随系统</div></div>
+            <select style="width:140px"><option>深色</option><option>浅色</option><option>跟随系统</option></select>
+          </div>
+          <div class="row">
+            <div class="row-main"><div class="row-title">字号</div></div>
+            <select style="width:140px"><option>中</option><option>小</option><option>大</option></select>
+          </div>
+
+          <h4>会话</h4>
+          <div class="row">
+            <div class="row-main"><div class="row-title">自动命名</div><div class="row-hint">让 AI 根据首条消息生成会话名</div></div>
+            <div class="toggle on"></div>
+          </div>
+          <div class="row">
+            <div class="row-main"><div class="row-title">自动归档</div><div class="row-hint">30 天未活动自动归档</div></div>
+            <div class="toggle on"></div>
+          </div>
+
+          <h4>通知</h4>
+          <div class="row">
+            <div class="row-main"><div class="row-title">AI 回复完成</div></div>
+            <div class="toggle on"></div>
+          </div>
+
+          <h4>数据</h4>
+          <div class="row">
+            <div class="row-main"><div class="row-title">导出会话</div><div class="row-hint">导出全部为 .zip</div></div>
+            <button class="btn sm">📦 导出</button>
+          </div>
+          <div class="row">
+            <div class="row-main"><div class="row-title">清空本地数据</div><div class="row-hint" style="color:var(--color-error)">不可恢复</div></div>
+            <button class="btn sm" style="color:var(--color-error)">🗑 清空</button>
+          </div>
+        </div>
+
+        <!-- Provider -->
+        <div data-pane="provider" style="display:none">
+          <h3>Provider · 供应商管理</h3>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-4)">
+            <span style="color:var(--color-text-muted)">已配置 2 个</span>
+            <button class="btn primary sm">+ 添加供应商</button>
+          </div>
+
+          <div class="provider-card active">
+            <div style="display:flex;justify-content:space-between">
+              <strong>● Anthropic 官方 (默认)</strong>
+              <span>⋮</span>
+            </div>
+            <div style="color:var(--color-text-muted);font-size:var(--fs-sm);margin-top:var(--sp-1)">
+              sk-ant-····xxxx · 余额 $42.18
+            </div>
+            <div style="color:var(--color-text-muted);font-size:var(--fs-sm)">
+              默认模型: claude-opus-4
+            </div>
+            <div style="margin-top:var(--sp-2)"><span class="badge ok">✅ 连接 220ms</span></div>
+          </div>
+
+          <div class="provider-card">
+            <div style="display:flex;justify-content:space-between">
+              <strong>○ AWS Bedrock</strong>
+              <span>⋮</span>
+            </div>
+            <div style="color:var(--color-text-muted);font-size:var(--fs-sm);margin-top:var(--sp-1)">
+              arn:aws:iam:... · us-east-1
+            </div>
+            <div style="margin-top:var(--sp-2)"><span class="badge warn">⚠️ 上次失败(1h 前)</span></div>
+          </div>
+        </div>
+
+        <!-- Shortcuts -->
+        <div data-pane="shortcuts" style="display:none">
+          <h3>Shortcuts · 快捷键</h3>
+
+          <input type="text" placeholder="搜索快捷键..." style="margin-bottom:var(--sp-4);width:100%;padding:var(--sp-2) var(--sp-3);border:1px solid var(--color-border);border-radius:var(--radius-md)" />
+
+          <h4>会话</h4>
+          <div class="kb-row"><span>新建会话</span><span class="kbd">⌘N</span><button class="btn sm ghost">编辑</button></div>
+          <div class="kb-row"><span>关闭当前会话</span><span class="kbd">⌘W</span><button class="btn sm ghost">编辑</button></div>
+          <div class="kb-row"><span>重命名当前会话</span><span class="kbd">⌘R</span><button class="btn sm ghost">编辑</button></div>
+
+          <h4>导航</h4>
+          <div class="kb-row"><span>全局搜索</span><span class="kbd">⌘K</span><button class="btn sm ghost">编辑</button></div>
+          <div class="kb-row"><span>设置</span><span class="kbd">⌘,</span><button class="btn sm ghost">编辑</button></div>
+          <div class="kb-row"><span>切换供应商</span><span class="kbd">⌘⇧P</span><button class="btn sm ghost">编辑</button></div>
+
+          <h4>输入</h4>
+          <div class="kb-row"><span>命令面板</span><span class="kbd">/</span><span style="color:var(--color-text-muted);font-size:var(--fs-xs)">固定</span></div>
+          <div class="kb-row"><span>发送消息</span><span class="kbd">⌘↵</span><button class="btn sm ghost">编辑</button></div>
+
+          <button class="btn" style="margin-top:var(--sp-4)">恢复默认</button>
+        </div>
+
+        <!-- Experimental -->
+        <div data-pane="exp" style="display:none">
+          <h3>Experimental ⚗️</h3>
+          <p style="color:var(--color-warning);margin-bottom:var(--sp-4)">⚠️ 以下功能不稳定,启用前请知悉风险</p>
+
+          <div class="row">
+            <div class="row-main"><div class="row-title">AI 长上下文优化(256k → 1M)</div><div class="row-hint">beta · 可能更慢、更贵</div></div>
+            <div class="toggle"></div>
+          </div>
+          <div class="row">
+            <div class="row-main"><div class="row-title">多模态输入(图片/PDF)</div><div class="row-hint">alpha · 部分供应商不支持</div></div>
+            <div class="toggle"></div>
+          </div>
+          <div class="row">
+            <div class="row-main"><div class="row-title">命令面板模糊搜索</div><div class="row-hint">beta · 已开启</div></div>
+            <div class="toggle on"></div>
+          </div>
+          <div class="row">
+            <div class="row-main"><div class="row-title">离线模式(本地模型)</div><div class="row-hint">概念验证 · 需 16GB+ 内存</div></div>
+            <div class="toggle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-footer">
+      <button class="btn">取消</button>
+      <button class="btn primary">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const navs = document.querySelectorAll('.nav-item');
+  const panes = document.querySelectorAll('[data-pane]');
+  const toggles = document.querySelectorAll('.toggle');
+
+  navs.forEach(n => n.addEventListener('click', () => {
+    navs.forEach(x => x.classList.remove('active'));
+    n.classList.add('active');
+    panes.forEach(p => p.style.display = p.dataset.pane === n.dataset.tab ? 'block' : 'none');
+  }));
+
+  toggles.forEach(t => t.addEventListener('click', () => t.classList.toggle('on')));
+</script>
+
+</body>
+</html>

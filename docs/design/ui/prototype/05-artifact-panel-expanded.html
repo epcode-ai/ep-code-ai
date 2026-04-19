@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>05 · Artifact 全屏 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .art-app {
+    display: grid;
+    grid-template-rows: 48px 40px 1fr 40px;
+    height: 100vh;
+    padding-top: 32px;
+  }
+  .art-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-4);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+  }
+  .art-topbar .title { display: flex; align-items: center; gap: var(--sp-3); }
+  .art-subbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--sp-4);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    font-size: var(--fs-sm);
+  }
+  .art-main {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    overflow: hidden;
+  }
+  .outline {
+    border-right: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+    overflow-y: auto;
+    padding: var(--sp-4);
+  }
+  .outline-title {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--sp-3);
+    color: var(--color-text-muted);
+  }
+  .outline-item {
+    padding: 4px var(--sp-3);
+    cursor: pointer;
+    font-size: var(--fs-sm);
+    border-left: 2px solid transparent;
+  }
+  .outline-item:hover { background: var(--color-bg-hover); }
+  .outline-item.active { border-left-color: var(--color-primary); color: var(--color-primary); font-weight: 500; }
+  .outline-item.indent { padding-left: var(--sp-6); }
+  .meta {
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+  .content-view {
+    overflow-y: auto;
+    padding: var(--sp-6);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    line-height: 1.8;
+  }
+  .line-num {
+    display: inline-block;
+    width: 40px;
+    color: var(--color-text-muted);
+    user-select: none;
+    margin-right: var(--sp-4);
+  }
+  .art-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+    font-size: var(--fs-sm);
+  }
+  .art-footer button { background: none; border: none; cursor: pointer; font-size: inherit; color: inherit; padding: var(--sp-2); }
+  .art-footer button:hover { color: var(--color-primary); }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 05 / 10 · Artifact 全屏详情</span>
+  <span><a href="index.html">← 返回</a> · <a href="04-slash-command-palette.html">上页</a> · <a href="06-provider-switcher.html">下页 →</a></span>
+</div>
+
+<div class="art-app">
+
+  <div class="art-topbar">
+    <div class="title">
+      <a href="01-main-three-pane.html" class="btn ghost sm">◀ 返回会话</a>
+      <div>
+        <div style="font-weight:600">prd-v1.2.md</div>
+        <div style="font-size:var(--fs-xs);color:var(--color-text-muted)">132 行 · 2.1KB</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:var(--sp-2)">
+      <button class="btn sm">📋 复制</button>
+      <button class="btn sm primary">💾 导出 ▾</button>
+    </div>
+  </div>
+
+  <div class="art-subbar">
+    <span>◀ 在 2 个 Artifact 中切换 ▶</span>
+    <div style="display:flex;gap:var(--sp-3);align-items:center">
+      <select><option>v3 (最新)</option><option>v2 (3 小时前)</option><option>v1</option><option>对比 v2 ↔ v3</option></select>
+      <span>📜 历史 (3)</span>
+    </div>
+  </div>
+
+  <div class="art-main">
+    <div class="outline">
+      <div class="outline-title">🗂 大纲</div>
+      <div class="outline-item">▾ 1. 概述</div>
+      <div class="outline-item indent active">1.1 背景</div>
+      <div class="outline-item indent">1.2 目标</div>
+      <div class="outline-item">▾ 2. 用户与场景</div>
+      <div class="outline-item indent">2.1 角色</div>
+      <div class="outline-item indent">2.2 主流程</div>
+      <div class="outline-item">▾ 3. 功能需求</div>
+      <div class="outline-item indent">3.1 功能清单</div>
+      <div class="outline-item indent">3.2 验收标准</div>
+      <div class="outline-item">▶ 4. 非功能需求</div>
+      <div class="outline-item">▶ 5. 数据规则</div>
+      <div class="outline-item">▶ 6. 交互设计</div>
+      <div class="outline-item">▶ 7. 风险</div>
+      <div class="outline-item">▶ 8. 变更历史</div>
+
+      <div class="meta">
+        <strong>📊 元数据</strong><br>
+        生成: 11:34<br>
+        修订: 4 次<br>
+        来源: 会话「需求评审」
+      </div>
+    </div>
+
+    <div class="content-view">
+<span class="line-num">1</span><span style="font-weight:700"># PRD - 离职流程 v1.2</span>
+<span class="line-num">2</span>
+<span class="line-num">3</span><span style="font-weight:700">## 1. 概述</span>
+<span class="line-num">4</span>
+<span class="line-num">5</span><span style="font-weight:600">### 1.1 背景</span>
+<span class="line-num">6</span>公司目前离职流程涉及 5 个部门(HR / 财务 / IT /
+<span class="line-num">7</span>上级 / 行政),平均处理时长 7-10 工作日,员工反馈
+<span class="line-num">8</span>断点多。
+<span class="line-num">9</span>
+<span class="line-num">10</span><span style="font-weight:600">### 1.2 目标</span>
+<span class="line-num">11</span>- 端到端处理时长 &le; 3 工作日
+<span class="line-num">12</span>- 关键步骤透明可追溯
+<span class="line-num">13</span>- 员工 NPS &ge; 60
+<span class="line-num">14</span>
+<span class="line-num">15</span><span style="font-weight:700">## 2. 用户与场景</span>
+<span class="line-num">16</span>
+<span class="line-num">17</span>...
+    </div>
+  </div>
+
+  <div class="art-footer">
+    <button>📍 跳转到生成时的对话</button>
+    <button>📤 发送到 Jira</button>
+    <button>✨ AI 重新润色</button>
+  </div>
+
+</div>
+
+</body>
+</html>
