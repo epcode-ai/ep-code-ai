@@ -16,4 +16,4 @@
 1. 复制 `templates/development/adr-template.md` 到当前目录
 2. 文件名按 `NNNN-简短描述.md`（NNNN 递增）
 3. 填写内容
-4. 重跑 `node tools/cross-platform/scripts/generate-adr-index.js --target docs/adr/` 刷新索引
+4. 重跑 `node tools/cross-platform/scripts/generate-adr-index.js --target docs/adr` 刷新索引
