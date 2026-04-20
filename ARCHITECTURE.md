@@ -34,7 +34,7 @@ graph TB
 
     subgraph L2 ["🧰 工具链层 (Tooling)"]
         CLI[tools/cli/ · epcode CLI<br/>10 个子命令]
-        SCRIPTS[tools/cross-platform/scripts/<br/>15 个零依赖脚本]
+        SCRIPTS[tools/cross-platform/scripts/<br/>16 个零依赖脚本]
         METRICS[tools/metrics/<br/>四场景 collect + dashboard]
         INTEG[tools/integrations/<br/>9 个系统连接器]
     end
@@ -293,7 +293,7 @@ flowchart LR
 | 项 | 现状 | 差距 | 优先级 | 目标 |
 |----|------|------|--------|-----|
 | CLI 10 个命令 | ✅ | - | - | - |
-| 脚本 15 个 | ✅ | - | - | - |
+| 脚本 16 个 | ✅ | - | - | - |
 | 度量 4 场景 | ✅ | - | - | - |
 | **类型定义(TS 或 JSON Schema)** | ❌ 纯 JS | 模板/PRD/用例无结构校验 Schema | P1 | S8 |
 | **插件机制** | ❌ | 企业想加自己的 check 要 fork | P2 | Phase 3 |

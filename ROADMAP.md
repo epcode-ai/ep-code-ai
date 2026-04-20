@@ -29,7 +29,7 @@
 ## 近期变更
 
 ### 2026-04-20（Sprint 6 完成 · Phase 2 第一 Sprint）
-- **⑥ UI/UX 设计稿**: 17 张 HTML 原型 + 10 wireframes + 5 Mermaid flows + modules map
+- **⑥ UI/UX 设计稿**: 17 张 HTML 原型 + 13 wireframes 文档(覆盖 17 个主题)+ 5 Mermaid flows + 映射表
   - 核心: 主视图 / 向导 / 设置 / 命令面板 / Artifact / 供应商切换 / 搜索 / 右键菜单 / 空态 / 状态栏
   - 角色: 登录 / 项目列表 / 新建项目向导(4 模式 A/B/C/D) · 四大场景工作流(业务/开发/测试/运维 + Prompt 一键操作)
 - **① 架构图 + 技术盘点**: `ARCHITECTURE.md` 含 4 张 Mermaid(四层 / 数据流 / 依赖 / 部署)+ 技术盘点清单 20+ 项
