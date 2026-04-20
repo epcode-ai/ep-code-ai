@@ -20,6 +20,11 @@
 | 08 | [会话右键菜单](./08-conversation-context-menu.html) | 收藏 / 分组 / 多选 / 删除 | 会话管理 | `SidebarView.swift`<br>`FavoritesManager.swift`<br>`ConversationStore.swift` | - |
 | 09 | [空状态合集](./09-empty-states.html) | 引导 + 提示 + 错误恢复 | 兜底与教育 | 分散在上述各组件 | - |
 | 10 | [环境状态栏](./10-env-status-bar.html) | 持久化健康提示 | 全局状态监控 | `EHUBInfoBar.swift` (需扩展)<br>`EnvironmentChecker.swift` | `platforms/*/scripts/check-environment.*` |
+| **11** | [**登录**](./11-login.html) | 身份 + 角色 | 登录/切换角色/退出 | **新增** `LoginView.swift`<br>`AuthManager.swift`<br>`RoleContext.swift` | - |
+| **12** | [**业务工作流**](./12-workflow-business.html) | 产品视角时序 | 需求→PRD→归档 · 6 步 | **新增** `WorkflowView.swift`<br>`PromptRegistry.swift`<br>`PromptRunner.swift` | `skills/business/` 6 个 prompt |
+| **13** | [**开发工作流**](./13-workflow-development.html) | 开发视角 | 设计→ADR→合入 · 7 步 | 共用 `WorkflowView.swift` | `skills/development/` 7 个 prompt |
+| **14** | [**测试工作流**](./14-workflow-testing.html) | 测试视角 | 策略→用例→准出 · 6 步 | 共用 | `skills/testing/` 8 个 prompt |
+| **15** | [**运维工作流**](./15-workflow-operations.html) | 运维视角 | 发布→事件→复盘 · 6 步 | 共用 | `skills/operations/` 8 个 prompt |
 
 ---
 

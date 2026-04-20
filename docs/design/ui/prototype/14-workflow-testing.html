@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>14 · 测试场景工作流 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 14 / 15 · 🧪 测试场景工作流(测试 / QA)</span>
+  <span><a href="index.html">← 返回</a> · <a href="13-workflow-development.html">上页</a> · <a href="15-workflow-operations.html">下页 →</a></span>
+</div>
+
+<div class="workflow-page">
+
+  <div class="workflow-header">
+    <div class="title">
+      <span class="title-icon">🧪</span>
+      <div>
+        <div class="title-main">测试场景工作流</div>
+        <div class="title-sub">测试工程师 · QA · 测试负责人</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:var(--sp-3);align-items:center">
+      <span style="font-size:var(--fs-sm);color:var(--color-text-muted)">本版本: <strong>v1.2 (计划 2026-04-30 发布)</strong></span>
+      <span class="user-chip"><div class="user-avatar" style="background:#D50000">陈</div><span class="user-name">陈测试</span></span>
+    </div>
+  </div>
+
+  <!-- 左:时序 -->
+  <div class="workflow-timeline">
+    <div class="timeline-title">📍 测试方法论生命周期</div>
+
+    <div class="timeline-step done" data-step="1">
+      <div class="timeline-step-title">需求可测性评审</div>
+      <div class="timeline-step-meta">✓ PRD 已评审,分 82</div>
+    </div>
+
+    <div class="timeline-step done" data-step="2">
+      <div class="timeline-step-title">测试策略设计</div>
+      <div class="timeline-step-meta">✓ 范围 / 方法 / 资源 · 已对齐</div>
+    </div>
+
+    <div class="timeline-step active" data-step="3">
+      <div class="timeline-step-title">用例编写 · 评审</div>
+      <div class="timeline-step-meta">进行中 · 42 / 60 用例</div>
+    </div>
+
+    <div class="timeline-step" data-step="4">
+      <div class="timeline-step-title">提测申请审核</div>
+      <div class="timeline-step-meta">开发提交 → 你审核</div>
+    </div>
+
+    <div class="timeline-step" data-step="5">
+      <div class="timeline-step-title">测试执行</div>
+      <div class="timeline-step-meta">冒烟 · 回归 · 新增 · Bug 管理</div>
+    </div>
+
+    <div class="timeline-step" data-step="6">
+      <div class="timeline-step-title">准出报告</div>
+      <div class="timeline-step-meta">通过率 + 遗留 Bug + 发布建议</div>
+    </div>
+  </div>
+
+  <!-- 中:当前 -->
+  <div class="workflow-content">
+    <h2>第 3 步 · 用例编写 · 评审</h2>
+
+    <div style="padding:var(--sp-3);background:var(--color-primary-lightest);border-radius:var(--radius-md);margin-bottom:var(--sp-4);font-size:var(--fs-sm);line-height:1.7">
+      📊 <strong>进度</strong>: 已编 42 / 预估 60 用例 · 覆盖 REQ-001 ~ REQ-004 · 覆盖率 67%
+      <br>⚠️ <strong>待覆盖</strong>: REQ-005(导出格式)· REQ-006(并发场景)
+    </div>
+
+    <h3>✅ 本阶段 Checklist</h3>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked />
+      <div style="flex:1">
+        <div class="checklist-item-title">对照 PRD 的 REQ ID,为每个需求点至少写 1 条正向用例</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked />
+      <div style="flex:1">
+        <div class="checklist-item-title">覆盖边界值 + 异常场景</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">关联用例 ↔ 需求 ID(frontmatter <code>requirements: [REQ-005]</code>)</div>
+        <div class="checklist-item-hint">这样 <code>/linkage regression</code> 能自动推荐回归用例</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">跑 <code>/coverage-analysis</code>,确认无悬空/遗漏</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">提交评审 → 测试组评 Leader 签字</div>
+      </div>
+    </div>
+
+    <h3>📄 本阶段产出物</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)">
+      <div class="artifact-card">
+        <div class="artifact-card-title">▾ test-strategy-v1.2.md</div>
+        <div class="artifact-card-meta">📋 已锁定 · 昨天</div>
+      </div>
+      <div class="artifact-card" style="border-color:var(--color-primary)">
+        <div class="artifact-card-title">▾ test-cases.md(编辑中)</div>
+        <div class="artifact-card-meta">📋 42 条 · 进度 67%</div>
+      </div>
+    </div>
+
+    <h3>🔀 上游输入 / 下游消费</h3>
+    <div style="background:var(--color-bg-alt);padding:var(--sp-3);border-radius:var(--radius-md);font-size:var(--fs-sm);line-height:1.8">
+      <strong>上游</strong>: 产品 PRD · 开发 API 契约 · 开发 ADR<br>
+      <strong>下游</strong>: 开发(提测评审依据)· 运维(发布计划参考)· 业务(验收依据)
+    </div>
+  </div>
+
+  <!-- 右:智能操作 -->
+  <div class="workflow-tools">
+    <div class="tools-title">✨ 智能操作 (AI Prompt)</div>
+    <p style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-bottom:var(--sp-3);line-height:1.6">
+      来自 <code>skills/testing/</code> 的 8 个 Prompt 模板。
+    </p>
+
+    <div class="prompt-action-card">
+      <div class="icon">📋</div>
+      <div class="name">测试策略起草</div>
+      <div class="desc">从 PRD + 历史数据 → 测试策略</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">✍️</div>
+      <div class="name">用例批量生成</div>
+      <div class="desc">输入 REQ → 正向/负向/边界用例</div>
+      <div class="meta"><span class="tag">输入: PRD</span><span class="tag">输出: test-cases.md</span></div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🔍</div>
+      <div class="name">可测性评审</div>
+      <div class="desc">PRD 模糊词 / 验收缺失 / 量化不足</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🐛</div>
+      <div class="name">Bug 报告规范化</div>
+      <div class="desc">自由描述 → 标准 Bug 报告(含重现步骤)</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">✅</div>
+      <div class="name">提测单审核</div>
+      <div class="desc">检查提测申请的完整性 + 可测性</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📊</div>
+      <div class="name">准出报告生成</div>
+      <div class="desc">从 Bug JSON + 执行记录 → 可发布性建议</div>
+      <div class="meta"><span class="tag">联动: /linkage release-plan</span></div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🎯</div>
+      <div class="name">回归范围推荐</div>
+      <div class="desc">git diff + 用例关联 → 回归清单</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📈</div>
+      <div class="name">Bug 趋势分析</div>
+      <div class="desc">周/月 Bug 分布 + 模块热图</div>
+    </div>
+
+    <div style="margin-top:var(--sp-4);padding:var(--sp-3);background:#e8f5e9;border-radius:var(--radius-md);font-size:var(--fs-xs);line-height:1.6">
+      <div style="font-weight:600;margin-bottom:4px">🔗 跨场景联动</div>
+      <ul style="margin-left:16px;color:var(--color-text-muted)">
+        <li>准出报告 → <code>/linkage release-plan</code> 自动生成发布计划</li>
+        <li>git diff → <code>/linkage regression</code> 推荐回归</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

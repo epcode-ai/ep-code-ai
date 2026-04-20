@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>11 · 登录 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 11 / 15 · 登录(企业 SSO + 账号密码)</span>
+  <span><a href="index.html">← 返回导航</a></span>
+</div>
+
+<div class="login-wrap">
+  <div class="login-card">
+
+    <div class="login-logo">🚀</div>
+    <div class="login-title">EP Code AI</div>
+    <div class="login-sub">企业级 AI 研发助手</div>
+
+    <!-- 企业 SSO(后续接入企业用户体系的主入口) -->
+    <button class="sso-btn">
+      <span style="font-size:20px">🏢</span>
+      <div style="flex:1;text-align:left">
+        <div style="font-weight:600">企业账号登录</div>
+        <div style="font-size:var(--fs-xs);color:var(--color-text-muted)">通过公司统一身份登录(SSO)</div>
+      </div>
+      <span style="color:var(--color-text-muted)">→</span>
+    </button>
+
+    <button class="sso-btn">
+      <span style="font-size:20px">💬</span>
+      <div style="flex:1;text-align:left">
+        <div style="font-weight:600">企业微信 / 钉钉 / 飞书</div>
+        <div style="font-size:var(--fs-xs);color:var(--color-text-muted)">扫码登录</div>
+      </div>
+      <span style="color:var(--color-text-muted)">→</span>
+    </button>
+
+    <div class="divider">或使用账号密码</div>
+
+    <div class="field">
+      <div class="field-label">工号 / 邮箱</div>
+      <input type="text" placeholder="zhang.san@company.com" />
+    </div>
+
+    <div class="field">
+      <div class="field-label">密码</div>
+      <input type="password" placeholder="" />
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-bottom:var(--sp-4);font-size:var(--fs-sm)">
+      <label><input type="checkbox" checked /> 保持登录 7 天</label>
+      <a href="#">忘记密码?</a>
+    </div>
+
+    <button class="btn primary lg" style="width:100%" onclick="location.href='01-main-three-pane.html'">登录</button>
+
+    <div style="text-align:center;margin-top:var(--sp-5);font-size:var(--fs-xs);color:var(--color-text-muted)">
+      登录即表示同意 <a href="#">用户协议</a> 和 <a href="#">隐私政策</a>
+      <br>
+      <span style="color:var(--color-primary)">⚠️ 本页为原型,真实 SSO 接入在 Sprint 8+</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- 说明区 -->
+<div style="max-width: 880px; margin: 40px auto; padding: 0 16px; font-size: var(--fs-sm); color: var(--color-text-muted); line-height: 1.8">
+  <h3 style="color:var(--color-text);margin-bottom:12px">关于用户体系(预留设计)</h3>
+  <p><strong>Phase 2 简化方案</strong>: 本地单用户,登录时记录身份 + 选择角色(产品/开发/测试/运维),用于场景工作流的个性化显示。</p>
+  <p style="margin-top:8px"><strong>Phase 3 企业集成</strong>: 接入企业 SSO (OIDC / SAML),从 HR 系统拉取用户基本信息 + 角色 + 团队,打通企业微信/钉钉的身份。</p>
+  <h4 style="color:var(--color-text);margin-top:16px;margin-bottom:8px">登录后会记录</h4>
+  <ul style="margin-left:24px">
+    <li>用户名 / 工号 / 头像 / 邮箱(来源: SSO / 用户填写)</li>
+    <li>主角色 (产品 / 开发 / 测试 / 运维 / 其他) - 决定工作流推荐</li>
+    <li>团队 / 项目组 (Phase 3)</li>
+    <li>上次登录时间 + 设备信息(用于审计,见 PLAN.md ④ 服务端 RFC)</li>
+  </ul>
+</div>
+
+</body>
+</html>

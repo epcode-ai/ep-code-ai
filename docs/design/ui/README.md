@@ -46,13 +46,13 @@
 
 ## 二、索引
 
-### Wireframes(静态线框图,10 张)
+### Wireframes(静态线框图,10 + 5 张)
 
 | # | 文件 | 主题 |
 |---|------|------|
 | 1 | [main-three-pane.md](./wireframes/01-main-three-pane.md) | 主视图(侧边栏 + 聊天 + Artifact) |
 | 2 | [setup-wizard.md](./wireframes/02-setup-wizard.md) | 首次启动 4 步向导 |
-| 3 | [settings.md](./wireframes/03-settings.md) | 设置页(General / Provider / Shortcuts / Experimental) |
+| 3 | [settings.md](./wireframes/03-settings.md) | 设置页(通用 / 供应商 / 快捷键 / 实验性) |
 | 4 | [slash-command-palette.md](./wireframes/04-slash-command-palette.md) | 斜杠命令浮层 |
 | 5 | [artifact-panel-expanded.md](./wireframes/05-artifact-panel-expanded.md) | Artifact 全屏详情 |
 | 6 | [provider-switcher.md](./wireframes/06-provider-switcher.md) | 供应商切换浮层 |
@@ -60,6 +60,8 @@
 | 8 | [conversation-context-menu.md](./wireframes/08-conversation-context-menu.md) | 会话右键菜单 + 收藏 + 分组 |
 | 9 | [empty-states.md](./wireframes/09-empty-states.md) | 各种空状态 |
 | 10 | [env-status-bar.md](./wireframes/10-env-status-bar.md) | 持久化环境健康状态栏 |
+| **11** | [**登录**](./wireframes/11-login.md) | 企业 SSO + IM 扫码 + 账号密码(Sprint 6 新增) |
+| **12-15** | [**四大场景工作流**](./wireframes/12-15-workflow-scenes.md) | 业务/开发/测试/运维 角色视角(Sprint 6 新增) |
 
 ### Interaction Flows(交互流程,5 个 Mermaid)
 

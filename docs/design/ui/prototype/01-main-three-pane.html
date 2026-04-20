@@ -15,11 +15,41 @@
 <div class="app">
 
   <!-- Topbar -->
-  <div class="topbar">
+  <div class="topbar" style="position:relative">
     <span class="brand">EP Code AI</span>
+    <nav style="display:flex;gap:var(--sp-4);margin-left:var(--sp-5);font-size:var(--fs-sm)">
+      <a href="12-workflow-business.html" style="color:var(--color-text-muted)">💼 业务</a>
+      <a href="13-workflow-development.html" style="color:var(--color-text-muted)">💻 开发</a>
+      <a href="14-workflow-testing.html" style="color:var(--color-text-muted)">🧪 测试</a>
+      <a href="15-workflow-operations.html" style="color:var(--color-text-muted)">🚀 运维</a>
+    </nav>
     <span class="spacer"></span>
     <button class="btn sm">Anthropic ▾</button>
     <button class="btn sm ghost">⚙</button>
+    <div class="user-chip" onclick="document.getElementById('userMenu').style.display='block'">
+      <div class="user-avatar">张</div>
+      <span class="user-name">张工</span>
+    </div>
+
+    <!-- 用户菜单(默认隐藏) -->
+    <div class="user-menu" id="userMenu" style="display:none">
+      <div class="user-menu-header">
+        <div class="user-avatar lg">张</div>
+        <div style="flex:1">
+          <div class="user-name">张工</div>
+          <div class="user-role">产品经理 · 基础架构组</div>
+          <div style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-top:2px">zhang.san@company.com</div>
+        </div>
+      </div>
+      <div class="user-menu-item"><span>👤 我的资料</span></div>
+      <div class="user-menu-item"><span>🎭 切换角色</span><span class="kbd">⌘⇧R</span></div>
+      <div class="user-menu-item"><span>📊 我的使用统计</span></div>
+      <div class="user-menu-sep"></div>
+      <div class="user-menu-item"><span>⚙ 设置</span><span class="kbd">⌘,</span></div>
+      <div class="user-menu-item"><span>❓ 帮助 & 文档</span></div>
+      <div class="user-menu-sep"></div>
+      <div class="user-menu-item" onclick="location.href='11-login.html'" style="color:var(--color-error)"><span>🚪 退出登录</span></div>
+    </div>
   </div>
 
   <!-- Main -->

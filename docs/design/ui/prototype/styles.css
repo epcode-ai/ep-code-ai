@@ -489,3 +489,309 @@ a:hover { text-decoration: underline; }
 }
 .proto-banner a { color: white; text-decoration: underline; }
 body.with-banner .app { padding-top: 32px; }
+
+/* ============ 用户菜单(Sprint 6 新增) ============ */
+
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.user-chip:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-border);
+}
+.user-avatar {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+.user-avatar.lg { width: 40px; height: 40px; font-size: var(--fs-md); }
+.user-name { font-weight: 500; font-size: var(--fs-sm); }
+.user-role { font-size: var(--fs-xs); color: var(--color-text-muted); }
+
+.user-menu {
+  position: absolute;
+  right: var(--sp-4);
+  top: calc(var(--topbar-height) + 4px);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 260px;
+  z-index: 50;
+  padding: var(--sp-2) 0;
+}
+.user-menu-header {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+}
+.user-menu-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-4);
+  cursor: pointer;
+  font-size: var(--fs-md);
+}
+.user-menu-item:hover { background: var(--color-bg-hover); }
+.user-menu-sep { height: 1px; background: var(--color-border); margin: var(--sp-1) 0; }
+
+/* ============ 工作流页面(Sprint 6 新增) ============ */
+
+.workflow-page {
+  min-height: 100vh;
+  padding-top: 32px;
+  background: var(--color-bg-alt);
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas: "header header header" "timeline content tools";
+  height: 100vh;
+}
+
+.workflow-header {
+  grid-area: header;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0 var(--sp-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.workflow-header .title { display: flex; align-items: center; gap: var(--sp-3); }
+.workflow-header .title-icon { font-size: var(--fs-2xl); }
+.workflow-header .title-main { font-size: var(--fs-xl); font-weight: 600; }
+.workflow-header .title-sub { font-size: var(--fs-sm); color: var(--color-text-muted); }
+
+.workflow-timeline {
+  grid-area: timeline;
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+  padding: var(--sp-4);
+  overflow-y: auto;
+}
+.timeline-title {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: var(--sp-3);
+}
+.timeline-step {
+  position: relative;
+  padding: var(--sp-3) var(--sp-3) var(--sp-3) 40px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-bottom: var(--sp-1);
+}
+.timeline-step:hover { background: var(--color-bg-hover); }
+.timeline-step.active { background: var(--color-primary-lightest); }
+.timeline-step.done { opacity: 0.7; }
+
+.timeline-step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: var(--sp-3);
+  top: var(--sp-3);
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--color-bg-hover);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.timeline-step.active::before {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+.timeline-step.done::before {
+  content: '✓';
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.timeline-step::after {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 44px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--color-border);
+}
+.timeline-step:last-child::after { display: none; }
+
+.timeline-step-title { font-weight: 500; font-size: var(--fs-md); }
+.timeline-step-meta { font-size: var(--fs-xs); color: var(--color-text-muted); margin-top: 2px; }
+
+.workflow-content {
+  grid-area: content;
+  overflow-y: auto;
+  padding: var(--sp-6);
+}
+.workflow-content h2 {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--sp-4);
+}
+.workflow-content h3 {
+  font-size: var(--fs-lg);
+  margin-top: var(--sp-5);
+  margin-bottom: var(--sp-3);
+}
+
+.checklist-item {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--sp-2);
+  background: var(--color-bg);
+}
+.checklist-item input { margin-top: 3px; }
+.checklist-item-title { font-weight: 500; }
+.checklist-item-hint { font-size: var(--fs-sm); color: var(--color-text-muted); margin-top: 2px; }
+
+.workflow-tools {
+  grid-area: tools;
+  background: var(--color-bg);
+  border-left: 1px solid var(--color-border);
+  padding: var(--sp-4);
+  overflow-y: auto;
+}
+.tools-title {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: var(--sp-3);
+}
+
+.prompt-action-card {
+  padding: var(--sp-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--sp-2);
+  background: var(--color-bg);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.prompt-action-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.prompt-action-card .icon { font-size: var(--fs-lg); margin-bottom: var(--sp-1); }
+.prompt-action-card .name { font-weight: 600; font-size: var(--fs-md); }
+.prompt-action-card .desc { font-size: var(--fs-xs); color: var(--color-text-muted); margin-top: 2px; }
+.prompt-action-card .meta {
+  margin-top: var(--sp-2);
+  display: flex;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+}
+.tag {
+  padding: 1px 6px;
+  background: var(--color-bg-hover);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+/* Prompt 运行弹窗 */
+.prompt-modal .field { margin-bottom: var(--sp-3); }
+.prompt-modal .preview {
+  padding: var(--sp-3);
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  white-space: pre-wrap;
+  line-height: 1.6;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+}
+
+/* 登录页 */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 16px 40px;
+  background: linear-gradient(135deg, #eef3ff 0%, #fff 100%);
+}
+.login-card {
+  width: 420px;
+  max-width: 100%;
+  background: var(--color-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-8) var(--sp-6);
+  box-shadow: var(--shadow-lg);
+}
+.login-logo {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: var(--sp-3);
+}
+.login-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--sp-1);
+}
+.login-sub {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-6);
+}
+.sso-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  padding: var(--sp-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  cursor: pointer;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-md);
+}
+.sso-btn:hover { background: var(--color-bg-hover); }
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: var(--sp-5) 0;
+  color: var(--color-text-muted);
+  font-size: var(--fs-xs);
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}

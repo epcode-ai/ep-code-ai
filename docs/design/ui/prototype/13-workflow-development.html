@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>13 · 开发场景工作流 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 13 / 15 · 💻 开发场景工作流(开发 / 架构师)</span>
+  <span><a href="index.html">← 返回</a> · <a href="12-workflow-business.html">上页</a> · <a href="14-workflow-testing.html">下页 →</a></span>
+</div>
+
+<div class="workflow-page">
+
+  <div class="workflow-header">
+    <div class="title">
+      <span class="title-icon">💻</span>
+      <div>
+        <div class="title-main">开发场景工作流</div>
+        <div class="title-sub">开发工程师 · 架构师 · Tech Lead</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:var(--sp-3);align-items:center">
+      <span style="font-size:var(--fs-sm);color:var(--color-text-muted)">当前任务: <strong>REQ-042 订单批量导出</strong></span>
+      <span class="user-chip"><div class="user-avatar" style="background:#00C853">李</div><span class="user-name">李架构</span></span>
+    </div>
+  </div>
+
+  <!-- 左:时序 -->
+  <div class="workflow-timeline">
+    <div class="timeline-title">📍 开发方法论时序</div>
+
+    <div class="timeline-step done" data-step="1">
+      <div class="timeline-step-title">接需求 · 澄清</div>
+      <div class="timeline-step-meta">✓ 已读 PRD v1.2</div>
+    </div>
+
+    <div class="timeline-step done" data-step="2">
+      <div class="timeline-step-title">技术方案设计</div>
+      <div class="timeline-step-meta">✓ design-v1.md</div>
+    </div>
+
+    <div class="timeline-step active" data-step="3">
+      <div class="timeline-step-title">ADR 决策</div>
+      <div class="timeline-step-meta">进行中 · 流式导出 vs 分页</div>
+    </div>
+
+    <div class="timeline-step" data-step="4">
+      <div class="timeline-step-title">API 契约对齐</div>
+      <div class="timeline-step-meta">开发 ↔ 测试 契约锁定</div>
+    </div>
+
+    <div class="timeline-step" data-step="5">
+      <div class="timeline-step-title">编码 · 自测</div>
+      <div class="timeline-step-meta">PR + CI 全绿</div>
+    </div>
+
+    <div class="timeline-step" data-step="6">
+      <div class="timeline-step-title">代码评审 · 合入</div>
+      <div class="timeline-step-meta">按 Checklist 评审</div>
+    </div>
+
+    <div class="timeline-step" data-step="7">
+      <div class="timeline-step-title">提测 · 发版说明</div>
+      <div class="timeline-step-meta">交给测试 + 写 Release Note</div>
+    </div>
+  </div>
+
+  <!-- 中:当前步骤 -->
+  <div class="workflow-content">
+    <h2>第 3 步 · ADR 决策</h2>
+    <p style="color:var(--color-text-muted);line-height:1.7">
+      对技术选型、架构变更、重要 trade-off 写 <strong>Architecture Decision Record</strong>(ADR),记录决策过程和备选方案,
+      让后人看得懂"当年为什么这么选"。
+    </p>
+
+    <h3>✅ 本阶段 Checklist</h3>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked />
+      <div style="flex:1">
+        <div class="checklist-item-title">识别需要 ADR 的决策点</div>
+        <div class="checklist-item-hint">例:DB 选型 / 框架切换 / API 风格 / 并发策略</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">写 ADR:状态 / 上下文 / 选项 / 决定 / 后果</div>
+        <div class="checklist-item-hint">用 <code>templates/development/adr-template.md</code></div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">邀请 2-3 位评审(架构组 + 受影响模块负责人)</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">达成决定 → ADR 标 Accepted,跑 <code>/adr index</code> 更新索引</div>
+      </div>
+    </div>
+
+    <h3>📄 本阶段产出物</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)">
+      <div class="artifact-card">
+        <div class="artifact-card-title">▾ design-v1.md</div>
+        <div class="artifact-card-meta">📄 156 行 · 今天 · Accepted</div>
+      </div>
+      <div class="artifact-card" style="border-color:var(--color-primary)">
+        <div class="artifact-card-title">▾ ADR-0003 流式导出.md(草稿)</div>
+        <div class="artifact-card-meta">📄 48 行 · 状态 Proposed</div>
+      </div>
+    </div>
+
+    <h3>💡 下一步</h3>
+    <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">
+      <button class="btn primary">📝 编辑 ADR-0003</button>
+      <button class="btn">✨ 让 AI review 方案</button>
+      <button class="btn">👥 发评审 · Slack 通知</button>
+      <button class="btn">📤 同步到 Jira Task</button>
+    </div>
+  </div>
+
+  <!-- 右:智能操作 -->
+  <div class="workflow-tools">
+    <div class="tools-title">✨ 智能操作 (AI Prompt)</div>
+    <p style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-bottom:var(--sp-3);line-height:1.6">
+      来自 <code>skills/development/</code> 的 7 个 Prompt 模板。
+    </p>
+
+    <div class="prompt-action-card">
+      <div class="icon">📐</div>
+      <div class="name">设计文档起草</div>
+      <div class="desc">从 PRD 生成技术设计初稿</div>
+      <div class="meta"><span class="tag">输入: PRD</span><span class="tag">输出: design.md</span></div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📜</div>
+      <div class="name">ADR 起草</div>
+      <div class="desc">技术决策 → 正式 ADR 文档</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🔄</div>
+      <div class="name">从代码反向生成 API 文档</div>
+      <div class="desc">扫描 src/ → Markdown API 契约</div>
+      <div class="meta"><span class="tag">模式 B 迁移用</span></div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🔍</div>
+      <div class="name">代码评审清单生成</div>
+      <div class="desc">按本次改动风险 → 个性化 checklist</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📝</div>
+      <div class="name">Release Note 生成</div>
+      <div class="desc">从 commits → 面向用户的发版说明</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">⬆️</div>
+      <div class="name">依赖升级风险分析</div>
+      <div class="desc">扫描 package.json 变更 → 风险评估</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🧩</div>
+      <div class="name">接口契约冲突检测</div>
+      <div class="desc">开发 API 和测试用例是否匹配</div>
+    </div>
+
+    <div style="margin-top:var(--sp-4);padding:var(--sp-3);background:var(--color-bg-alt);border-radius:var(--radius-md);font-size:var(--fs-xs);line-height:1.6">
+      <div style="font-weight:600;margin-bottom:4px">🔗 跨场景联动</div>
+      本页改动 ADR / 设计会触发:
+      <ul style="margin:4px 0 0 16px;color:var(--color-text-muted)">
+        <li>业务场景: <code>/linkage prd-to-design</code></li>
+        <li>测试场景: <code>/linkage regression</code> 推荐回归</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

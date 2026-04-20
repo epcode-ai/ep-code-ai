@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>15 · 运维场景工作流 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 15 / 15 · 🚀 运维场景工作流(SRE / 运维)</span>
+  <span><a href="index.html">← 返回</a> · <a href="14-workflow-testing.html">上页</a></span>
+</div>
+
+<div class="workflow-page">
+
+  <div class="workflow-header">
+    <div class="title">
+      <span class="title-icon">🚀</span>
+      <div>
+        <div class="title-main">运维场景工作流</div>
+        <div class="title-sub">SRE · 运维 · On-call</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:var(--sp-3);align-items:center">
+      <span class="badge warn">⚠️ 当前有 1 个 P2 事件</span>
+      <span class="user-chip"><div class="user-avatar" style="background:#FFB300">周</div><span class="user-name">周运维 · on-call</span></span>
+    </div>
+  </div>
+
+  <!-- 左:时序 -->
+  <div class="workflow-timeline">
+    <div class="timeline-title">📍 运维工作流(常态 + 应急)</div>
+
+    <div class="timeline-step done" data-step="1">
+      <div class="timeline-step-title">发布计划</div>
+      <div class="timeline-step-meta">✓ v1.2 计划已定</div>
+    </div>
+
+    <div class="timeline-step done" data-step="2">
+      <div class="timeline-step-title">Runbook 准备</div>
+      <div class="timeline-step-meta">✓ 3 个关键告警已有 Runbook</div>
+    </div>
+
+    <div class="timeline-step" data-step="3">
+      <div class="timeline-step-title">发布执行</div>
+      <div class="timeline-step-meta">灰度 → 全量(按计划)</div>
+    </div>
+
+    <div class="timeline-step active" data-step="4">
+      <div class="timeline-step-title">🚨 事件响应</div>
+      <div class="timeline-step-meta">INC-2026-0419 处理中</div>
+    </div>
+
+    <div class="timeline-step" data-step="5">
+      <div class="timeline-step-title">故障复盘(48h 内)</div>
+      <div class="timeline-step-meta">Blameless · 找改进项</div>
+    </div>
+
+    <div class="timeline-step" data-step="6">
+      <div class="timeline-step-title">改进项跟踪</div>
+      <div class="timeline-step-meta">同步到业务 backlog</div>
+    </div>
+  </div>
+
+  <!-- 中:当前(事件响应) -->
+  <div class="workflow-content">
+    <h2>🚨 当前:INC-2026-0419 事件响应</h2>
+
+    <div style="padding:var(--sp-4);background:#ffebee;border-left:4px solid var(--color-error);border-radius:var(--radius-md);margin-bottom:var(--sp-4)">
+      <div style="font-weight:600;margin-bottom:var(--sp-1)">P2 · 支付服务 P99 延迟异常</div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.7">
+        🕐 开始: 14:02 CST · 持续: <strong>26 分钟</strong><br>
+        📊 影响: 5% 用户 · 核心业务: 支付 · 每分钟约 12 笔失败<br>
+        📡 告警: <code>HighErrorRate</code> + <code>P99LatencyHigh</code>(已转发到企业微信)
+      </div>
+    </div>
+
+    <h3>✅ 响应 Checklist(按 Runbook 执行)</h3>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked />
+      <div style="flex:1">
+        <div class="checklist-item-title">✅ 收到告警 → 5 分钟内确认</div>
+        <div class="checklist-item-hint">已打开 runbook-payment-latency.md</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked />
+      <div style="flex:1">
+        <div class="checklist-item-title">✅ 初步定位(看日志 / 监控 / 依赖状态)</div>
+        <div class="checklist-item-hint">根因疑似: DB 连接池耗尽(活动连接 920/1000)</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">紧急降级 or 回滚?</div>
+        <div class="checklist-item-hint">Runbook 建议: 先扩容连接池至 1500,观察 5 分钟,不行则回滚到 v1.1</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">拉战时群,通报影响面</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">恢复后 48 小时内完成复盘</div>
+      </div>
+    </div>
+
+    <h3>🛠 快速操作</h3>
+    <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">
+      <button class="btn" style="background:var(--color-error);color:white;border:none">🔙 一键回滚 v1.2 → v1.1</button>
+      <button class="btn">📈 打开 Grafana</button>
+      <button class="btn">📜 查看相关 Runbook</button>
+      <button class="btn">📢 通知战时群</button>
+      <button class="btn">📝 创建故障报告</button>
+    </div>
+
+    <h3>📄 相关产出物</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)">
+      <div class="artifact-card">
+        <div class="artifact-card-title">▾ runbook-payment-latency.md</div>
+        <div class="artifact-card-meta">📘 当前使用中</div>
+      </div>
+      <div class="artifact-card" style="border-color:var(--color-error)">
+        <div class="artifact-card-title">▾ INC-2026-0419.md(新建)</div>
+        <div class="artifact-card-meta">📝 初始化 · 待填</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右:智能操作 -->
+  <div class="workflow-tools">
+    <div class="tools-title">✨ 智能操作 (AI Prompt)</div>
+    <p style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-bottom:var(--sp-3);line-height:1.6">
+      来自 <code>skills/operations/</code> 的 8 个 Prompt 模板。
+    </p>
+
+    <div class="prompt-action-card" style="border-color:var(--color-error)">
+      <div class="icon">🚨</div>
+      <div class="name">事件分级 & 处理建议</div>
+      <div class="desc">当前告警 → 严重度判定 + 下一步动作</div>
+      <div class="meta"><span class="tag">实时</span></div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📘</div>
+      <div class="name">Runbook 起草</div>
+      <div class="desc">从告警类型生成处置手册模板</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📋</div>
+      <div class="name">发布计划生成</div>
+      <div class="desc">从测试准出报告 → 灰度节奏方案</div>
+      <div class="meta"><span class="tag">上游: 测试报告</span></div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📝</div>
+      <div class="name">故障复盘起草</div>
+      <div class="desc">基于时间线 + 日志 → postmortem 初稿(blameless)</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🎯</div>
+      <div class="name">改进项 → 需求池</div>
+      <div class="desc">从复盘抽行动项 → Jira/GH issue</div>
+      <div class="meta"><span class="tag">联动: 业务场景</span></div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">📊</div>
+      <div class="name">SLO 分析</div>
+      <div class="desc">是否消耗了 error budget?</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">🔁</div>
+      <div class="name">多环境配置审计</div>
+      <div class="desc">dev/staging/prod 配置差异扫描</div>
+    </div>
+
+    <div class="prompt-action-card">
+      <div class="icon">👥</div>
+      <div class="name">On-call 交接</div>
+      <div class="desc">整理本周事件 → 交接文档</div>
+    </div>
+
+    <div style="margin-top:var(--sp-4);padding:var(--sp-3);background:#fff8e1;border-radius:var(--radius-md);font-size:var(--fs-xs);line-height:1.6">
+      <div style="font-weight:600;margin-bottom:4px">💡 降低事件时的认知负载</div>
+      事件响应期间,"智能操作"卡片可以替代你"记住所有 Runbook 步骤" —— 点一下让 AI 帮你判断下一步。
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
