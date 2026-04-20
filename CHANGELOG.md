@@ -10,11 +10,50 @@
 
 ---
 
-## [Unreleased] · Sprint 7 进行中
+## [Unreleased] · Sprint 7 规划完成 · 实施 S7.1-7.4 滚动推进
 
-Phase 2 第一 Sprint (S6) 完成。S7 启动: macOS Beta 打包 + 跨平台栈决策。
+S7 按"规划 + 框架"范围完成:跨平台栈决策 + Swift 改造清单 + 打包 workflow。
+实际 Swift 代码修改分 4 轮 PR(S7.1-7.4)滚动推进,每轮发布一个 Beta milestone。
 
-### [0.7.0-draft] · Sprint 6 完成(2026-04-20)
+### [0.7.0-draft] · Sprint 7 规划完成(2026-04-20)
+
+**主题**: ADR 决策 · macOS 打包框架 · Swift 改造路线图
+
+#### 新增 · 3 个 ADR
+- **ADR-0001** 采用 4 种接入模式作为框架一等公民(回溯 Sprint 1 的决策)· Accepted
+- **ADR-0002** 跨平台桌面应用技术栈 · **混合方案**:macOS 保留 Swift(资产保护)+ Linux/Windows 用 Tauri+Svelte(快速多平台)· Proposed
+  - 对比 Tauri / Electron / 保持原生 / 混合 4 方案,基于"团队规模 1 人 + 已有 Swift 骨架 2500 行 + 维护成本敏感"选混合
+- **ADR-0003** 自动更新策略 · 统一用 GitHub Release API 作为更新源(零付费 + 三平台一致)· Proposed
+  - severity frontmatter 区分 critical / recommended / optional 强制级别
+
+#### 新增 · 实施规划
+- **Swift 改造清单** `docs/design/ui/swift-refactor-plan.md` · 列出 22 个 Swift 文件的具体改动:
+  - P0 · 8 项 · Beta 前必做(主视图/侧栏/聊天/向导/设置/供应商/命令面板/状态栏)
+  - P1 · 5 项 · 重要但可稍晚(登录/项目列表/新建向导/工作流/Prompt 注册表)
+  - P2 · 6 项 · Beta 后补(搜索/Artifact 增强/自动更新/收藏调整)
+  - 拆成 S7.1 - S7.4 四轮 PR 推进
+
+#### 新增 · 构建基础设施
+- **`.github/workflows/macos-build.yml`** · macOS Beta 自动构建:
+  - **无签名分支**(当前默认):用户需右键打开绕 Gatekeeper
+  - **签名+公证分支**(预留):secrets 配好 AC_TEAM_ID 等 5 个后自动启用
+  - push tag v*.*.* 自动创建 GitHub Release 附 .dmg
+- **ADR 索引** `docs/adr/README.md` 由 `generate-adr-index.js` 生成
+
+#### Sprint 7.x 推进路线
+| 轮次 | 目标 | 文件数 |
+|------|------|--------|
+| S7.1 | 基础三栏 + 向导 + 设置 | P0 #1-5(5) |
+| S7.2 | 命令面板 + 状态栏 + 供应商 | P0 #6-8(3) |
+| S7.3 | 登录 + 项目列表 + 新建向导 | P1 #9-11(3) |
+| S7.4 | 场景工作流 + Prompt 注册表 | P1 #12-13(2) |
+
+Sprint 7 结束时:S7.1 + S7.2 macOS Beta 可下载(无签名)。
+
+---
+
+
+### [Sprint 6] · 2026-04-20 · 完成
 
 **主题**: 架构盘点 + UI/UX 设计稿 + 信息共享文档化 + 用户手册起步
 
