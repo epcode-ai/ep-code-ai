@@ -68,9 +68,20 @@
     padding: var(--sp-3) var(--sp-4);
     border-top: 1px solid var(--color-border);
     display: flex;
-    gap: var(--sp-3);
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
     font-size: var(--fs-sm);
+  }
+  .pg-footer-left {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--color-text-muted);
+  }
+  .pg-footer-right {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
   }
 
   /* 二次确认 */
@@ -162,8 +173,14 @@
   </div>
 
   <div class="pg-footer">
-    <span class="kbd">esc</span> <span style="color:var(--color-text-muted)">取消</span>
-    <button class="btn primary">↵ 切换</button>
+    <span class="pg-footer-left">
+      <span class="kbd">esc</span>
+      <span>取消</span>
+    </span>
+    <span class="pg-footer-right">
+      <button class="btn">取消</button>
+      <button class="btn primary">↵ 切换到新会话</button>
+    </span>
   </div>
 </div>
 

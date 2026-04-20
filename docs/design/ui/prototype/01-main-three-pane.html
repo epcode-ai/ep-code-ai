@@ -14,9 +14,19 @@
 
 <div class="app">
 
-  <!-- Topbar -->
+  <!-- 顶栏 -->
   <div class="topbar" style="position:relative">
-    <span class="brand">EP Code AI</span>
+    <a href="16-project-list.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><span class="brand">🚀 EP Code AI</span></a>
+
+    <span style="color:var(--color-text-muted);margin:0 var(--sp-2)">/</span>
+
+    <!-- 项目切换器 -->
+    <div class="project-switcher" onclick="location.href='16-project-list.html'">
+      <span class="name">离职流程优化</span>
+      <span class="mode-badge mode-a">A · 绿地</span>
+      <span style="color:var(--color-text-muted)">▾</span>
+    </div>
+
     <nav style="display:flex;gap:var(--sp-4);margin-left:var(--sp-5);font-size:var(--fs-sm)">
       <a href="12-workflow-business.html" style="color:var(--color-text-muted)">💼 业务</a>
       <a href="13-workflow-development.html" style="color:var(--color-text-muted)">💻 开发</a>
@@ -52,9 +62,9 @@
     </div>
   </div>
 
-  <!-- Main -->
+  <!-- 主体 -->
   <div class="main">
-    <!-- Sidebar -->
+    <!-- 侧边栏 -->
     <div class="sidebar">
       <div class="sidebar-search">
         <input type="text" placeholder="🔍 搜索... ⌘K">
@@ -100,7 +110,7 @@
       </div>
     </div>
 
-    <!-- Chat -->
+    <!-- 聊天区 -->
     <div class="chat">
       <div class="chat-header">
         <div>
@@ -167,9 +177,9 @@
       </div>
     </div>
 
-    <!-- Artifact Panel -->
+    <!-- 产出物面板 -->
     <div class="artifact-panel">
-      <div class="artifact-title">📦 Artifacts (2)</div>
+      <div class="artifact-title">📦 产出物 (2)</div>
 
       <div class="artifact-card">
         <div class="artifact-card-title">
@@ -192,7 +202,7 @@
     </div>
   </div>
 
-  <!-- Status bar -->
+  <!-- 状态栏 -->
   <div class="statusbar ok">
     <span>✅ 环境正常 · Node v20 / Claude Code v1.2.3</span>
     <span><span class="dot"></span>Anthropic · 240ms</span>

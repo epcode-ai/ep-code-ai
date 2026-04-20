@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>05 · Artifact 全屏 · EP Code AI</title>
+<title>05 · 产出物全屏 · EP Code AI</title>
 <link rel="stylesheet" href="styles.css">
 <style>
   .art-app {
@@ -92,7 +92,7 @@
 <body>
 
 <div class="proto-banner">
-  <span>🎨 原型 05 / 10 · Artifact 全屏详情</span>
+  <span>🎨 原型 05 · 产出物全屏详情</span>
   <span><a href="index.html">← 返回</a> · <a href="04-slash-command-palette.html">上页</a> · <a href="06-provider-switcher.html">下页 →</a></span>
 </div>
 
@@ -113,10 +113,14 @@
   </div>
 
   <div class="art-subbar">
-    <span>◀ 在 2 个 Artifact 中切换 ▶</span>
+    <span>◀ 在 2 个产出物中切换 ▶</span>
     <div style="display:flex;gap:var(--sp-3);align-items:center">
+      <div style="display:flex;gap:2px;padding:2px;background:var(--color-bg-hover);border-radius:var(--radius-md)">
+        <button class="btn sm" id="viewPreview" onclick="switchView('preview')" style="background:var(--color-bg);border:none;padding:4px 12px">👁 预览</button>
+        <button class="btn sm ghost" id="viewSource" onclick="switchView('source')" style="border:none;padding:4px 12px">&lt;/&gt; 源码</button>
+      </div>
       <select><option>v3 (最新)</option><option>v2 (3 小时前)</option><option>v1</option><option>对比 v2 ↔ v3</option></select>
-      <span>📜 历史 (3)</span>
+      <span style="font-size:var(--fs-sm);color:var(--color-text-muted)">📜 历史 (3)</span>
     </div>
   </div>
 
@@ -146,24 +150,124 @@
       </div>
     </div>
 
-    <div class="content-view">
+    <!-- 预览模式(默认):渲染为正式的 Markdown -->
+    <div class="content-view" id="viewPreviewEl" style="font-family: var(--font-ui); font-size: var(--fs-md); padding: var(--sp-8) var(--sp-10); line-height: 1.75; max-width: 800px;">
+      <h1 style="font-size:28px;margin-bottom:var(--sp-5);padding-bottom:var(--sp-3);border-bottom:2px solid var(--color-border)">PRD · 离职流程 v1.2</h1>
+
+      <div style="display:flex;gap:var(--sp-4);font-size:var(--fs-sm);color:var(--color-text-muted);margin-bottom:var(--sp-6)">
+        <span>版本: v1.2</span>
+        <span>作者: 张工(产品)</span>
+        <span>日期: 2026-04-19</span>
+        <span class="badge warn">⏳ 草稿</span>
+      </div>
+
+      <h2 style="font-size:22px;margin-top:var(--sp-8);margin-bottom:var(--sp-4);padding-bottom:var(--sp-2);border-bottom:1px solid var(--color-border)">1. 概述</h2>
+
+      <h3 style="font-size:18px;margin-top:var(--sp-5);margin-bottom:var(--sp-3)">1.1 背景</h3>
+      <p style="margin-bottom:var(--sp-4)">
+        公司目前离职流程涉及 <strong>5 个部门</strong>(HR / 财务 / IT / 上级 / 行政),平均处理时长 <strong>7-10 工作日</strong>,员工反馈断点多。
+      </p>
+
+      <h3 style="font-size:18px;margin-top:var(--sp-5);margin-bottom:var(--sp-3)">1.2 目标</h3>
+      <ul style="margin-left:var(--sp-6);margin-bottom:var(--sp-4)">
+        <li>端到端处理时长 ≤ <strong>3 工作日</strong></li>
+        <li>关键步骤 <strong>透明可追溯</strong></li>
+        <li>员工 NPS ≥ <strong>60</strong></li>
+      </ul>
+
+      <h2 style="font-size:22px;margin-top:var(--sp-8);margin-bottom:var(--sp-4);padding-bottom:var(--sp-2);border-bottom:1px solid var(--color-border)">2. 用户与场景</h2>
+
+      <h3 style="font-size:18px;margin-top:var(--sp-5);margin-bottom:var(--sp-3)">2.1 角色</h3>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:var(--sp-4)">
+        <thead>
+          <tr style="background:var(--color-bg-alt)">
+            <th style="padding:var(--sp-2);border:1px solid var(--color-border);text-align:left">角色</th>
+            <th style="padding:var(--sp-2);border:1px solid var(--color-border);text-align:left">关键动作</th>
+            <th style="padding:var(--sp-2);border:1px solid var(--color-border);text-align:left">SLA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">员工</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">提交申请 / 确认交接</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">—</td>
+          </tr>
+          <tr>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">直接上级</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">审批 / 工作交接确认</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">1 工作日</td>
+          </tr>
+          <tr>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">HR</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">资料审核 / 流程协调</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">1 工作日</td>
+          </tr>
+          <tr>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">IT</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">账号注销 / 设备回收</td>
+            <td style="padding:var(--sp-2);border:1px solid var(--color-border)">0.5 工作日</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:18px;margin-top:var(--sp-5);margin-bottom:var(--sp-3)">2.2 主流程</h3>
+      <p style="margin-bottom:var(--sp-4)">员工发起 → 上级审批 → HR 审核 → 并行(IT 注销 / 财务结算 / 行政回收)→ 员工确认 → 归档。</p>
+
+      <h2 style="font-size:22px;margin-top:var(--sp-8);margin-bottom:var(--sp-4);padding-bottom:var(--sp-2);border-bottom:1px solid var(--color-border)">3. 功能需求</h2>
+
+      <h3 style="font-size:18px;margin-top:var(--sp-5);margin-bottom:var(--sp-3)">REQ-001 · 员工在线提交离职申请</h3>
+      <p style="margin-bottom:var(--sp-3)"><strong>背景</strong>: 当前员工需线下填纸质表格,流程不透明。</p>
+      <p style="margin-bottom:var(--sp-3)"><strong>验收标准</strong>(Given-When-Then):</p>
+      <ul style="margin-left:var(--sp-6);margin-bottom:var(--sp-4);font-family:var(--font-mono);font-size:var(--fs-sm);line-height:1.7">
+        <li><strong>Given</strong> 员工已登录内部系统</li>
+        <li><strong>When</strong> 员工进入"我的流程"→"离职申请"并填写表单(离职日期、原因、备注)</li>
+        <li><strong>Then</strong> 系统创建申请单,状态 <code>待上级审批</code>,并发送通知给直接上级</li>
+      </ul>
+
+      <h3 style="font-size:18px;margin-top:var(--sp-5);margin-bottom:var(--sp-3)">REQ-002 · 上级审批</h3>
+      <p style="margin-bottom:var(--sp-4);color:var(--color-text-muted);font-style:italic">(省略 · 点击"源码"查看完整内容)</p>
+
+      <h2 style="font-size:22px;margin-top:var(--sp-8);margin-bottom:var(--sp-4);padding-bottom:var(--sp-2);border-bottom:1px solid var(--color-border)">4. 非功能需求</h2>
+      <ul style="margin-left:var(--sp-6);margin-bottom:var(--sp-4)">
+        <li><strong>性能</strong>: 单个流程操作 P99 响应时间 ≤ <strong>500ms</strong></li>
+        <li><strong>可用性</strong>: <strong>99.9%</strong> SLA(全年停机 ≤ 8.76h)</li>
+        <li><strong>安全</strong>: 离职相关个人信息 加密存储 + 访问审计</li>
+        <li><strong>兼容</strong>: 支持 Chrome 90+ / Safari 14+ / 企业微信内嵌</li>
+      </ul>
+
+      <div style="padding:var(--sp-4);background:var(--color-primary-lightest);border-radius:var(--radius-md);margin-top:var(--sp-6);font-size:var(--fs-sm);color:var(--color-text-muted)">
+        📄 完整 PRD 共 <strong>132 行 · 8 章</strong>,此处为前 4 章预览。点击"源码"按钮查看完整原始 Markdown。
+      </div>
+    </div>
+
+    <!-- 源码模式:默认隐藏,切换显示 -->
+    <div class="content-view" id="viewSourceEl" style="display:none;font-family:var(--font-mono);font-size:var(--fs-sm);line-height:1.8">
 <span class="line-num">1</span><span style="font-weight:700"># PRD - 离职流程 v1.2</span>
 <span class="line-num">2</span>
-<span class="line-num">3</span><span style="font-weight:700">## 1. 概述</span>
-<span class="line-num">4</span>
-<span class="line-num">5</span><span style="font-weight:600">### 1.1 背景</span>
-<span class="line-num">6</span>公司目前离职流程涉及 5 个部门(HR / 财务 / IT /
-<span class="line-num">7</span>上级 / 行政),平均处理时长 7-10 工作日,员工反馈
-<span class="line-num">8</span>断点多。
-<span class="line-num">9</span>
-<span class="line-num">10</span><span style="font-weight:600">### 1.2 目标</span>
-<span class="line-num">11</span>- 端到端处理时长 &le; 3 工作日
-<span class="line-num">12</span>- 关键步骤透明可追溯
-<span class="line-num">13</span>- 员工 NPS &ge; 60
-<span class="line-num">14</span>
-<span class="line-num">15</span><span style="font-weight:700">## 2. 用户与场景</span>
+<span class="line-num">3</span><span style="color:var(--color-text-muted)"># 元数据</span>
+<span class="line-num">4</span><span style="color:var(--color-text-muted)">版本: v1.2  作者: 张工  日期: 2026-04-19</span>
+<span class="line-num">5</span>
+<span class="line-num">6</span><span style="font-weight:700">## 1. 概述</span>
+<span class="line-num">7</span>
+<span class="line-num">8</span><span style="font-weight:600">### 1.1 背景</span>
+<span class="line-num">9</span>公司目前离职流程涉及 5 个部门(HR / 财务 / IT /
+<span class="line-num">10</span>上级 / 行政),平均处理时长 7-10 工作日,员工反馈断点多。
+<span class="line-num">11</span>
+<span class="line-num">12</span><span style="font-weight:600">### 1.2 目标</span>
+<span class="line-num">13</span>- 端到端处理时长 ≤ 3 工作日
+<span class="line-num">14</span>- 关键步骤透明可追溯
+<span class="line-num">15</span>- 员工 NPS ≥ 60
 <span class="line-num">16</span>
-<span class="line-num">17</span>...
+<span class="line-num">17</span><span style="font-weight:700">## 2. 用户与场景</span>
+<span class="line-num">18</span>
+<span class="line-num">19</span><span style="font-weight:600">### 2.1 角色</span>
+<span class="line-num">20</span>| 角色 | 关键动作 | SLA |
+<span class="line-num">21</span>| 员工 | 提交申请 / 确认交接 | - |
+<span class="line-num">22</span>| 直接上级 | 审批 / 工作交接确认 | 1 工作日 |
+<span class="line-num">23</span>| HR | 资料审核 / 流程协调 | 1 工作日 |
+<span class="line-num">24</span>| IT | 账号注销 / 设备回收 | 0.5 工作日 |
+<span class="line-num">25</span>
+<span class="line-num">26</span><span style="color:var(--color-text-muted)">... (132 行,此处截断)</span>
     </div>
   </div>
 
@@ -174,6 +278,30 @@
   </div>
 
 </div>
+
+<script>
+  function switchView(mode) {
+    const preview = document.getElementById('viewPreviewEl');
+    const source = document.getElementById('viewSourceEl');
+    const btnP = document.getElementById('viewPreview');
+    const btnS = document.getElementById('viewSource');
+    if (mode === 'preview') {
+      preview.style.display = 'block';
+      source.style.display = 'none';
+      btnP.style.background = 'var(--color-bg)';
+      btnP.classList.remove('ghost');
+      btnS.style.background = 'transparent';
+      btnS.classList.add('ghost');
+    } else {
+      preview.style.display = 'none';
+      source.style.display = 'block';
+      btnS.style.background = 'var(--color-bg)';
+      btnS.classList.remove('ghost');
+      btnP.style.background = 'transparent';
+      btnP.classList.add('ghost');
+    }
+  }
+</script>
 
 </body>
 </html>
