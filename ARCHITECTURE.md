@@ -88,6 +88,8 @@ graph TB
 
 ## 二、数据流图 · Markdown 在四场景间流动
 
+> ⚠️ 重要: **测试不是开发下游**,测试从 PRD 阶段就**与开发并行**参与(可测性评审)。这是 [`测试篇`](./docs/chapters/04-testing/) 的核心设计 —— 不要把它画成串行链。
+
 ```mermaid
 flowchart LR
     subgraph 业务
@@ -101,7 +103,8 @@ flowchart LR
     end
 
     subgraph 测试
-        STRATEGY[test-strategy.md] --> CASES[test-cases.md]
+        TESTABILITY["可测性评审意见<br/>testability-review.md"] --> STRATEGY[test-strategy.md]
+        STRATEGY --> CASES[test-cases.md]
         CASES --> SUBMISSION[submission.md]
         SUBMISSION --> REPORT[test-report.md]
     end
@@ -112,22 +115,50 @@ flowchart LR
         INC --> PM[postmortem.md]
     end
 
-    RULES -.->|PRD 变更<br/>link-prd-to-design.js| DESIGN
-    API -.->|开发变更<br/>recommend-regression.js| CASES
-    REPORT -.->|测试准出<br/>generate-release-plan.js| PLAN
-    PM -.->|改进项<br/>incident-to-requirement.js| PRD
+    %% 业务产出同时推给开发和测试(并行)
+    PRD -->|需求评审门禁| DESIGN
+    PRD -->|需求评审门禁| TESTABILITY
+
+    %% 开发与测试之间的 API 契约对齐
+    API <-.->|契约双向锁定| CASES
+
+    %% 测试准出 → 运维发布
+    REPORT -->|准出门禁| PLAN
+
+    %% 联动脚本(虚线 = Sprint 4 产出的自动化)
+    RULES -.->|link-prd-to-design.js| DESIGN
+    API -.->|recommend-regression.js| CASES
+    REPORT -.->|generate-release-plan.js| PLAN
+    PM -.->|incident-to-requirement.js| PRD
 
     style 业务 fill:#e8f5e9
     style 开发 fill:#e3f2fd
     style 测试 fill:#fff3e0
     style 运维 fill:#f3e5f5
+    style TESTABILITY fill:#fffde7,stroke:#f57f17,stroke-width:2px
 ```
 
 **关键观察**:
-- **实线**: 场景内部产出物演进
-- **虚线**: 跨场景联动(Sprint 4 的 4 个联动脚本)
-- **闭环**: 运维 → 业务(复盘改进项回流需求池),形成**完整回路**
+- **业务产出是"双消费"**: PRD 同时推给开发(开始设计)和测试(做可测性评审)。两条线**并行启动**,不是串行
+- **测试是业务的并行下游,不是开发的下游**: 测试可测性评审是一个**门禁**,评审通过后业务才算真正交付
+- **开发 ↔ 测试 双向**: API 契约是开发 + 测试共同锁定(测试从用例角度反推 API 是否可测,开发从实现角度反推用例是否可编)
+- **实线 = 产出物+门禁**,**虚线 = Sprint 4 联动脚本**(自动检测触发下一环)
+- **闭环**: 运维 → 业务(复盘改进项)→ PRD → 开发+测试 并行
 - 每个节点都是 **Git 里的 Markdown 文件**,不是数据库记录
+
+### 为什么测试要提前并行参与?
+
+这是测试方法论的核心观点(详见 `docs/chapters/04-testing/FULL.md § 1`):
+
+| 🤔 传统做法 | ✅ 本框架做法 |
+|-----------|-------------|
+| 业务写完 PRD → 开发写代码 → 给测试 | 业务写 PRD → 开发 + 测试**同时**接手 |
+| 测试在提测时才发现"验收标准模糊" | PRD 评审时就卡住模糊需求,回炉重写 |
+| Bug 发现在测试阶段,改动成本高 | 把"可测性"作为**PRD 的准出门禁** |
+| 开发 - 测试 信息不对称,临近上线才对齐契约 | API 契约从需求阶段就共同设计 |
+
+- `tools/cross-platform/scripts/check-prd.js` + `score-testability.js` 就是这套理念的自动化
+- 本仓库 `docs/chapters/04-testing/04-gates/requirements-gate.md` 专门定义了"需求评审门禁"
 
 详细扩展见 [docs/architecture/information-sharing.md](./docs/architecture/information-sharing.md)。
 
