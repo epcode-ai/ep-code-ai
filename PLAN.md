@@ -304,11 +304,14 @@
 **开发场景产出**：
 - `tools/cross-platform/scripts/generate-adr-index.js`
   - 扫 `docs/adr/*.md` 自动生成 `docs/adr/README.md` 索引
-- `tools/integrations/jenkins/` 目录
-  - `README.md` 接入指南
-  - `create-pipeline.js` 通过 API 创建 Pipeline Job
-  - `trigger-job.js` 触发构建
-  - 示例 `Jenkinsfile`（含提测门禁）
+- ~~`tools/integrations/jenkins/` 目录~~
+  - ~~`README.md` 接入指南~~
+  - ~~`create-pipeline.js` 通过 API 创建 Pipeline Job~~
+  - ~~`trigger-job.js` 触发构建~~
+  - ~~示例 `Jenkinsfile`（含提测门禁）~~
+  - ❌ **未实施 · 用户选 GitLab CI 替代**
+    - Sprint 2 启动时确认,详见 [CHANGELOG v0.3.0](./CHANGELOG.md#030---2026-04-18--sprint-2-完成) "不做 Jenkins" 说明
+    - 对应 Jenkins 要做的事,已在 `workflows/gitlab/.gitlab-ci.example.yml` 扩展的 4 个 job 里实现
 - `tools/metrics/development/` 目录
   - MR 平均响应时长、评审轮次、Bug 重开率
 
@@ -322,7 +325,7 @@
 **验收**：
 - 对 examples/ 下现有 PRD 跑校验和打分，确认合理
 - ADR 索引可复现生成
-- Jenkins 示例 Pipeline 能在真实 Jenkins 上 dry-run
+- ~~Jenkins 示例 Pipeline 能在真实 Jenkins 上 dry-run~~ → 改为 **GitLab CI example 4 个新 job 能通过 lint + dry-run**
 
 ---
 
@@ -517,7 +520,7 @@ Week 5: 复盘 + 反馈 → 改进 backlog
 - `tools/cross-platform/scripts/check-prd.js` 🆕
 - `tools/cross-platform/scripts/score-testability.js` 🆕
 - `tools/cross-platform/scripts/generate-adr-index.js` 🆕
-- `tools/integrations/jenkins/` 🆕
+- ~~`tools/integrations/jenkins/`~~ ❌ 未做(GitLab CI 替代)
 - `tools/metrics/business/`、`tools/metrics/development/` 🆕
 
 **Sprint 3**:
