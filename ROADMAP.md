@@ -18,7 +18,7 @@
 | S4 | Week 4 | 场景联动 + 度量闭环 | ✅ 完成 |
 | S5 | Week 5 | 统一 CLI + 对外发布 + 试点复盘 | ✅ 完成 |
 | **Phase 2 · 落地与产品化** | | | |
-| S6 | Week 6 | 架构图 + UI/UX 设计稿 + 信息流 + 手册起步 | 📋 计划中 |
+| S6 | Week 6 | 架构图 + UI/UX 设计稿 + 信息流 + 手册起步 | ✅ 完成 |
 | S7 | Week 7 | macOS Beta(对齐设计稿)+ 跨平台栈决策 | 📋 计划中 |
 | S8 | Week 8 | 用户手册完整版 + Linux/Win Beta + v1.0 GA | 📋 计划中 |
 | S9 | Week 9 | 服务端同步 RFC + OTA 协议设计（不实现） | 📋 计划中 |
@@ -27,6 +27,15 @@
 **完整计划**（所有 Sprint 的详细产出、接入模式抽象、风险、验收）见 **[PLAN.md](./PLAN.md)** 🔗
 
 ## 近期变更
+
+### 2026-04-20（Sprint 6 完成 · Phase 2 第一 Sprint）
+- **⑥ UI/UX 设计稿**: 17 张 HTML 原型 + 10 wireframes + 5 Mermaid flows + modules map
+  - 核心: 主视图 / 向导 / 设置 / 命令面板 / Artifact / 供应商切换 / 搜索 / 右键菜单 / 空态 / 状态栏
+  - 角色: 登录 / 项目列表 / 新建项目向导(4 模式 A/B/C/D) · 四大场景工作流(业务/开发/测试/运维 + Prompt 一键操作)
+- **① 架构图 + 技术盘点**: `ARCHITECTURE.md` 含 4 张 Mermaid(四层 / 数据流 / 依赖 / 部署)+ 技术盘点清单 20+ 项
+- **⑤ 信息共享模式**: `docs/architecture/information-sharing.md` 固化 Git+Markdown+CI 模型,含优缺点 / 反模式 / 何时上服务端
+- **② 用户手册起步**: `docs/manual/` README + 00-install(三平台)+ 99-cheatsheet(一页速查)
+- **③ 桌面应用**: 未启动,推迟到 Sprint 7 实施
 
 ### 2026-04-18（Sprint 5 完成）
 - `tools/cli/` — 统一 `epcode` CLI,10 个子命令（init/adopt/migrate/check/prd/adr/metrics/incident/linkage/jira）
