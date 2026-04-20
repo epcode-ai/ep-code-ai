@@ -25,6 +25,8 @@
 | **13** | [**开发工作流**](./13-workflow-development.html) | 开发视角 | 设计→ADR→合入 · 7 步 | 共用 `WorkflowView.swift` | `skills/development/` 7 个 prompt |
 | **14** | [**测试工作流**](./14-workflow-testing.html) | 测试视角 | 策略→用例→准出 · 6 步 | 共用 | `skills/testing/` 8 个 prompt |
 | **15** | [**运维工作流**](./15-workflow-operations.html) | 运维视角 | 发布→事件→复盘 · 6 步 | 共用 | `skills/operations/` 8 个 prompt |
+| **16** | [**项目列表**](./16-project-list.html) | 多项目切换 · 4 模式徽章 | 登录后入口 · 筛选 / 切换 / 新建 | **新增** `ProjectListView.swift`<br>`ProjectStore.swift`<br>`ProjectCard.swift` | CLI: `epcode init --mode=X` · 读 `docs/chapters/00-adoption/` |
+| **17** | [**新建项目向导**](./17-new-project.html) | 4 模式初始化 | 选 A/B/C/D → 填信息 → 起步清单 → 完成 | **新增** `NewProjectWizardView.swift`<br>调用 `epcode init` | 复用 `tools/cli/scaffolds/mode-{a,b,c,d}/` |
 
 ---
 

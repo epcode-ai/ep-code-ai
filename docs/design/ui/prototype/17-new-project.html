@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>17 · 新建项目 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .new-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 24px 40px;
+  }
+  .step-indicator {
+    display: flex;
+    gap: var(--sp-1);
+    margin-bottom: var(--sp-5);
+    font-size: var(--sp-sm);
+  }
+  .step-indicator .step {
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
+    font-size: var(--fs-sm);
+  }
+  .step-indicator .step.active {
+    background: var(--color-primary);
+    color: white;
+    font-weight: 500;
+  }
+  .step-indicator .step.done { color: var(--color-success); }
+  .step-content {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    min-height: 480px;
+  }
+  .step-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--sp-5);
+  }
+  .mode-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+    margin-top: var(--sp-4);
+  }
+  .help-box {
+    padding: var(--sp-3);
+    background: var(--color-primary-lightest);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    margin-top: var(--sp-4);
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 17 · 新建项目向导 · 选接入模式 → 填基本信息 → 完成</span>
+  <span><a href="index.html">← 返回</a> · <a href="16-project-list.html">上页(项目列表)</a></span>
+</div>
+
+<!-- 顶栏 -->
+<div style="position:fixed;top:32px;left:0;right:0;height:48px;background:var(--color-bg);border-bottom:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-5);z-index:30">
+  <div style="display:flex;align-items:center;gap:var(--sp-3)">
+    <a href="16-project-list.html" class="btn ghost sm">◀ 返回项目列表</a>
+    <span style="color:var(--color-text-muted)">|</span>
+    <span style="font-weight:600">新建项目</span>
+  </div>
+  <span class="user-chip">
+    <div class="user-avatar">张</div>
+    <span class="user-name">张工</span>
+  </span>
+</div>
+
+<div class="new-wrap">
+
+  <!-- 步骤指示 -->
+  <div class="step-indicator">
+    <div class="step active" data-step="1">1. 选接入模式</div>
+    <div class="step" data-step="2">2. 项目基本信息</div>
+    <div class="step" data-step="3">3. 起步清单预览</div>
+    <div class="step" data-step="4">4. 初始化完成</div>
+  </div>
+
+  <!-- 第 1 步 -->
+  <div class="step-content" data-content="1">
+    <h2 style="font-size:var(--fs-xl);margin-bottom:var(--sp-2)">你的项目处于什么阶段?</h2>
+    <p style="color:var(--color-text-muted);margin-bottom:var(--sp-4)">
+      选对接入模式,框架才能给你最合适的引导。不确定?可以看每张卡片下面的<strong>判定条件</strong>。
+    </p>
+
+    <div class="mode-cards">
+
+      <div class="mode-card-select" onclick="selectMode(this, 'a')">
+        <div class="letter" style="background:#e8f5e9;color:#1b5e20">A</div>
+        <div>
+          <div style="font-weight:700;font-size:var(--fs-lg)">绿地项目</div>
+          <div style="color:var(--color-text-muted);font-size:var(--fs-sm);margin:var(--sp-1) 0">全套上车 · 从 0 开始建</div>
+          <div style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-top:var(--sp-2);line-height:1.6">
+            <strong>判定</strong>: 项目刚立项,尚未开始编码 · 团队愿意从 Day 1 走规范
+            <br><strong>适合</strong>: 新业务 / 创新项目 / 独立新系统
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-card-select selected" onclick="selectMode(this, 'b')">
+        <div class="letter" style="background:#fff3e0;color:#e65100">B</div>
+        <div>
+          <div style="font-weight:700;font-size:var(--fs-lg)">开发中项目</div>
+          <div style="color:var(--color-text-muted);font-size:var(--fs-sm);margin:var(--sp-1) 0">从现在追溯补齐</div>
+          <div style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-top:var(--sp-2);line-height:1.6">
+            <strong>判定</strong>: 代码已开始写,但未上线 · 零散 PRD / 设计
+            <br><strong>适合</strong>: 接手半成品 · 新项目改造
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-card-select" onclick="selectMode(this, 'c')">
+        <div class="letter" style="background:#e3f2fd;color:#0d47a1">C</div>
+        <div>
+          <div style="font-weight:700;font-size:var(--fs-lg)">迭代中项目</div>
+          <div style="color:var(--color-text-muted);font-size:var(--fs-sm);margin:var(--sp-1) 0">每版本加一层 · 渐进嵌入</div>
+          <div style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-top:var(--sp-2);line-height:1.6">
+            <strong>判定</strong>: 已上线,双周/月迭代 · 有成熟但不同的流程
+            <br><strong>适合</strong>: 老项目升级 · 存量业务改造
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-card-select" onclick="selectMode(this, 'd')">
+        <div class="letter" style="background:#f3e5f5;color:#4a148c">D</div>
+        <div>
+          <div style="font-weight:700;font-size:var(--fs-lg)">稳态运维项目</div>
+          <div style="color:var(--color-text-muted);font-size:var(--fs-sm);margin:var(--sp-1) 0">聚焦运维 · 只做关键层</div>
+          <div style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-top:var(--sp-2);line-height:1.6">
+            <strong>判定</strong>: 运行 1 年+,不再大版本迭代 · 只做 bug 修复
+            <br><strong>适合</strong>: 线上老系统 · 维护中的服务
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="help-box">
+      🤔 <strong>还不确定?</strong> 花 5 分钟阅读
+      <a href="../../chapters/00-adoption/README.md">接入模式判定流程</a>,
+      根据 5 个问题帮你定位。
+      <br>
+      模式可随时切换(通过 <code>epcode adopt</code> 命令或在项目设置里改)。
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="step-footer">
+    <a href="16-project-list.html" class="btn">取消</a>
+    <button class="btn primary lg" id="next-btn" onclick="nextStep()">下一步 ▶</button>
+  </div>
+
+</div>
+
+<!-- 第 2 步(默认隐藏) -->
+<div class="new-wrap" data-content="2" style="display:none">
+  <div class="step-indicator">
+    <div class="step done" data-step="1">✓ 选模式</div>
+    <div class="step active" data-step="2">2. 项目基本信息</div>
+    <div class="step" data-step="3">3. 起步清单</div>
+    <div class="step" data-step="4">4. 完成</div>
+  </div>
+
+  <div class="step-content">
+    <h2 style="font-size:var(--fs-xl);margin-bottom:var(--sp-4)">项目基本信息</h2>
+
+    <div style="display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-4);padding:var(--sp-3);background:#fff3e0;border-radius:var(--radius-md)">
+      <span class="mode-badge mode-b">B · 开发中</span>
+      <span style="color:var(--color-text-muted);font-size:var(--fs-sm)">你选择的接入模式</span>
+    </div>
+
+    <div class="field">
+      <div class="field-label">项目名 *</div>
+      <input type="text" placeholder="如: order-batch-export" value="" />
+      <div class="field-hint">英文小写字母、数字和短横线。会用作目录名和 Git 仓库名</div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">显示名 *</div>
+      <input type="text" placeholder="如: 订单批量导出 v2" />
+      <div class="field-hint">在项目列表和主视图里显示</div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">描述</div>
+      <textarea rows="3" placeholder="一句话说明项目做什么 · 预期用户"></textarea>
+    </div>
+
+    <div class="field">
+      <div class="field-label">本地目录</div>
+      <div style="display:flex;gap:var(--sp-2)">
+        <input type="text" value="~/projects/order-batch-export" style="flex:1" />
+        <button class="btn">📁 浏览</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Git 远程</div>
+      <select>
+        <option>暂不关联</option>
+        <option>新建(GitLab)</option>
+        <option>新建(GitHub)</option>
+        <option>关联已有仓库</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="step-footer">
+    <button class="btn">◀ 上一步</button>
+    <button class="btn primary lg">下一步 ▶</button>
+  </div>
+</div>
+
+<!-- 第 3 步 -->
+<div class="new-wrap" data-content="3" style="display:none">
+  <div class="step-indicator">
+    <div class="step done">✓ 选模式</div>
+    <div class="step done">✓ 基本信息</div>
+    <div class="step active">3. 起步清单</div>
+    <div class="step">4. 完成</div>
+  </div>
+
+  <div class="step-content">
+    <h2 style="font-size:var(--fs-xl);margin-bottom:var(--sp-2)">B 模式起步清单(预览)</h2>
+    <p style="color:var(--color-text-muted);margin-bottom:var(--sp-4)">
+      接下来初始化会生成以下目录骨架 + 清单。你可以调整。
+    </p>
+
+    <h3 style="margin-top:var(--sp-4)">📂 将创建的目录结构</h3>
+    <pre style="padding:var(--sp-3);background:var(--color-bg-alt);border-radius:var(--radius-md);font-family:var(--font-mono);font-size:var(--fs-sm);line-height:1.6">order-batch-export/
+├── docs/
+│   ├── prd/              (待补齐核心 PRD)
+│   └── design/           (关键设计追溯)
+├── BACKLOG.md            (技术债 + 文档欠账)
+├── .github/workflows/    (CI 门禁,从下个 MR 启用)
+└── MIGRATION-PLAN.md     (本目录建设计划)</pre>
+
+    <h3 style="margin-top:var(--sp-4)">✅ 起步清单(将写入 README)</h3>
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">把现有 API 代码反向生成 Markdown 接口文档</div>
+        <div class="checklist-item-hint">使用 <code>epcode migrate --from=existing-code</code> · 预计 2-4 小时</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">找 3-5 个核心场景,补 PRD 简版</div>
+        <div class="checklist-item-hint">不求完整 · 预计 1-2 天</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">建立提测达标 Checklist + MR 模板</div>
+      </div>
+    </div>
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">从下个 MR 开始强制走新规范</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-footer">
+    <button class="btn">◀ 上一步</button>
+    <button class="btn primary lg">开始初始化 ✨</button>
+  </div>
+</div>
+
+<!-- 第 4 步 -->
+<div class="new-wrap" data-content="4" style="display:none">
+  <div class="step-indicator">
+    <div class="step done">✓ 选模式</div>
+    <div class="step done">✓ 基本信息</div>
+    <div class="step done">✓ 起步清单</div>
+    <div class="step active">4. 完成</div>
+  </div>
+
+  <div class="step-content" style="text-align:center;padding-top:var(--sp-10)">
+    <div style="font-size:64px;margin-bottom:var(--sp-3)">🎉</div>
+    <h2 style="font-size:var(--fs-2xl);margin-bottom:var(--sp-2)">项目已创建</h2>
+    <p style="color:var(--color-text-muted);margin-bottom:var(--sp-5)">
+      <strong>order-batch-export</strong>(B 模式)已初始化到 <code>~/projects/order-batch-export</code>
+    </p>
+
+    <div style="display:flex;gap:var(--sp-3);justify-content:center">
+      <a href="01-main-three-pane.html" class="btn primary lg">▶ 进入项目</a>
+      <button class="btn lg">📁 在 Finder 中打开</button>
+    </div>
+
+    <div class="help-box" style="margin-top:var(--sp-6);text-align:left">
+      💡 <strong>下一步建议</strong>:
+      <ol style="margin-left:var(--sp-5);margin-top:var(--sp-2)">
+        <li>查看 <code>BACKLOG.md</code>,认领 2-3 条技术债</li>
+        <li>跑 <code>epcode migrate --from=existing-code</code> 反向生成 API 文档</li>
+        <li>把 <code>.github/workflows/ci.yml</code> 复制到你的仓库</li>
+        <li>回到项目列表,进入业务场景开始写 PRD</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+  function selectMode(el, mode) {
+    document.querySelectorAll('.mode-card-select').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+  function nextStep() {
+    // 示意用,真实实现会做表单校验和切换
+    document.querySelector('[data-content="1"]').parentElement.style.display = 'none';
+    document.querySelector('[data-content="2"]').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>

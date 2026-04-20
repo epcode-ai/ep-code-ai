@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>16 · 项目列表 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 16 · 项目列表 / 切换 · 4 种接入模式</span>
+  <span><a href="index.html">← 返回</a> · <a href="11-login.html">上页(登录)</a> · <a href="17-new-project.html">下页(新建)→</a></span>
+</div>
+
+<!-- 顶部窄条(显示用户身份) -->
+<div style="position:fixed;top:32px;left:0;right:0;height:48px;background:var(--color-bg);border-bottom:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;padding:0 var(--sp-5);z-index:30">
+  <span style="font-weight:600;font-size:var(--fs-lg)">🚀 EP Code AI</span>
+  <div class="user-chip">
+    <div class="user-avatar">张</div>
+    <span class="user-name">张工</span>
+    <span style="color:var(--color-text-muted);font-size:var(--fs-xs)">· 产品</span>
+  </div>
+</div>
+
+<div class="projects-wrap" style="padding-top:100px">
+  <div class="projects-header">
+    <div>
+      <h1>我的项目</h1>
+      <p>选一个项目进入,或新建项目 · 每个项目都会标注其接入模式</p>
+    </div>
+    <a href="17-new-project.html" class="btn primary lg">+ 新建项目</a>
+  </div>
+
+  <!-- 筛选 -->
+  <div class="projects-filter">
+    <span style="font-size:var(--fs-sm);color:var(--color-text-muted);margin-right:var(--sp-2)">筛选:</span>
+    <span class="filter-chip active">全部 (7)</span>
+    <span class="filter-chip">A · 绿地 (2)</span>
+    <span class="filter-chip">B · 开发中 (2)</span>
+    <span class="filter-chip">C · 迭代中 (2)</span>
+    <span class="filter-chip">D · 稳态运维 (1)</span>
+    <span style="margin-left:auto;font-size:var(--fs-sm);color:var(--color-text-muted)">排序: 最近访问 ▾</span>
+  </div>
+
+  <!-- 项目卡片 -->
+  <div class="project-grid">
+
+    <a class="project-card" href="01-main-three-pane.html">
+      <div class="project-card-header">
+        <div class="project-name">离职流程优化</div>
+        <span class="mode-badge mode-a">A · 绿地</span>
+      </div>
+      <div class="project-meta">
+        <span>📁 12 会话</span>
+        <span>📄 8 产出物</span>
+        <span>👥 3 人</span>
+      </div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.5">
+        HR 离职流程 · 端到端 3 天 · v1.2 开发中
+      </div>
+      <div class="project-last">上次访问: 11 分钟前 · 当前阶段: <strong>业务 / PRD 编写</strong></div>
+    </a>
+
+    <a class="project-card" href="01-main-three-pane.html">
+      <div class="project-card-header">
+        <div class="project-name">支付服务稳定性</div>
+        <span class="mode-badge mode-d">D · 稳态运维</span>
+      </div>
+      <div class="project-meta">
+        <span>📁 32 会话</span>
+        <span>📄 15 产出物</span>
+        <span>👥 5 人</span>
+        <span style="color:var(--color-warning)">⚠️ 1 P2 事件</span>
+      </div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.5">
+        线上运行 2 年 · 月均 4 次告警 · 只做 bug 修复
+      </div>
+      <div class="project-last">上次访问: 3 小时前 · 当前阶段: <strong>运维 / 事件响应</strong></div>
+    </a>
+
+    <a class="project-card" href="01-main-three-pane.html">
+      <div class="project-card-header">
+        <div class="project-name">订单批量导出 v2</div>
+        <span class="mode-badge mode-b">B · 开发中</span>
+      </div>
+      <div class="project-meta">
+        <span>📁 7 会话</span>
+        <span>📄 4 产出物</span>
+        <span>👥 2 人</span>
+      </div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.5">
+        代码已写 60% · 追溯补齐 PRD + API 文档
+      </div>
+      <div class="project-last">上次访问: 昨天 · 当前阶段: <strong>开发 / 技术债追溯</strong></div>
+    </a>
+
+    <a class="project-card" href="01-main-three-pane.html">
+      <div class="project-card-header">
+        <div class="project-name">移动端 App</div>
+        <span class="mode-badge mode-c">C · 迭代中</span>
+      </div>
+      <div class="project-meta">
+        <span>📁 54 会话</span>
+        <span>📄 28 产出物</span>
+        <span>👥 12 人</span>
+      </div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.5">
+        已上线 8 个月 · 双周迭代 · 当前 Level 3
+      </div>
+      <div class="project-last">上次访问: 昨天 · 当前 adopt level: <strong>3 / 5</strong></div>
+    </a>
+
+    <a class="project-card" href="01-main-three-pane.html">
+      <div class="project-card-header">
+        <div class="project-name">数据分析平台</div>
+        <span class="mode-badge mode-c">C · 迭代中</span>
+      </div>
+      <div class="project-meta">
+        <span>📁 23 会话</span>
+        <span>📄 9 产出物</span>
+        <span>👥 6 人</span>
+      </div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.5">
+        月度迭代 · 接入 adopt level 2
+      </div>
+      <div class="project-last">上次访问: 3 天前</div>
+    </a>
+
+    <a class="project-card" href="01-main-three-pane.html">
+      <div class="project-card-header">
+        <div class="project-name">推荐算法改版</div>
+        <span class="mode-badge mode-a">A · 绿地</span>
+      </div>
+      <div class="project-meta">
+        <span>📁 2 会话</span>
+        <span>📄 1 产出物</span>
+        <span>👥 1 人</span>
+      </div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.5">
+        刚立项 · PRD 编写中
+      </div>
+      <div class="project-last">上次访问: 昨天 · 当前阶段: <strong>业务 / 需求采集</strong></div>
+    </a>
+
+    <a class="project-card" href="01-main-three-pane.html">
+      <div class="project-card-header">
+        <div class="project-name">SSO 接入改造</div>
+        <span class="mode-badge mode-b">B · 开发中</span>
+      </div>
+      <div class="project-meta">
+        <span>📁 4 会话</span>
+        <span>📄 2 产出物</span>
+        <span>👥 2 人</span>
+      </div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);line-height:1.5">
+        关键 PRD 已追溯,测试用例补齐中
+      </div>
+      <div class="project-last">上次访问: 一周前</div>
+    </a>
+
+    <a class="project-card new-project" href="17-new-project.html">
+      <div style="font-size:48px;color:var(--color-primary)">+</div>
+      <div style="font-weight:600;margin-top:var(--sp-2)">新建项目</div>
+      <div style="font-size:var(--fs-sm);color:var(--color-text-muted);margin-top:var(--sp-1)">4 种接入模式,按项目阶段选</div>
+    </a>
+
+  </div>
+
+  <!-- 说明 -->
+  <div style="margin-top:var(--sp-8);padding:var(--sp-5);background:var(--color-bg-alt);border-radius:var(--radius-lg)">
+    <h3 style="margin-bottom:var(--sp-3);font-size:var(--fs-lg)">💡 什么是"接入模式"?</h3>
+    <p style="color:var(--color-text-muted);line-height:1.7;margin-bottom:var(--sp-3)">
+      不同阶段的项目接入本框架的路径不同。这是本框架的<strong>一等公民抽象</strong>,帮你判断"从哪儿开始、先做什么、别纠结什么"。
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-3)">
+      <div style="padding:var(--sp-3);background:var(--color-bg);border-radius:var(--radius-md)">
+        <span class="mode-badge mode-a">A · 绿地</span>
+        <p style="margin-top:var(--sp-2);font-size:var(--fs-sm);color:var(--color-text-muted)">刚立项、从 0 开始的项目。全套上车。</p>
+      </div>
+      <div style="padding:var(--sp-3);background:var(--color-bg);border-radius:var(--radius-md)">
+        <span class="mode-badge mode-b">B · 开发中</span>
+        <p style="margin-top:var(--sp-2);font-size:var(--fs-sm);color:var(--color-text-muted)">代码已写未上线。两条腿走路,从今天规范。</p>
+      </div>
+      <div style="padding:var(--sp-3);background:var(--color-bg);border-radius:var(--radius-md)">
+        <span class="mode-badge mode-c">C · 迭代中</span>
+        <p style="margin-top:var(--sp-2);font-size:var(--fs-sm);color:var(--color-text-muted)">已上线定期迭代。每版本加一层,5 迭代走完。</p>
+      </div>
+      <div style="padding:var(--sp-3);background:var(--color-bg);border-radius:var(--radius-md)">
+        <span class="mode-badge mode-d">D · 稳态运维</span>
+        <p style="margin-top:var(--sp-2);font-size:var(--fs-sm);color:var(--color-text-muted)">运行多年只做维护。聚焦运维场景。</p>
+      </div>
+    </div>
+    <p style="margin-top:var(--sp-3);font-size:var(--fs-sm)">
+      👉 详细判定 + 起步清单: <a href="../../chapters/00-adoption/README.md">docs/chapters/00-adoption/</a>
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>

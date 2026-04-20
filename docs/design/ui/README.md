@@ -60,8 +60,9 @@
 | 8 | [conversation-context-menu.md](./wireframes/08-conversation-context-menu.md) | 会话右键菜单 + 收藏 + 分组 |
 | 9 | [empty-states.md](./wireframes/09-empty-states.md) | 各种空状态 |
 | 10 | [env-status-bar.md](./wireframes/10-env-status-bar.md) | 持久化环境健康状态栏 |
-| **11** | [**登录**](./wireframes/11-login.md) | 企业 SSO + IM 扫码 + 账号密码(Sprint 6 新增) |
-| **12-15** | [**四大场景工作流**](./wireframes/12-15-workflow-scenes.md) | 业务/开发/测试/运维 角色视角(Sprint 6 新增) |
+| **11** | [**登录**](./wireframes/11-login.md) | 企业 SSO + IM 扫码 + 账号密码 |
+| **12-15** | [**四大场景工作流**](./wireframes/12-15-workflow-scenes.md) | 业务/开发/测试/运维 角色视角 + Prompt 一键操作 |
+| **16-17** | [**项目列表 + 新建项目向导**](./wireframes/16-17-projects-and-new-project.md) | 4 种接入模式(A/B/C/D)的 GUI 入口 ⭐ |
 
 ### Interaction Flows(交互流程,5 个 Mermaid)
 

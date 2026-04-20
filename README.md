@@ -8,7 +8,7 @@
 [![npx](https://img.shields.io/badge/npx-epcode-orange)](./tools/cli/)
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-> 📍 **最新进展**: Phase 1 已完成(v0.6.0 · 5 Sprint · 整体完成度 98%)。Phase 2 启动 · Sprint 6 ⑥ UI/UX 设计稿完整首发(**[🎨 11 个 HTML 原型](./docs/design/ui/prototype/)** + 10 wireframes + 5 flows + 映射表)。
+> 📍 **最新进展**: Phase 1 完成(v0.6.0 · 整体 98%)。Phase 2 · Sprint 6 ⑥ UI/UX 扩展中 · **[🎨 17 个 HTML 原型](./docs/design/ui/prototype/)**(完整用户旅程: 登录 → 选项目/新建(4 模式)→ 主视图 → 场景工作流 + Prompt 一键操作)。
 >
 > - 🧰 [统一 CLI · epcode](./tools/cli/) · 10 个子命令,零依赖 `npx epcode --help`
 > - 🌐 **[文档站 · epcode-ai.github.io/ep-code-ai](https://epcode-ai.github.io/ep-code-ai/)** ✅ 已上线 · 首页以 4 接入模式为一等公民
