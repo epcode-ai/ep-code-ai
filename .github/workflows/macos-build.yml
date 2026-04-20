@@ -1,0 +1,222 @@
+name: macOS Build · app/ClaudeCodeHistory
+
+# 构建 macOS 桌面应用 · 输出 .app 包 + .dmg
+#
+# 触发:
+# - push 到 main 且动了 app/ 目录 → 构建 + 上传 artifact(不打 Release)
+# - 打 tag v*.*.* → 构建 + 自动创建 GitHub Release 附 .dmg
+# - workflow_dispatch → 手动触发
+#
+# 签名 / 公证逻辑:
+# - 无 AC_* secret → 跳过签名,产出 unsigned .dmg(用户首次打开要右键绕 Gatekeeper)
+# - 有 AC_* secret → 用 codesign + notarytool 签名 + 公证
+# - 签名相关 secret:
+#   - AC_TEAM_ID · Apple Developer Team ID
+#   - AC_SIGNING_CERT · base64 编码的 .p12 证书
+#   - AC_SIGNING_CERT_PASSWORD · .p12 密码
+#   - AC_APPLE_ID · Apple ID 邮箱
+#   - AC_APPLE_ID_PASSWORD · App-specific password
+#
+# 说明:目前 secret 未配置,workflow 会走无签名分支;未来配好后自动切签名版。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - '.github/workflows/macos-build.yml'
+  workflow_dispatch:
+    inputs:
+      create-release:
+        description: 是否创建 GitHub Release(非 tag 触发时用)
+        required: false
+        default: 'false'
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write  # 创建 Release 要写权限
+
+jobs:
+  build:
+    name: Build macOS .app + .dmg
+    runs-on: macos-14  # Apple Silicon runner
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: 检测签名 Secret 是否配置
+        id: check-signing
+        run: |
+          if [ -n "${{ secrets.AC_TEAM_ID }}" ] && [ -n "${{ secrets.AC_SIGNING_CERT }}" ]; then
+            echo "signing=true" >> $GITHUB_OUTPUT
+            echo "🔐 将使用 Apple Developer 证书签名 + 公证"
+          else
+            echo "signing=false" >> $GITHUB_OUTPUT
+            echo "⚠️  无 AC_TEAM_ID / AC_SIGNING_CERT secret,产出未签名 .dmg"
+            echo "   用户首次打开需右键点'打开'绕过 Gatekeeper"
+          fi
+
+      # ============ 签名分支(有 Secret 时)============
+      - name: 导入签名证书(有 secret)
+        if: steps.check-signing.outputs.signing == 'true'
+        env:
+          SIGNING_CERT: ${{ secrets.AC_SIGNING_CERT }}
+          SIGNING_CERT_PASSWORD: ${{ secrets.AC_SIGNING_CERT_PASSWORD }}
+        run: |
+          # 解码 base64 证书
+          echo "$SIGNING_CERT" | base64 -d > /tmp/cert.p12
+
+          # 创建临时 keychain 避免污染 runner
+          KEYCHAIN="build.keychain"
+          security create-keychain -p "tempPass" "$KEYCHAIN"
+          security default-keychain -s "$KEYCHAIN"
+          security unlock-keychain -p "tempPass" "$KEYCHAIN"
+          security set-keychain-settings -t 3600 -l "$KEYCHAIN"
+
+          # 导入证书
+          security import /tmp/cert.p12 -k "$KEYCHAIN" \
+            -P "$SIGNING_CERT_PASSWORD" \
+            -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "tempPass" "$KEYCHAIN"
+
+          # 清理 p12
+          rm -f /tmp/cert.p12
+
+      # ============ 构建 ============
+      - name: Build (xcodebuild archive)
+        working-directory: app
+        run: |
+          SIGNING=${{ steps.check-signing.outputs.signing }}
+
+          if [ "$SIGNING" = "true" ]; then
+            CODE_SIGN_ARGS="-allowProvisioningUpdates DEVELOPMENT_TEAM=${{ secrets.AC_TEAM_ID }} CODE_SIGN_STYLE=Automatic"
+          else
+            CODE_SIGN_ARGS="CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO"
+          fi
+
+          xcodebuild \
+            -project ClaudeCodeHistory.xcodeproj \
+            -scheme ClaudeCodeHistory \
+            -configuration Release \
+            -destination 'generic/platform=macOS' \
+            -archivePath /tmp/build/ClaudeCodeHistory.xcarchive \
+            $CODE_SIGN_ARGS \
+            archive
+
+      - name: 导出 .app(有签名,正式)
+        if: steps.check-signing.outputs.signing == 'true'
+        working-directory: app
+        run: |
+          cat > /tmp/exportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key><string>developer-id</string>
+            <key>teamID</key><string>${{ secrets.AC_TEAM_ID }}</string>
+          </dict>
+          </plist>
+          EOF
+          xcodebuild -exportArchive \
+            -archivePath /tmp/build/ClaudeCodeHistory.xcarchive \
+            -exportPath /tmp/build/export \
+            -exportOptionsPlist /tmp/exportOptions.plist
+
+      - name: 导出 .app(无签名,直接从 archive 拷贝)
+        if: steps.check-signing.outputs.signing == 'false'
+        run: |
+          mkdir -p /tmp/build/export
+          cp -r /tmp/build/ClaudeCodeHistory.xcarchive/Products/Applications/*.app /tmp/build/export/
+
+      # ============ 打包 .dmg ============
+      - name: 装 create-dmg 工具
+        run: brew install create-dmg
+
+      - name: 打包 .dmg
+        id: dmg
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          [ "$GITHUB_REF" = "$VERSION" ] && VERSION="0.0.0-dev"
+          DMG_NAME="EP-Code-AI-macOS-${VERSION}.dmg"
+          APP_PATH=$(ls -d /tmp/build/export/*.app | head -1)
+
+          create-dmg \
+            --volname "EP Code AI" \
+            --window-size 600 400 \
+            --icon-size 100 \
+            --icon "$(basename $APP_PATH)" 150 200 \
+            --app-drop-link 450 200 \
+            --hdiutil-quiet \
+            "/tmp/build/${DMG_NAME}" \
+            "$APP_PATH" || true  # create-dmg 有时返回非零但文件已生成
+
+          ls -la /tmp/build/*.dmg
+          echo "dmg_path=/tmp/build/${DMG_NAME}" >> $GITHUB_OUTPUT
+          echo "dmg_name=${DMG_NAME}" >> $GITHUB_OUTPUT
+
+      # ============ 公证(有 secret 时)============
+      - name: Notarize(公证 · 有 secret)
+        if: steps.check-signing.outputs.signing == 'true'
+        env:
+          APPLE_ID: ${{ secrets.AC_APPLE_ID }}
+          APPLE_PW: ${{ secrets.AC_APPLE_ID_PASSWORD }}
+          TEAM_ID: ${{ secrets.AC_TEAM_ID }}
+        run: |
+          # 提交公证
+          xcrun notarytool submit "${{ steps.dmg.outputs.dmg_path }}" \
+            --apple-id "$APPLE_ID" \
+            --password "$APPLE_PW" \
+            --team-id "$TEAM_ID" \
+            --wait
+
+          # 把公证 staple 到 dmg
+          xcrun stapler staple "${{ steps.dmg.outputs.dmg_path }}"
+
+      # ============ 上传 artifact ============
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-dmg
+          path: ${{ steps.dmg.outputs.dmg_path }}
+          retention-days: 30
+
+      # ============ 创建 Release(tag 触发)============
+      - name: Create Release(tag 推送时)
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          SIGNING=${{ steps.check-signing.outputs.signing }}
+          NOTE=""
+          if [ "$SIGNING" = "false" ]; then
+            NOTE=$'\n\n⚠️ **本版本未签名**。首次打开请右键点"打开"绕过 Gatekeeper。签名版本在 Apple Developer 账号配置好后自动启用。'
+          fi
+
+          # 如果 Release 不存在就建,存在就追加
+          if gh release view "$VERSION" > /dev/null 2>&1; then
+            gh release upload "$VERSION" "${{ steps.dmg.outputs.dmg_path }}" --clobber
+          else
+            gh release create "$VERSION" \
+              "${{ steps.dmg.outputs.dmg_path }}" \
+              --title "$VERSION" \
+              --notes "macOS Beta 构建${NOTE}"
+          fi
+
+      - name: 运行结束摘要
+        run: |
+          echo "## 构建完成" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 项 | 值 |" >> $GITHUB_STEP_SUMMARY
+          echo "|----|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| 签名 | ${{ steps.check-signing.outputs.signing == 'true' && '✅ 已签名+公证' || '⚠️ 无签名' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 产物 | ${{ steps.dmg.outputs.dmg_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| artifact | [下载](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |" >> $GITHUB_STEP_SUMMARY

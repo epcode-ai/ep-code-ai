@@ -19,7 +19,7 @@
 | S5 | Week 5 | 统一 CLI + 对外发布 + 试点复盘 | ✅ 完成 |
 | **Phase 2 · 落地与产品化** | | | |
 | S6 | Week 6 | 架构图 + UI/UX 设计稿 + 信息流 + 手册起步 | ✅ 完成 |
-| S7 | Week 7 | macOS Beta(对齐设计稿)+ 跨平台栈决策 | 📋 计划中 |
+| S7 | Week 7 | 跨平台栈决策(ADR-0002)+ macOS 改造清单 + 打包 workflow | 🟡 规划完成 · 代码实施 S7.1-7.4 |
 | S8 | Week 8 | 用户手册完整版 + Linux/Win Beta + v1.0 GA | 📋 计划中 |
 | S9 | Week 9 | 服务端同步 RFC + OTA 协议设计（不实现） | 📋 计划中 |
 | S10 | Week 10 | 真实试点项目复盘 | 📋 计划中 |
@@ -27,6 +27,14 @@
 **完整计划**（所有 Sprint 的详细产出、接入模式抽象、风险、验收）见 **[PLAN.md](./PLAN.md)** 🔗
 
 ## 近期变更
+
+### 2026-04-20（Sprint 7 规划完成 · 代码留 S7.1-7.4）
+- **ADR-0001** 采用 4 种接入模式作为框架一等公民(回溯 Sprint 1)· Accepted
+- **ADR-0002** 跨平台桌面应用技术栈 · **混合方案**(macOS 保留 Swift + Linux/Win 用 Tauri+Svelte)· Proposed
+- **ADR-0003** 自动更新策略 · GitHub Release 为统一更新源(三平台共享)· Proposed
+- **Swift 改造清单** `docs/design/ui/swift-refactor-plan.md` · 19 项改动 + 4 轮 PR 推进计划
+- **macOS 打包 workflow** `.github/workflows/macos-build.yml` · 支持签名/无签名双路径(secret 未配时走无签名)
+- **ADR 索引** `docs/adr/README.md` 自动生成
 
 ### 2026-04-20（Sprint 6 完成 · Phase 2 第一 Sprint）
 - **⑥ UI/UX 设计稿**: 17 张 HTML 原型 + 13 wireframes 文档(覆盖 17 个主题)+ 5 Mermaid flows + 映射表
