@@ -309,7 +309,9 @@
   - ~~`create-pipeline.js` 通过 API 创建 Pipeline Job~~
   - ~~`trigger-job.js` 触发构建~~
   - ~~示例 `Jenkinsfile`（含提测门禁）~~
-  - ❌ **未实施 · 用户选 GitLab CI 替代**(Sprint 2 启动时确认,见 [CHANGELOG v0.3.0](./CHANGELOG.md#030---2026-04-18--sprint-2-完成)"不做 Jenkins"说明)。对应 Jenkins 要做的事,已在 `workflows/gitlab/.gitlab-ci.example.yml` 扩展的 4 个 job 里实现
+  - ❌ **未实施 · 用户选 GitLab CI 替代**
+    - Sprint 2 启动时确认,详见 [CHANGELOG v0.3.0](./CHANGELOG.md#030---2026-04-18--sprint-2-完成) "不做 Jenkins" 说明
+    - 对应 Jenkins 要做的事,已在 `workflows/gitlab/.gitlab-ci.example.yml` 扩展的 4 个 job 里实现
 - `tools/metrics/development/` 目录
   - MR 平均响应时长、评审轮次、Bug 重开率
 
