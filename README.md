@@ -11,7 +11,9 @@
 > 📍 **最新进展**: Phase 1 完成(v0.6.0 · 整体 98%)。Phase 2 · Sprint 6 ⑥ UI/UX 扩展中 · **[🎨 17 个 HTML 原型](./docs/design/ui/prototype/)**(完整用户旅程: 登录 → 选项目/新建(4 模式)→ 主视图 → 场景工作流 + Prompt 一键操作)。
 >
 > - 🧰 [统一 CLI · epcode](./tools/cli/) · 10 个子命令,零依赖 `npx epcode --help`
-> - 🌐 **[文档站 · epcode-ai.github.io/ep-code-ai](https://epcode-ai.github.io/ep-code-ai/)** ✅ 已上线 · 首页以 4 接入模式为一等公民
+> - 🌐 **[文档站 · epcode-ai.github.io/ep-code-ai](https://epcode-ai.github.io/ep-code-ai/)** ✅ 已上线
+> - 🏛 [**ARCHITECTURE.md** · 整体架构(4 层 · 数据流 · 技术盘点)](./ARCHITECTURE.md) 🆕 Sprint 6
+> - 📖 [**用户手册** · 安装 + 速查表 · docs/manual/](./docs/manual/) 🆕 Sprint 6
 > - 📋 [完整建设计划 PLAN.md](./PLAN.md) · 5 Sprint × 4 接入模式 × 验收标准
 > - 🗺️ [实施路线图 ROADMAP.md](./ROADMAP.md) · 概览 + 里程碑
 > - 📝 [变更日志 CHANGELOG.md](./CHANGELOG.md) · 每个版本的具体产出

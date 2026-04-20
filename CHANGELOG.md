@@ -10,9 +10,24 @@
 
 ---
 
-## [Unreleased] · Phase 2 进行中
+## [Unreleased] · Sprint 7 进行中
 
-进入真实落地与产品化期。详见 [PLAN.md § Phase 2](./PLAN.md#phase-2--落地与产品化新增2026-04-18)。
+Phase 2 第一 Sprint (S6) 完成。S7 启动: macOS Beta 打包 + 跨平台栈决策。
+
+### [0.7.0-draft] · Sprint 6 完成(2026-04-20)
+
+**主题**: 架构盘点 + UI/UX 设计稿 + 信息共享文档化 + 用户手册起步
+
+- 🎨 **UI/UX 设计稿完整铺开**(17 个 HTML 原型 + 10 wireframes + 5 Mermaid flows + 映射表):
+  - 核心页面(10):主视图 / 向导 / 设置 / 命令面板 / Artifact / 供应商切换 / 搜索 / 右键菜单 / 空态 / 状态栏
+  - 用户旅程:**登录 → 项目列表 → 新建项目(4 模式 A/B/C/D)→ 主视图**
+  - 四大场景工作流(业务/开发/测试/运维)含 Prompt 一键操作
+  - 跨平台约束 + 原型↔模块↔Swift 文件 映射
+- 🏛 **ARCHITECTURE.md**: 全局四层视图 / 数据流 / 组件依赖 / 部署拓扑 / 技术盘点 20+ 项 / 负约束 / 关键决策
+- 🔄 **信息共享模式** (`docs/architecture/information-sharing.md`): Git+Markdown+CI 模型详述 / 四场景流向 / 优缺点分析 / 反模式 / 何时上服务端
+- 📖 **用户手册起步** (`docs/manual/`): README 索引 + 00-install 三平台步骤 + 99-cheatsheet 一页速查
+
+小步迭代: Sprint 6 只发起步 2 篇手册,完整角色/场景指南延后到 Sprint 8。
 
 ---
 
