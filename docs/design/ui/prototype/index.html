@@ -63,7 +63,7 @@
 
 <div class="page-header">
   <h1>EP Code AI · 桌面应用原型</h1>
-  <p>10 个核心页面的可交互 HTML 原型。点击卡片预览。</p>
+  <p>15 个可交互 HTML 原型(10 个功能页 + 1 个登录 + 4 个场景工作流)。点击卡片预览。</p>
   <p style="margin-top: 12px; font-size: var(--fs-sm);">
     📚 配套文档:
     <a href="../README.md">设计稿索引</a> ·
@@ -129,6 +129,42 @@
     <div class="card-num">10</div>
     <h3>环境健康状态栏</h3>
     <p>全绿 / 警告 / 错误 · hover 详情</p>
+  </a>
+</div>
+
+<h2 class="section-title">身份与登录</h2>
+<div class="grid">
+  <a class="card" href="11-login.html">
+    <div class="card-num">11</div>
+    <h3>🔐 登录页</h3>
+    <p>企业 SSO / IM 扫码 / 账号密码 · 后续接入企业用户体系</p>
+  </a>
+</div>
+
+<h2 class="section-title">四大场景工作流(角色视角)</h2>
+<p style="max-width:960px;margin:0 auto var(--sp-4);color:var(--color-text-muted);font-size:var(--fs-sm)">
+  每个场景有"时序→当前步骤→Prompt 一键操作"三栏布局。Prompt 来自 <code>skills/</code> 目录的 29 个模板,变成表单化可点执行。
+</p>
+<div class="grid">
+  <a class="card" href="12-workflow-business.html">
+    <div class="card-num">12 💼</div>
+    <h3>业务场景工作流</h3>
+    <p>产品 · BA · 6 步: 需求采集 → PRD → 可测性 → 规则 → 冲突 → 归档</p>
+  </a>
+  <a class="card" href="13-workflow-development.html">
+    <div class="card-num">13 💻</div>
+    <h3>开发场景工作流</h3>
+    <p>开发 · 架构 · 7 步: 澄清 → 设计 → ADR → API → 编码 → 评审 → 提测</p>
+  </a>
+  <a class="card" href="14-workflow-testing.html">
+    <div class="card-num">14 🧪</div>
+    <h3>测试场景工作流</h3>
+    <p>测试 · QA · 6 步: 可测性 → 策略 → 用例 → 提测审核 → 执行 → 准出</p>
+  </a>
+  <a class="card" href="15-workflow-operations.html">
+    <div class="card-num">15 🚀</div>
+    <h3>运维场景工作流</h3>
+    <p>SRE · On-call · 6 步: 发布计划 → Runbook → 发布 → 事件响应 → 复盘 → 改进</p>
   </a>
 </div>
 

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>12 · 业务场景工作流 · EP Code AI</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">
+  <span>🎨 原型 12 / 15 · 💼 业务场景工作流(产品经理 / BA)</span>
+  <span><a href="index.html">← 返回</a> · <a href="11-login.html">上页</a> · <a href="13-workflow-development.html">下页 →</a></span>
+</div>
+
+<div class="workflow-page">
+
+  <!-- 顶栏 -->
+  <div class="workflow-header">
+    <div class="title">
+      <span class="title-icon">💼</span>
+      <div>
+        <div class="title-main">业务场景工作流</div>
+        <div class="title-sub">产品经理 · BA · 业务分析师</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:var(--sp-3);align-items:center">
+      <span style="font-size:var(--fs-sm);color:var(--color-text-muted)">当前项目: <strong>离职流程优化 v1.2</strong></span>
+      <span class="user-chip"><div class="user-avatar">张</div><span class="user-name">张工 · 产品</span></span>
+    </div>
+  </div>
+
+  <!-- 左:时序 -->
+  <div class="workflow-timeline">
+    <div class="timeline-title">📍 业务方法论时序</div>
+
+    <div class="timeline-step done" data-step="1">
+      <div class="timeline-step-title">需求采集</div>
+      <div class="timeline-step-meta">✓ 已完成 · 访谈 5 位 HR</div>
+    </div>
+
+    <div class="timeline-step active" data-step="2">
+      <div class="timeline-step-title">PRD 编写</div>
+      <div class="timeline-step-meta">进行中 · 草稿 v0.3</div>
+    </div>
+
+    <div class="timeline-step" data-step="3">
+      <div class="timeline-step-title">可测性评审</div>
+      <div class="timeline-step-meta">待开始 · 测试团队</div>
+    </div>
+
+    <div class="timeline-step" data-step="4">
+      <div class="timeline-step-title">业务规则固化</div>
+      <div class="timeline-step-meta">用户故事 + 规则表</div>
+    </div>
+
+    <div class="timeline-step" data-step="5">
+      <div class="timeline-step-title">冲突检测 & 变更</div>
+      <div class="timeline-step-meta">跨模块冲突 · CR 管理</div>
+    </div>
+
+    <div class="timeline-step" data-step="6">
+      <div class="timeline-step-title">评审通过 & 归档</div>
+      <div class="timeline-step-meta">交付开发 / 测试</div>
+    </div>
+  </div>
+
+  <!-- 中:当前步骤 -->
+  <div class="workflow-content">
+    <h2>第 2 步 · PRD 编写</h2>
+    <p style="color:var(--color-text-muted);line-height:1.7">
+      基于需求采集结果,撰写结构化 PRD。推荐用
+      <a href="https://github.com/epcode-ai/ep-code-ai/blob/main/templates/business/prd-template.md">PRD 模板</a>
+      作为起点,然后配合右侧的"智能操作"加速。
+    </p>
+
+    <h3>✅ 本阶段 Checklist</h3>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked />
+      <div style="flex:1">
+        <div class="checklist-item-title">复制 PRD 模板并填入元数据</div>
+        <div class="checklist-item-hint">版本号 / 作者 / 日期 / 状态</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" checked />
+      <div style="flex:1">
+        <div class="checklist-item-title">完成 1-2 章:概述 + 用户与场景</div>
+        <div class="checklist-item-hint">背景 / 目标 / 角色 / 主流程</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">完成 3-4 章:功能需求 + 非功能需求</div>
+        <div class="checklist-item-hint">REQ-NNN + Given-When-Then 验收 + 量化指标(QPS/延迟/%)</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">完成 5-7 章:数据规则 + 交互 + 风险</div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">跑 /prd 校验,得分 ≥ 80</div>
+        <div class="checklist-item-hint">用右侧 "PRD 校验" 按钮,或命令面板 <code>/prd docs/prd/v1.0.md</code></div>
+      </div>
+    </div>
+
+    <div class="checklist-item">
+      <input type="checkbox" />
+      <div style="flex:1">
+        <div class="checklist-item-title">主管评审签字</div>
+      </div>
+    </div>
+
+    <h3>📄 本阶段产出物</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)">
+      <div class="artifact-card">
+        <div class="artifact-card-title">▾ prd-v1.2.md(草稿)</div>
+        <div class="artifact-card-meta">📄 76 行 · 3 小时前 · 进度 45%</div>
+      </div>
+      <div class="artifact-card">
+        <div class="artifact-card-title">▾ user-interviews.md</div>
+        <div class="artifact-card-meta">📋 5 条访谈 · 昨天</div>
+      </div>
+    </div>
+
+    <h3>💡 下一步动作</h3>
+    <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">
+      <button class="btn primary">📝 继续编辑 PRD</button>
+      <button class="btn">✨ 跑可测性评审</button>
+      <button class="btn">👥 邀请测试参与评审</button>
+    </div>
+  </div>
+
+  <!-- 右:智能操作(Prompts 按钮化) -->
+  <div class="workflow-tools">
+    <div class="tools-title">✨ 智能操作 (AI Prompt)</div>
+    <p style="font-size:var(--fs-xs);color:var(--color-text-muted);margin-bottom:var(--sp-3);line-height:1.6">
+      点击卡片 → 填写简单参数 → AI 自动执行。来自 <code>skills/business/</code> 的 6 个 Prompt 模板。
+    </p>
+
+    <div class="prompt-action-card" onclick="openPromptModal('prd-draft')">
+      <div class="icon">📝</div>
+      <div class="name">生成 PRD 初稿</div>
+      <div class="desc">从需求访谈笔记生成结构化 PRD</div>
+      <div class="meta">
+        <span class="tag">输入: 访谈笔记</span>
+        <span class="tag">输出: prd-vX.Y.md</span>
+      </div>
+    </div>
+
+    <div class="prompt-action-card" onclick="openPromptModal('user-story-gen')">
+      <div class="icon">📋</div>
+      <div class="name">拆用户故事</div>
+      <div class="desc">按 INVEST 原则把 PRD 拆成 user story</div>
+      <div class="meta"><span class="tag">skills/business/user-story-gen</span></div>
+    </div>
+
+    <div class="prompt-action-card" onclick="openPromptModal('prd-testability-check')">
+      <div class="icon">🧪</div>
+      <div class="name">PRD 可测性评审</div>
+      <div class="desc">识别歧义 · 验收标准缺失 · 量化不足</div>
+      <div class="meta"><span class="tag">需测试参与</span></div>
+    </div>
+
+    <div class="prompt-action-card" onclick="openPromptModal('business-rule-to-table')">
+      <div class="icon">🔢</div>
+      <div class="name">业务规则转表格</div>
+      <div class="desc">文字规则 → 决策表(避免口径歧义)</div>
+    </div>
+
+    <div class="prompt-action-card" onclick="openPromptModal('conflict-detection')">
+      <div class="icon">⚠️</div>
+      <div class="name">需求冲突检测</div>
+      <div class="desc">跨模块规则一致性扫描</div>
+    </div>
+
+    <div class="prompt-action-card" onclick="openPromptModal('change-impact')">
+      <div class="icon">🔁</div>
+      <div class="name">变更影响分析</div>
+      <div class="desc">CR 上下游受影响模块清单</div>
+    </div>
+
+    <div style="margin-top:var(--sp-4);padding:var(--sp-3);background:var(--color-primary-lightest);border-radius:var(--radius-md);font-size:var(--fs-xs)">
+      💡 这些按钮本质是 Sprint 1-5 skills/ 目录里的 prompt 模板,加上表单化参数 + 发送给当前会话 = "一键执行"。
+    </div>
+  </div>
+
+</div>
+
+<!-- Prompt 执行弹窗(隐藏) -->
+<div class="overlay" id="promptModal" style="display:none">
+  <div class="modal prompt-modal">
+    <div class="modal-header">
+      <div class="modal-title"><span id="pm-icon">📝</span> <span id="pm-name">生成 PRD 初稿</span></div>
+      <button class="btn ghost" onclick="document.getElementById('promptModal').style.display='none'">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--color-text-muted);margin-bottom:var(--sp-4)" id="pm-desc">从需求访谈笔记生成结构化 PRD</p>
+
+      <div class="field">
+        <div class="field-label">输入来源</div>
+        <select>
+          <option>从 Artifact 选择(user-interviews.md)</option>
+          <option>粘贴文本</option>
+          <option>上传文件</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-label">补充说明 (可选)</div>
+        <textarea rows="3" placeholder="如:侧重 HR 视角,精简到 20 页以内..."></textarea>
+      </div>
+
+      <div class="field">
+        <div class="field-label">预览 Prompt</div>
+        <div class="preview">你是高级产品经理,请基于下方访谈笔记,按 templates/business/prd-template.md 的
+结构生成 PRD 草稿:
+
+【访谈笔记】
+{input}
+
+【补充说明】
+{notes}
+
+产出要求:
+- 章节完整(1-9 节)
+- 每个需求点有 REQ-NNN ID
+- 非功能需求必须量化
+- 验收标准用 Given-When-Then</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="document.getElementById('promptModal').style.display='none'">取消</button>
+      <button class="btn primary">✨ 执行 (发送到当前会话)</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const prompts = {
+    'prd-draft': { icon: '📝', name: '生成 PRD 初稿', desc: '从需求访谈笔记生成结构化 PRD' },
+    'user-story-gen': { icon: '📋', name: '拆用户故事', desc: '按 INVEST 拆 PRD 为 user story' },
+    'prd-testability-check': { icon: '🧪', name: 'PRD 可测性评审', desc: '识别歧义 / 验收缺失 / 量化不足' },
+    'business-rule-to-table': { icon: '🔢', name: '业务规则转表格', desc: '文字规则 → 决策表' },
+    'conflict-detection': { icon: '⚠️', name: '需求冲突检测', desc: '跨模块规则一致性扫描' },
+    'change-impact': { icon: '🔁', name: '变更影响分析', desc: 'CR 上下游影响清单' }
+  };
+  function openPromptModal(key) {
+    const p = prompts[key];
+    document.getElementById('pm-icon').textContent = p.icon;
+    document.getElementById('pm-name').textContent = p.name;
+    document.getElementById('pm-desc').textContent = p.desc;
+    document.getElementById('promptModal').style.display = 'flex';
+  }
+</script>
+
+</body>
+</html>
